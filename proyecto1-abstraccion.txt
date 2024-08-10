@@ -1,0 +1,112 @@
+
+software
+	postgresql
+	tomcat
+	angular 
+
+diagramas
+	diagrama entidad-relacion (peter chen)
+		para base de datos relacional
+
+empleado
+	debe tener un rol asignado
+	
+empresa 
+	nombre: GamerProXela
+	tienen varias sucursales en la misma ciudad
+	registros
+		productos
+			ubicacion en sucursal
+				estanteria
+				bodega: cada sucursal tiene una bodega
+			tipos
+				sucursal parque: 100
+				sucursal centro1: 75
+				sucursal centro2: 75
+			sql
+				agregar producto usando INSERT
+				(ficticio) agregar productos a cada sucursal (estanteria y bodega)
+		empleados
+			roles
+				cajero
+				bodega
+				inventario
+				administrador
+			(ficticio) para cada sucursal
+				6 rol cajero + 4 rol inventario + 1 rol bodega
+			interfaz visual
+				cada rol tiene diferente interfaz visual
+				rol cajero
+					1 cajero / 1 caja
+					vista para ventas
+						cada venta se realiza en la sucursal del rol cajero
+						venta
+							(ficticio) en cada sucursal agregar 5 ventas
+							id_factura: numero
+							nit: numero | null
+							cliente-nombre
+							cajero-nombre
+							productos: producto[]
+								1-* productos
+								cada producto puede tener descuento
+							total
+								sin descuento
+								con descuento
+						puntos
+							1 pt = 1 quetzal
+					vista para clientes
+						id_cliente: nit
+						new cliente
+							cada cliente debe estar disponible en todas las sucursales
+						mod cliente: se requiere usuario y contrasena de un rol administrador
+				rol bodega
+					vista para productos
+						new producto: 
+							cada new se realiza en la sucursal del rol bodega
+				rol inventario
+					vista para estanteria: 
+						bodega.del(producto) + estanteria.new(producto)
+					vista para informacion de producto: 
+						numero de pasillo
+				rol administrador
+					vista para reportes
+						descuentos por intervalo
+							descuento { fecha }
+						10 ventas mas grandes por intervalo
+						2 sucursales con mas ingresos por intervalo
+						10 productos mas vendidos
+						10 clientes que mas gastaron
+					vista para trabajadores
+						new trabajador
+					vista para tarjetas
+						mod tarjeta
+							nivel comun
+								requisitos: solicitud
+								5 pt / 200
+							nivel oro
+								requisitos: 10000 + tarjeta comun
+								10 pt / 200
+							nivel platino
+								requisitos: 20000 + tarjeta oro
+								20 pt / 200
+							nivel diamante
+								requisitos: 30000 + tarjeta platino
+								30 pt / 200
+		sucursales
+		clientes
+			(ficticio) 8 clientes
+			cada cliente puede tener <<una>> tarjeta 
+				pero con sus compras puede el nivel de la tarjeta cambia
+		relaciones
+			1 empleado / 1 sucursal
+				operaciones: new empleado, mod empleado
+
+sucursal { empleados:empleado[] }
+
+
+
+
+
+
+
+
