@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
+// ng g c top
 @Component({
-  selector: 'app-root',
+  selector: 'app-top',
   standalone: true,
   imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  templateUrl: './top.component.html',
+  styleUrl: './top.component.css'
 })
-export class AppComponent {
-  title = 'proyecto1';
+export class TopComponent {
+
 }
