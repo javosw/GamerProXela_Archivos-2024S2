@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
-// ng g c top
+// <.angular> ng g c top
+// <.angular>/src/app/<top> 
 @Component({
   selector: 'app-top',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterLink, RouterOutlet],
   templateUrl: './top.component.html',
   styleUrl: './top.component.css'
 })
