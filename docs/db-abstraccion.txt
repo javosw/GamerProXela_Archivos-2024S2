@@ -6,23 +6,32 @@ Relaciones
 Sucursales
 	id_sucursal
 	nombre/ubicacion
-	personal[]
 
 Productos
-	nombre/tipo/categoria
+	id_producto (nombre/tipo/categoria)
+	Sucursales.id_sucursal
 	en_estanteria
 	en_bodega
+
+Estanteria
+	id_pasillo
 	Sucursales.id_sucursal
+	Productos.id_producto
+	en_pasillo
+	
 
 Cajeros
+	id_caja
 	Empleados.dpi
 	Sucursales.id_sucursal
 
 Bodegueros
 	Empleados.dpi
+	Sucursales.id_sucursal
 
 Inventaristas
 	Empleados.dpi
+	Sucursales.id_sucursal
 
 Administradores
 	Empleados.dpi
@@ -39,7 +48,7 @@ Ventas
 	(calc) total
 	(calc) total_descuento
 
-ProductosVendidos
+ProductosFacturados
 	Ventas.id_factura
 	Productos.nombre
 	(calc) subtotal
@@ -48,10 +57,14 @@ ProductosVendidos
 Descuentos
 	Productos.nombre
 	Sucursales.id_sucursal
-	
+
 Clientes
 	nit
 	nombre
 
-
-
+Permisos
+	Empleados.dpi
+	AreasAcceso.nombre
+	
+AreasAcceso
+	nombre

@@ -28,70 +28,88 @@ empresa
 				(ficticio) agregar productos a cada sucursal (estanteria y bodega)
 		empleados
 			roles
-				cajero
-				bodega
-				inventario
+				cajero <- 1 sucursal
+				bodega <- 1 sucursal
+				inventario <- 1 sucursal
 				administrador
 			(ficticio) para cada sucursal
 				6 rol cajero + 4 rol inventario + 1 rol bodega
-			interfaz visual
-				cada rol tiene diferente interfaz visual
-				rol cajero
-					1 cajero / 1 caja
-					vista para ventas
-						cada venta se realiza en la sucursal del rol cajero
-						venta
-							(ficticio) en cada sucursal agregar 5 ventas
-							id_factura: numero
-							nit: numero | null
-							cliente-nombre
-							cajero-nombre
-							productos: producto[]
-								1-* productos
-								cada producto puede tener descuento
-							total
-								sin descuento
-								con descuento
-						puntos
-							1 pt = 1 quetzal
-					vista para clientes
-						id_cliente: nit
-						new cliente
-							cada cliente debe estar disponible en todas las sucursales
-						mod cliente: se requiere usuario y contrasena de un rol administrador
-				rol bodega
-					vista para productos
-						new producto: 
-							cada new se realiza en la sucursal del rol bodega
-				rol inventario
-					vista para estanteria: 
-						bodega.del(producto) + estanteria.new(producto)
-					vista para informacion de producto: 
-						numero de pasillo
-				rol administrador
-					vista para reportes
-						descuentos por intervalo
-							descuento { fecha }
-						10 ventas mas grandes por intervalo
-						2 sucursales con mas ingresos por intervalo
-						10 productos mas vendidos
-						10 clientes que mas gastaron
-					vista para trabajadores
-						new trabajador
-					vista para tarjetas
-						mod tarjeta
-							nivel comun
-								requisitos: solicitud
-								5 pt / 200
-							nivel oro
-								requisitos: 10000 + tarjeta comun
-								10 pt / 200
-							nivel platino
-								requisitos: 20000 + tarjeta oro
-								20 pt / 200
-							nivel diamante
-								requisitos: 30000 + tarjeta platino
-								30 pt / 200
+			cada rol tiene diferente interfaz visual
+			rol cajero
+				1 cajero <- 1 caja
+				(ficticio) en cada sucursal agregar 5 ventas
+				venta
+					id_factura: numero
+					nit: numero | null
+					cliente-nombre
+					cajero-nombre
+					productos: producto[]
+						1-* productos
+						cada producto puede tener descuento
+					total
+						sin descuento
+						con descuento
+					puntos
+						1 pt = 1 quetzal
+				cliente
+					id_cliente: nit
+				vistas
+					new venta
+					new cliente
+					mod cliente
+				add venta
+					cada venta se realiza en la sucursal del rol cajero
+				new cliente
+					cada cliente debe estar disponible en todas las sucursales
+				mod cliente
+					se requiere usuario y contrasena de un rol administrador
+			rol bodega
+				vistas
+					tabla productos en sucursal (bodega/estanteria)
+					mod producto
+					new producto
+				tabla productos en sucursal
+				mod producto
+					aqui se aumenta/disminuye los productos en <<bodega>>
+				new producto
+					aqui se crea un nuevo producto en Productos
+					cada new se realiza en la sucursal del rol bodega
+			rol inventario
+				vistas
+					tabla productos en sucursal (bodega/estanteria)
+					tabla productos en pasillos
+					add estanteria
+					mod estanteria
+				new estanteria
+					bodega.mod(producto,unidades) -> estanteria.new(producto,unidades,pasillo)
+				mod estanteria
+					bodega.mod(producto,unidades) -> estanteria.mod(producto,unidades,pasillo)
+			rol administrador
+				vistas
+					reportes
+					new trabajador
+					mod tarjeta
+				reportes
+					descuentos por intervalo
+						descuento { fecha }
+					10 ventas mas grandes por intervalo
+					2 sucursales con mas ingresos por intervalo
+					10 productos mas vendidos
+					10 clientes que mas gastaron
+				new trabajador
+				mod tarjeta
+					nivel comun
+						requisitos: solicitud
+						5 pt / 200
+					nivel oro
+						requisitos: 10000 + tarjeta comun
+						10 pt / 200
+					nivel platino
+						requisitos: 20000 + tarjeta oro
+						20 pt / 200
+					nivel diamante
+						requisitos: 30000 + tarjeta platino
+						30 pt / 200
 		sucursales
 		clientes
 			(ficticio) 8 clientes
@@ -104,9 +122,14 @@ empresa
 sucursal { empleados:empleado[] }
 
 
+reglas del negocio
+	cada producto facturado requiere la dependencia
+		producto <- estanteria <- caja
+	Productos.en_estanteria = GRUPO->SUMA(Estanteria.en_pasillo SI Sucursales.id_sucursal)
 
+triggers
+	cambiar estado de tarjeta por monto de compra
 
-
-
-
-
+preguntas
+	quien crea la nivel comun? el cajero | el admin ?
+	
