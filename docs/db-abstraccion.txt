@@ -1,0 +1,57 @@
+
+Relaciones
+	Sucursales (*) - (*) Empleados
+	Sucursales (1) - (*) Productos
+
+Sucursales
+	id_sucursal
+	nombre/ubicacion
+	personal[]
+
+Productos
+	nombre/tipo/categoria
+	en_estanteria
+	en_bodega
+	Sucursales.id_sucursal
+
+Cajeros
+	Empleados.dpi
+	Sucursales.id_sucursal
+
+Bodegueros
+	Empleados.dpi
+
+Inventaristas
+	Empleados.dpi
+
+Administradores
+	Empleados.dpi
+
+Empleados
+	dpi
+	nombre
+	
+Ventas
+	id_factura
+	Sucursales.id_sucursal
+	Clientes.nit
+	Cajeros.dpi
+	(calc) total
+	(calc) total_descuento
+
+ProductosVendidos
+	Ventas.id_factura
+	Productos.nombre
+	(calc) subtotal
+	(calc) subtotal_descuento
+
+Descuentos
+	Productos.nombre
+	Sucursales.id_sucursal
+	
+Clientes
+	nit
+	nombre
+
+
+
