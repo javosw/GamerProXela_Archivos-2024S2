@@ -57,12 +57,14 @@ empresa
 					new venta
 					new cliente
 					mod cliente
+					new tarjeta
 				add venta
 					cada venta se realiza en la sucursal del rol cajero
 				new cliente
 					cada cliente debe estar disponible en todas las sucursales
 				mod cliente
 					se requiere usuario y contrasena de un rol administrador
+				new tarjeta
 			rol bodega
 				vistas
 					tabla productos en sucursal (bodega/estanteria)
@@ -128,8 +130,9 @@ reglas del negocio
 	Productos.en_estanteria = GRUPO->SUMA(Estanteria.en_pasillo SI Sucursales.id_sucursal)
 
 triggers
-	cambiar estado de tarjeta por monto de compra
+	usar triggers para cambiar el nivel de tarjeta
+
+aclaraciones
+	quien crea la nivel comun? el cajero | el admin ?
 
 preguntas
-	quien crea la nivel comun? el cajero | el admin ?
-	

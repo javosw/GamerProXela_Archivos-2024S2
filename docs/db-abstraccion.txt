@@ -5,7 +5,8 @@ Relaciones
 
 Sucursales
 	id_sucursal
-	nombre/ubicacion
+	nombre
+	ubicacion
 
 Productos
 	id_producto (nombre/tipo/categoria)
@@ -18,7 +19,6 @@ Estanteria
 	Sucursales.id_sucursal
 	Productos.id_producto
 	en_pasillo
-	
 
 Cajeros
 	id_caja
@@ -50,12 +50,12 @@ Ventas
 
 ProductosFacturados
 	Ventas.id_factura
-	Productos.nombre
+	Productos.id_producto
 	(calc) subtotal
 	(calc) subtotal_descuento
 
 Descuentos
-	Productos.nombre
+	Productos.id_producto
 	Sucursales.id_sucursal
 
 Clientes
@@ -64,7 +64,12 @@ Clientes
 
 Permisos
 	Empleados.dpi
-	AreasAcceso.nombre
+	AreasAcceso.area
 	
 AreasAcceso
-	nombre
+	area
+
+Tarjetas
+	Clientes.nit
+	nivel
+	puntos
