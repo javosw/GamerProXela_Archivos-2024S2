@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TopComponent } from './top.component';
+import { HolaAuthComponent } from './hola-auth.component';
 
-describe('TopComponent', () => {
-  let component: TopComponent;
-  let fixture: ComponentFixture<TopComponent>;
+describe('HolaAuthComponent', () => {
+  let component: HolaAuthComponent;
+  let fixture: ComponentFixture<HolaAuthComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TopComponent]
+      imports: [HolaAuthComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TopComponent);
+    fixture = TestBed.createComponent(HolaAuthComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

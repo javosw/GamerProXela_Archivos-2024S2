@@ -1,9 +1,8 @@
 import { Routes } from '@angular/router';
-import { TopEntrarComponent } from './top-entrar/top-entrar.component';
-import { TopHolaComponent } from './top-hola/top-hola.component';
+import { HolaAuthComponent } from './hola-auth/hola-auth.component';
+import { HolaCarruselComponent } from './hola-carrusel/hola-carrusel.component';
 
 export const app_routes: Routes = [
-    { path:"entrar", component: TopEntrarComponent },
-    { path:"", component: TopHolaComponent },
-
+    { path:"entrar", component: HolaAuthComponent },
+    { path:"", component: HolaCarruselComponent },
 ];

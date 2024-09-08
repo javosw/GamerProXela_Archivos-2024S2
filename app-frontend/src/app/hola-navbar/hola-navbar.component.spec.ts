@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TopHolaComponent } from './top-hola.component';
+import { HolaNavbarComponent } from './hola-navbar.component';
 
-describe('TopHolaComponent', () => {
-  let component: TopHolaComponent;
-  let fixture: ComponentFixture<TopHolaComponent>;
+describe('HolaNavbarComponent', () => {
+  let component: HolaNavbarComponent;
+  let fixture: ComponentFixture<HolaNavbarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TopHolaComponent]
+      imports: [HolaNavbarComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TopHolaComponent);
+    fixture = TestBed.createComponent(HolaNavbarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

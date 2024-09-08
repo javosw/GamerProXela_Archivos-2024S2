@@ -1,5 +1,5 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { app_config } from './app/app_config';
-import { TopComponent } from './app/top/top.component';
+import { GpxComponent } from './app/gpx/gpx.component';
 
-bootstrapApplication(TopComponent, app_config).catch((err) => console.error(err));
+bootstrapApplication(GpxComponent, app_config).catch((err) => console.error(err));

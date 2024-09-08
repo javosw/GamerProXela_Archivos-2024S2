@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TopEntrarComponent } from './top-entrar.component';
+import { HolaCarruselComponent } from './hola-carrusel.component';
 
-describe('TopEntrarComponent', () => {
-  let component: TopEntrarComponent;
-  let fixture: ComponentFixture<TopEntrarComponent>;
+describe('HolaCarruselComponent', () => {
+  let component: HolaCarruselComponent;
+  let fixture: ComponentFixture<HolaCarruselComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TopEntrarComponent]
+      imports: [HolaCarruselComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TopEntrarComponent);
+    fixture = TestBed.createComponent(HolaCarruselComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
