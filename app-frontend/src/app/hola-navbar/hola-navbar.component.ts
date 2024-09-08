@@ -6,7 +6,6 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [RouterLink, RouterOutlet, HolaNavbarComponent],
   templateUrl: './hola-navbar.component.html',
-  styleUrl: './hola-navbar.component.css'
 })
 export class HolaNavbarComponent {
 

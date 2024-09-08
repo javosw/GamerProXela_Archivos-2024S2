@@ -6,7 +6,6 @@ import { ReactiveFormsModule } from '@angular/forms';
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './hola-auth.component.html',
-  styleUrl: './hola-auth.component.css'
 })
 export class HolaAuthComponent {
 

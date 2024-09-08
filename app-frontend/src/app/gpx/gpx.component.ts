@@ -10,7 +10,6 @@ import { HolaNavbarComponent } from '../hola-navbar/hola-navbar.component';
   standalone: true,
   imports: [RouterLink, RouterOutlet, HolaNavbarComponent],
   templateUrl: './gpx.component.html',
-  styleUrl: './gpx.component.css'
 })
 export class GpxComponent {
 

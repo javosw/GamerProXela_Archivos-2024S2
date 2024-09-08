@@ -5,7 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './hola-carrusel.component.html',
-  styleUrl: './hola-carrusel.component.css'
 })
 export class HolaCarruselComponent {
 
