@@ -24,9 +24,15 @@ $uri = $_SERVER['REQUEST_URI'];
 
 // if (preg_match('//', $uri)) {}
 $aqui = __DIR__;
-if(preg_match('/^\/holaMundo\/hola/', $uri)) {
-    require_once $aqui.'\view\global\hola.php';
+if(preg_match('/^\/gpx\/entrar/', $uri)) {
+    if($_REQUEST['REQUEST_METHOD'] == 'POST'){
+        require_once $aqui.'\controller\AuthController.php';
+        if(!empty($_POST['user']) && !empty($_POST['password'])){
+            AuthController::entrar($_POST['user'],$_POST['password']);
+        }
+    }
 }
+/*
 else if(preg_match('/^\/holaMundo\/jugadores\/add/', $uri)) {
     require_once $aqui.'\controller\JugadoresController.php';
 
@@ -58,8 +64,7 @@ else if(preg_match('/^\/holaMundo\/noticias/', $uri)) {
 else if(preg_match('/^\/holaMundo\/api\/jugadores/', $uri)) {
     require_once $aqui.'\controller\JugadoresController.php';
     JugadoresController::jugadoresAPI();
-}
+}*/
 else {
     http_response_code(404);
-    require_once $aqui.'\view\global\errores.php';
 }
