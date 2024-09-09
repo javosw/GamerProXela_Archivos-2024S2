@@ -1,7 +1,7 @@
 <?php
 
 class AuthModel{
-    public static function checkAuth($user,$password){
+    public static function checkCredenciales($user,$password){
         return true;
     }
 }

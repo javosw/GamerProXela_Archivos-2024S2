@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { HolaNavbarComponent } from '../hola-navbar/hola-navbar.component';
+import { HolaNavbarComponent } from '../hola/hola-navbar/hola-navbar.component';
 
 // .angular
 // ng g c gpx

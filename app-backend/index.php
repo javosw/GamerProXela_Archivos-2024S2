@@ -25,11 +25,26 @@ $uri = $_SERVER['REQUEST_URI'];
 // if (preg_match('//', $uri)) {}
 $aqui = __DIR__;
 if(preg_match('/^\/gpx\/entrar/', $uri)) {
-    if($_REQUEST['REQUEST_METHOD'] == 'POST'){
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+    //header('Access-Control-Allow-Headers: Content-Type, Authorization');
+    header('Access-Control-Allow-Headers: *');
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $requestBody = file_get_contents('php://input');
+        $data = json_decode($requestBody, true);
+
+        //$jsonData = array('nombre' => 'josq', 'rol' => 'admin');
+
+        echo json_encode($data);
+        exit;
         require_once $aqui.'\controller\AuthController.php';
         if(!empty($_POST['user']) && !empty($_POST['password'])){
             AuthController::entrar($_POST['user'],$_POST['password']);
         }
+    }
+    else if($_SERVER['REQUEST_METHOD'] == 'OPTIONS'){
+
     }
 }
 /*

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { AuthService } from '../../injectables/auth.service';
 
 @Component({
   selector: 'gpx-hola-auth',
@@ -10,7 +11,7 @@ import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angul
 export class HolaAuthComponent {
   entrarForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private auth:AuthService) {
     this.entrarForm = this.formBuilder.group({
       user: [''],
       password: [''],
@@ -21,7 +22,8 @@ export class HolaAuthComponent {
   // entrarForm = new FormGroup({ user: new FormControl(''), password: new FormControl('') });
 
   onSubmit() {
-    // TODO: Use EventEmitter with form value
-    console.warn(this.entrarForm.value);
+    this.auth.checkCredenciales(this.entrarForm.value);
+
+    //console.warn(this.entrarForm.value);
   }
 }
