@@ -22,6 +22,9 @@ export class HolaAuthComponent {
   // entrarForm = new FormGroup({ user: new FormControl(''), password: new FormControl('') });
 
   onSubmit() {
+
+    //this.auth.checkCredencialesWithForm(this.entrarForm.value);
+    console.log(this.entrarForm.get("user")?.value+" : "+this.entrarForm.get("password")?.value);
     this.auth.checkCredenciales(this.entrarForm.value);
 
     //console.warn(this.entrarForm.value);

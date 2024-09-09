@@ -31,42 +31,33 @@ if(preg_match('/^\/gpx\/entrar/', $uri)) {
     header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
     //header('Access-Control-Allow-Headers: Content-Type, Authorization');
     header('Access-Control-Allow-Headers: *');
-    
+
+    // leer parametros usando $_GET['user'] es solo util para get, pero en post angular ignora los parametros en url
+    /*if($_SERVER['REQUEST_METHOD'] == 'GET'){
+        if(!empty($_GET['user']) && !empty($_GET['password'])){
+            $user_info = '{"tipo":"POST-OK","rol":"adminXXXX"}';
+            //echo json_encode($user_info);
+            echo $user_info;
+            exit;
+        }
+    }*/
+
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
         header("Content-Type: application/json");
 
-        if(!empty($_POST['user']) && !empty($_POST['password'])){
-            $user_info = '"tipo":"POST-OK","rol":"adminXXXX"';
-            echo json_encode($user_info);
-            exit;
-        }
-
         // leer un json
-        // json_decode($body, true) para array
-        // json_decode($body) para objetos
+        // json_decode($body, true) para acceder con arrays
+        // json_decode($body) para acceder con objetos
 
         $body = file_get_contents('php://input');
-        $es_array = true;
-        if($es_array){
-            $json_body = json_decode($body, true);
-            $user = $json_body['user'];
-            $user_info = '{"user":"'.$user.'","rol":"ARRAY"}';
-            echo $user_info;
+        $json_body = json_decode($body);
 
-            //echo json_encode($json_body);
-            exit;
-        }
-        else{
-            $json_body = json_decode($body);
-            $user = $json_body->user;
-            $user_info = '{"user":"'.$user.'","rol":"OBJECT"}';
-            echo $user_info;
+        $user = $json_body->user;
+        $user_info = '{"user":"'.$user.'","rol":"OBJECT"}';
 
-            //$password = $json_body['password'];
-            //siii $user_info = '{"user":"YOOOOOOOOO","rol":"PASSSSS"}';
-            //echo json_encode($user_info);
-            exit;
-        }
+        echo $user_info;
+
+        exit;
 
         //$jsonData = array('nombre' => 'josq', 'rol' => 'admin');
     }
