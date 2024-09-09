@@ -24,24 +24,51 @@ $uri = $_SERVER['REQUEST_URI'];
 
 // if (preg_match('//', $uri)) {}
 $aqui = __DIR__;
+
+
 if(preg_match('/^\/gpx\/entrar/', $uri)) {
     header('Access-Control-Allow-Origin: *');
     header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
     //header('Access-Control-Allow-Headers: Content-Type, Authorization');
     header('Access-Control-Allow-Headers: *');
-
+    
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        $requestBody = file_get_contents('php://input');
-        $data = json_decode($requestBody, true);
+        header("Content-Type: application/json");
+
+        if(!empty($_POST['user']) && !empty($_POST['password'])){
+            $user_info = '"tipo":"POST-OK","rol":"adminXXXX"';
+            echo json_encode($user_info);
+            exit;
+        }
+
+        // leer un json
+        // json_decode($body, true) para array
+        // json_decode($body) para objetos
+
+        $body = file_get_contents('php://input');
+        $es_array = true;
+        if($es_array){
+            $json_body = json_decode($body, true);
+            $user = $json_body['user'];
+            $user_info = '{"user":"'.$user.'","rol":"ARRAY"}';
+            echo $user_info;
+
+            //echo json_encode($json_body);
+            exit;
+        }
+        else{
+            $json_body = json_decode($body);
+            $user = $json_body->user;
+            $user_info = '{"user":"'.$user.'","rol":"OBJECT"}';
+            echo $user_info;
+
+            //$password = $json_body['password'];
+            //siii $user_info = '{"user":"YOOOOOOOOO","rol":"PASSSSS"}';
+            //echo json_encode($user_info);
+            exit;
+        }
 
         //$jsonData = array('nombre' => 'josq', 'rol' => 'admin');
-
-        echo json_encode($data);
-        exit;
-        require_once $aqui.'\controller\AuthController.php';
-        if(!empty($_POST['user']) && !empty($_POST['password'])){
-            AuthController::entrar($_POST['user'],$_POST['password']);
-        }
     }
     else if($_SERVER['REQUEST_METHOD'] == 'OPTIONS'){
 
