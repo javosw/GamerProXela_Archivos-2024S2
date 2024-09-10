@@ -27,10 +27,10 @@ export class AuthService {
 
   }
 
-  ejemploGet(user: string, password: string) {
+  ejemploGet(user: string, pass: string) {
     const params = new HttpParams()
       .set('user', user)
-      .set('password', password);
+      .set('pass', pass);
     this.http.get(this.url, { params }).subscribe(
       {
         next: (response: any) => {

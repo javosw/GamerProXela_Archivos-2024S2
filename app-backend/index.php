@@ -52,14 +52,9 @@ if(preg_match('/^\/gpx\/entrar/', $uri)) {
         $body = file_get_contents('php://input');
         $json_body = json_decode($body);
 
-        $user = $json_body->user;
-        $user_info = '{"user":"'.$user.'","rol":"OBJECT"}';
-
-        echo $user_info;
-
+        require_once $aqui.'\controller\AuthController.php';
+        AuthController::entrar($json_body->user,$json_body->pass);
         exit;
-
-        //$jsonData = array('nombre' => 'josq', 'rol' => 'admin');
     }
     else if($_SERVER['REQUEST_METHOD'] == 'OPTIONS'){
 

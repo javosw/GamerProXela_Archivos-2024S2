@@ -14,7 +14,7 @@ export class HolaAuthComponent {
   constructor(private formBuilder: FormBuilder, private auth:AuthService) {
     this.entrarForm = this.formBuilder.group({
       user: [''],
-      password: [''],
+      pass: [''],
     });
   }
   // Replacing a form control value
@@ -24,7 +24,7 @@ export class HolaAuthComponent {
   onSubmit() {
 
     //this.auth.checkCredencialesWithForm(this.entrarForm.value);
-    console.log(this.entrarForm.get("user")?.value+" : "+this.entrarForm.get("password")?.value);
+    console.log(this.entrarForm.get("user")?.value+" : "+this.entrarForm.get("pass")?.value);
     this.auth.checkCredenciales(this.entrarForm.value);
 
     //console.warn(this.entrarForm.value);
