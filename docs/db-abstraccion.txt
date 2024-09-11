@@ -1,75 +1,75 @@
 
-Relaciones
-	Sucursales (*) - (*) Empleados
-	Sucursales (1) - (*) Productos
 
-Sucursales
-	id_sucursal
+Sucursales // #sucursales
+	(PK) id_sucursal
 	nombre
 	ubicacion
 
-Productos
-	id_producto (nombre/tipo/categoria)
-	Sucursales.id_sucursal
-	en_estanteria
-	en_bodega
+Productos // #productos
+	(PK) id_producto (barcode/nombre/tipo/categoria)
+	descripcion
 
-Estanteria
-	id_pasillo
-	Sucursales.id_sucursal
-	Productos.id_producto
-	en_pasillo
+ProductosSucursal // # = #sucursales * #productos
+	(PK) Sucursales.id_sucursal
+	(PK) Productos.id_producto
+	unidades_en_bodega
+	unidades_en_estanteria
 
-Cajeros
-	id_caja
-	Empleados.dpi
-	Sucursales.id_sucursal
+Estanteria // # = #sucursales * #pasillos * #productos
+	(PK) Sucursales.id_sucursal
+	(PK) id_pasillo
+	(PK) Productos.id_producto
+	unidades_en_pasillo
 
-Bodegueros
-	Empleados.dpi
-	Sucursales.id_sucursal
-
-Inventaristas
-	Empleados.dpi
-	Sucursales.id_sucursal
-
-Administradores
-	Empleados.dpi
-
-Empleados
+Empleados // #empleados
 	dpi
 	nombre
-	
-Ventas
-	id_factura
+
+Cajeros // #cajeros = #sucursales * #cajas * #empleados
+	(PK) Sucursales.id_sucursal
+	(PK) id_caja
+	(PK) Empleados.dpi
+
+Bodegueros // #bodegueros = #sucursales * #empleados
+	(PK) Sucursales.id_sucursal
+	(PK) Empleados.dpi
+
+Inventaristas // #inventaristas = #sucursales * #empleados
+	(PK) Sucursales.id_sucursal
+	(PK) Empleados.dpi
+
+Administradores // #administradores = #sucursales * #empleados
+	(PK) Sucursales.id_sucursal
+	(PK) Empleados.dpi
+
+Usuarios // #usuarios = #empleados
+	(PK) Empleados.dpi
+	username
+	password
+
+Ventas // #ventas = #facturas
+	(PK) id_factura
 	Sucursales.id_sucursal
 	Clientes.nit
-	Cajeros.dpi
+	Cajeros.Empleados.dpi
 	(calc) total
 	(calc) total_descuento
+	fecha
 
 ProductosFacturados
 	Ventas.id_factura
 	Productos.id_producto
+	unidades
 	(calc) subtotal
-	(calc) subtotal_descuento
-
-Descuentos
-	Productos.id_producto
-	Sucursales.id_sucursal
 
 Clientes
 	nit
 	nombre
 
-Permisos
-	Empleados.dpi
-	AreasAcceso.area
-	
-AreasAcceso
-	area
-
 Tarjetas
 	Clientes.nit
 	nivel
 	puntos
+
+dudas
+	Sucursales (*) - (*) Empleados

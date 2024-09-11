@@ -92,12 +92,16 @@ empresa
 					new trabajador
 					mod tarjeta
 				reportes
-					descuentos por intervalo
-						descuento { fecha }
-					10 ventas mas grandes por intervalo
-					2 sucursales con mas ingresos por intervalo
-					10 productos mas vendidos
+					descuentos por intervalo de tiempo
+						Ventas.total_descuento > 0
+					10 ventas mas grandes por intervalo de tiempo
+						group Ventas.fecha
+					2 sucursales con mas ingresos
+						group Ventas.Sucursales.id_sucursal
+					10 productos con mas unidades vendidas
+						group ProductosFacturados.Productos.id_producto
 					10 clientes que mas gastaron
+						group Ventas.Clientes.nit
 				new trabajador
 				mod tarjeta
 					nivel comun
