@@ -1,0 +1,58 @@
+
+Sucursales
+	(PK) id_sucursal:string
+	nombre:string
+	ubicacion:string
+Productos
+	(PK) id_producto:barcode
+	descripcion:string
+ProductosSucursal
+	(PK) Sucursales.id_sucursal
+	(PK) Productos.id_producto
+	unidades_en_bodega:number
+	unidades_en_estanteria:number
+Estanteria
+	(PK) Sucursales.id_sucursal
+	(PK) id_pasillo:number
+	(PK) Productos.id_producto
+	unidades_en_pasillo:number
+Empleados 
+	(PK) dpi:number
+	nombre:string
+Cajeros 
+	(PK) Sucursales.id_sucursal
+	(PK) id_caja:number
+	(PK) Empleados.dpi
+Bodegueros 
+	(PK) Sucursales.id_sucursal
+	(PK) Empleados.dpi
+Inventaristas 
+	(PK) Sucursales.id_sucursal
+	(PK) Empleados.dpi
+Administradores 
+	(PK) Sucursales.id_sucursal
+	(PK) Empleados.dpi
+Usuarios
+	(PK) Empleados.dpi
+	username:string
+	password:string
+Clientes 
+	(PK) nit:number
+	nombre:string
+Ventas
+	(PK) id_factura:number
+	Sucursales.id_sucursal
+	Clientes.nit
+	Cajeros.Empleados.dpi
+	total:number
+	total_descuento:number
+	fecha:date
+ProductosFacturados
+	(PK) Ventas.id_factura
+	(PK) Productos.id_producto
+	unidades:number
+	subtotal:number
+Tarjetas 
+	(PK) Clientes.nit
+	nivel:enum[comun,oro,platino,diamante]
+	puntos:number

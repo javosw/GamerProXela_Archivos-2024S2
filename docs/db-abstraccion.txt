@@ -1,5 +1,4 @@
 
-
 Sucursales // #sucursales
 	(PK) id_sucursal
 	nombre
@@ -22,7 +21,7 @@ Estanteria // # = #sucursales * #pasillos * #productos
 	unidades_en_pasillo
 
 Empleados // #empleados
-	dpi
+	(PK) dpi
 	nombre
 
 Cajeros // #cajeros = #sucursales * #cajas * #empleados
@@ -52,22 +51,22 @@ Ventas // #ventas = #facturas
 	Sucursales.id_sucursal
 	Clientes.nit
 	Cajeros.Empleados.dpi
-	(calc) total
-	(calc) total_descuento
+	total
+	total_descuento
 	fecha
 
-ProductosFacturados
-	Ventas.id_factura
-	Productos.id_producto
+ProductosFacturados // # = #ventas * #productos
+	(PK) Ventas.id_factura
+	(PK) Productos.id_producto
 	unidades
-	(calc) subtotal
+	subtotal
 
-Clientes
-	nit
+Clientes // #clientes
+	(PK) nit
 	nombre
 
-Tarjetas
-	Clientes.nit
+Tarjetas // #tarjetas
+	(PK) Clientes.nit
 	nivel
 	puntos
 
