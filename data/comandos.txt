@@ -1,0 +1,51 @@
+b--------------------------------------------------
+ IMPORTANTE
+
+postgresql databases
+	postgres 
+	template1
+
+nombres de objetos
+	con comillas: se respetan los caracteres en mayuscula y minuscula
+	sin comillas: cada caracter se convierte a minuscula
+
+ IMPORTANTE
+b--------------------------------------------------
+
+psql -U my_user -l
+\l
+
+b--------------------------------------------------
+ FILE
+
+psql -U my_user -d my_database
+\i /folder/my_file.sql
+
+ FILE
+b--------------------------------------------------
+ FILE
+
+psql -U my_user -d my_database -f my_file.sql
+psql -U postgres -d template1 -f gpx.sql
+
+ FILE
+b--------------------------------------------------
+
+\q
+\c my_database
+
+pg_database
+pg_roles
+pg_user
+pg_tables
+pg_namespace
+
+\d my_table
+\dt my_schema.*
+\df my_schema.*
+\dv my_schema.*
+\dn
+
+\du
+
+\di
