@@ -1,19 +1,23 @@
 <?php
 class MiConexion {
-    private $host = 'localhost:3306';
-    private $user = 'root';
-    private $password = '';
-    private $database = 'equipo';
+
+    // xampp > php.ini > [942] extension=pdo_pgsql && [944] extension=pgsql
+    private $host = 'localhost';
+    private $port = "5432";
+    private $database = 'gpx';
+    private $user = 'postgres';
+    private $password = '123123';
 
     public function getConnection() {
-        $hostDB = "mysql:host={$this->host};dbname={$this->database};";
+        $source = "pgsql:host=$this->host;port=$this->port;dbname=$this->database";
 
         try {
-            $connection = new PDO($hostDB, $this->user, $this->password);
-            $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $connection;
+            $my_pdo = new PDO($source, $this->user, $this->password);
+            $my_pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return $my_pdo;
         } catch (PDOException $e) {
-            die("ERROR: " . $e->getMessage());
+            echo '{"JOSQ":"'.$e->getMessage().'"}';
         }
     }
+
 }

@@ -25,6 +25,7 @@ $uri = $_SERVER['REQUEST_URI'];
 // if (preg_match('//', $uri)) {}
 $aqui = __DIR__;
 
+header("Content-Type: application/json");
 
 if(preg_match('/^\/gpx\/entrar/', $uri)) {
     header('Access-Control-Allow-Origin: *');
@@ -32,18 +33,7 @@ if(preg_match('/^\/gpx\/entrar/', $uri)) {
     //header('Access-Control-Allow-Headers: Content-Type, Authorization');
     header('Access-Control-Allow-Headers: *');
 
-    // leer parametros usando $_GET['user'] es solo util para get, pero en post angular ignora los parametros en url
-    /*if($_SERVER['REQUEST_METHOD'] == 'GET'){
-        if(!empty($_GET['user']) && !empty($_GET['password'])){
-            $user_info = '{"tipo":"POST-OK","rol":"adminXXXX"}';
-            //echo json_encode($user_info);
-            echo $user_info;
-            exit;
-        }
-    }*/
-
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        header("Content-Type: application/json");
 
         // leer un json
         // json_decode($body, true) para acceder con arrays
@@ -60,17 +50,24 @@ if(preg_match('/^\/gpx\/entrar/', $uri)) {
 
     }
 }
-/*
-else if(preg_match('/^\/holaMundo\/jugadores\/add/', $uri)) {
-    require_once $aqui.'\controller\JugadoresController.php';
+else if(preg_match('/^\/gpx\/admin\/empleados/', $uri)) {
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+    //header('Access-Control-Allow-Headers: Content-Type, Authorization');
+    header('Access-Control-Allow-Headers: *');
 
-    if(!empty($_POST['dorsal']) && !empty($_POST['nit']) && !empty($_POST['nombre']) && !empty($_POST['nacimiento'])){
-        JugadoresController::addJugador($_POST['dorsal'],$_POST['nit'],$_POST['nombre'],$_POST['nacimiento']);
-    }
-    else {
-        JugadoresController::formAddJugador();
+    require_once $aqui.'\controller\AdminController.php';
+
+    // leer parametros usando $_GET['user'] es solo util para get, pero en post angular ignora los parametros en url
+    if($_SERVER['REQUEST_METHOD'] == 'GET'){
+
+        if(isset($_GET['dpi']) && isset($_GET['nombre'])){    
+            AdminController::addEmpleado($_GET['dpi'],$_GET['nombre']);
+        }
     }
 }
+
+/*
 else if(preg_match('/^\/holaMundo\/jugadores/', $uri)) {
     require_once $aqui.'\controller\JugadoresController.php';
     JugadoresController::jugadores();
