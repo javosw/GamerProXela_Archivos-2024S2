@@ -7,8 +7,7 @@ class AdminModel{
     {
         require_once __DIR__.'/MiConexion.php';
 
-        $miConexion = new MiConexion();
-        $my_pdo = $miConexion->getConnection();
+        $my_pdo = CustomPDO::paraAdmin();
 
         $query = 'INSERT INTO administracion.empleados VALUES (:dpi,:nombre)';
 
