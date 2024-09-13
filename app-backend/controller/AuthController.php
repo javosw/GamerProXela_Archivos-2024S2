@@ -10,11 +10,15 @@ class AuthController
         // $_SESSION['id'] = session_id();
     }
 
+    private static function haEntrado() : bool {
+        return isset($_SESSION['user']) && isset($_SESSION['nombre']) && isset($_SESSION['rol']);
+    }
+
     public static function entrar($user, $pass)
     {
         session_start();
 
-        if (isset($_SESSION['user']) && isset($_SESSION['nombre']) && isset($_SESSION['rol'])) {
+        if (self::haEntrado()) {
 
             $resp = array(
                 'user' => $_SESSION['user'],

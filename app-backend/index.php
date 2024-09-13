@@ -2,6 +2,9 @@
 
 // PARA RUTAS USAR SIEMPRE -> \\\\\
 
+// Turn off all error reporting
+error_reporting(0);
+
 /*
 echo '<pre>';
 echo 'REQUEST_URI: '.$_SERVER["REQUEST_URI"].'<br/>';
