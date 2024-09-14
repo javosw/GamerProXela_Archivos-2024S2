@@ -55,7 +55,7 @@ class AuthController
                 exit;
             } catch (\Throwable $th) {
                 session_destroy();
-                header('HTTP/1.1 404 ERRORAZO');
+                header('HTTP/1.1 401 ERRORAZO');
                 echo '{"status":"SIN_AUTH"}';
                 // redireccionar o status=unautorized
                 // otra opcion: llenar los campos faltantes
