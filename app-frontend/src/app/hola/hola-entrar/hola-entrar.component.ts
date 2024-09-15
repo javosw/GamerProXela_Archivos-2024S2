@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angular/forms';
-import { AuthService } from '../../injectables/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'gpx-hola-auth',
   standalone: true,
   imports: [ReactiveFormsModule],
-  templateUrl: './hola-auth.component.html',
+  templateUrl: './hola-entrar.component.html',
 })
-export class HolaAuthComponent {
+export class HolaEntrarComponent {
   entrarForm: FormGroup;
   tieneSesion: boolean;
 
