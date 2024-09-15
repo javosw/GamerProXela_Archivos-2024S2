@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { HolaNavbarComponent } from '../hola/hola-navbar/hola-navbar.component';
+import { AuthService } from '../injectables/auth.service';
 
 // .angular
 // ng g c gpx
@@ -12,5 +13,13 @@ import { HolaNavbarComponent } from '../hola/hola-navbar/hola-navbar.component';
   templateUrl: './gpx.component.html',
 })
 export class GpxComponent {
+  tieneSesion: boolean;
 
+  constructor(private auth: AuthService) {
+    this.tieneSesion = false;
+  }
+
+  ngOnInit(){
+    this.auth.tieneSesion.subscribe((val)=>{this.tieneSesion = val;});
+  }
 }
