@@ -10,8 +10,10 @@ import { AuthService } from '../../injectables/auth.service';
 })
 export class HolaAuthComponent {
   entrarForm: FormGroup;
+  tieneSesion: boolean;
 
   constructor(private formBuilder: FormBuilder, private auth:AuthService) {
+    this.tieneSesion = true;
     this.entrarForm = this.formBuilder.group({
       user: [''],
       pass: [''],
@@ -21,12 +23,17 @@ export class HolaAuthComponent {
   // this.formControl1.setValue('my value');
   // entrarForm = new FormGroup({ user: new FormControl(''), password: new FormControl('') });
 
+  ngOnInit(){
+    this.auth.tieneSesion.subscribe((val)=>{this.tieneSesion = val;});
+  }
+
   onSubmit() {
 
     //this.auth.checkCredencialesWithForm(this.entrarForm.value);
-    console.log(`@josq[entrar=${JSON.stringify(this.entrarForm.value)}]`);
+    console.log(`@entrar[form=${JSON.stringify(this.entrarForm.value)}]`);
     //console.log(this.entrarForm.get("user")?.value+" : "+this.entrarForm.get("pass")?.value);
     this.auth.checkCredenciales(this.entrarForm.value);
+
 
     //console.warn(this.entrarForm.value);
   }

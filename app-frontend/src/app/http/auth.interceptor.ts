@@ -2,20 +2,24 @@ import { HttpClient, HttpErrorResponse, HttpInterceptorFn } from '@angular/commo
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
+import { AuthService } from '../injectables/auth.service';
 
 // ng g interceptor /http/auth
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  console.log(`@josq[intercept=${req.url}]`);
+  console.log(`@intercept[${req.url}]`);
+
   let router: Router = inject(Router);
+  let auth:AuthService = inject(AuthService);
+  
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
-      if (error.status === 401) {
-        console.error('@josq[401:Sin Autorizacion]');
+      console.error(`@intercept[${error.status}]`);
+
+      if (error.status === 401 && req.url !== 'http://localhost/gpx/entrar') {
+        console.log(`@catchError[navigate=entrar]`);
+        router.navigate(['entrar']);
+        auth.tieneSesion.next(false);
       }
-      else {
-        console.error(`@josq[${error.status}]`);
-      }
-      router.navigate(['sin-auth']);
 
       return throwError(() => error);
     })
