@@ -1,62 +1,69 @@
-GamerProXela:DATABASE
-	Administracion:SCHEMA
-		Sucursales
+GamerProXela:DATABASE {
+	Administracion:SCHEMA {
+		Sucursales:TABLE {
 			(PK) id_sucursal:string
 			nombre:string
 			ubicacion:string
-		Empleados 
+		}
+		Empleados:TABLE {
 			(PK) dpi:number
 			nombre:string
-		Cajeros 
-			(PK) Sucursales.id_sucursal
-			(PK) id_caja:number
-			(PK) Empleados.dpi
-		Bodegueros 
-			(PK) Sucursales.id_sucursal
-			(PK) Empleados.dpi
-		Inventaristas 
-			(PK) Sucursales.id_sucursal
-			(PK) Empleados.dpi
-		Administradores 
-			(PK) Sucursales.id_sucursal
-			(PK) Empleados.dpi
-		Usuarios
-			(PK) Empleados.dpi
-			username:string
+			Sucursales.id_sucursal
+			rol:enum[caja,bodega,inventario,administracion]
+			(UK) username:string
 			password:string
-	Bodega:SCHEMA
-		Productos
+		}
+	}
+	Bodega:SCHEMA {
+		Productos:TABLE {
 			(PK) id_producto:barcode
 			descripcion:string
-		ProductosSucursal
+		}
+		ProductosSucursal:TABLE {
 			(PK) Sucursales.id_sucursal
 			(PK) Productos.id_producto
 			unidades_en_bodega:number
 			unidades_en_estanteria:number
-	Inventario:SCHEMA
-		Estanteria
+		}
+	}
+	Inventario:SCHEMA {
+		Estanteria:TABLE {
 			(PK) Sucursales.id_sucursal
 			(PK) id_pasillo:number
 			(PK) Productos.id_producto
 			unidades_en_pasillo:number
-	Caja:SCHEMA
-		Clientes 
+		}
+	}
+	Caja:SCHEMA {
+		Cajas:TABLE {
+			(PK) id_caja:number
+			(PK) Sucursales.id_sucursal
+			Empleados.dpi
+		}
+		Clientes:TABLE {
 			(PK) nit:number
 			nombre:string
-		Ventas
+			total_historico:number
+		}
+		Ventas:TABLE {
 			(PK) id_factura:number
+			Caja.id_caja
 			Sucursales.id_sucursal
 			Clientes.nit
-			Cajeros.Empleados.dpi
 			total:number
 			total_descuento:number
 			fecha:date
-		ProductosFacturados
+		}
+		ProductosFacturados:TABLE {
 			(PK) Ventas.id_factura
 			(PK) Productos.id_producto
 			unidades:number
 			subtotal:number
-		Tarjetas
+		}
+		Tarjetas:TABLE {
 			(PK) Clientes.nit
 			nivel:enum[comun,oro,platino,diamante]
 			puntos:number
+		}
+	}
+}

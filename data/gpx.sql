@@ -18,96 +18,77 @@ CREATE TABLE administracion.sucursales (
     ubicacion VARCHAR NOT NULL
 );
 
+CREATE TYPE administracion.rol_type AS ENUM ('caja', 'bodega', 'inventario', 'administracion');
+
 CREATE TABLE administracion.empleados (
     dpi BIGINT PRIMARY KEY,
-    nombre VARCHAR NOT NULL
-);
-
-CREATE TABLE administracion.cajeros (
+    nombre VARCHAR NOT NULL,
     id_sucursal VARCHAR REFERENCES administracion.sucursales(id_sucursal),
-    id_caja BIGINT,
-    dpi BIGINT REFERENCES administracion.empleados(dpi),
-    PRIMARY KEY(id_sucursal, id_caja, dpi)
-);
-
-CREATE TABLE administracion.bodegueros (
-    id_sucursal VARCHAR REFERENCES administracion.sucursales(id_sucursal),
-    dpi BIGINT REFERENCES administracion.empleados(dpi),
-    PRIMARY KEY(id_sucursal, dpi)
-);
-
-CREATE TABLE administracion.inventaristas (
-    id_sucursal VARCHAR REFERENCES administracion.sucursales(id_sucursal),
-    dpi BIGINT REFERENCES administracion.empleados(dpi),
-    PRIMARY KEY(id_sucursal, dpi)
-);
-
-CREATE TABLE administracion.administradores (
-    id_sucursal VARCHAR REFERENCES administracion.sucursales(id_sucursal),
-    dpi BIGINT REFERENCES administracion.empleados(dpi),
-    PRIMARY KEY(id_sucursal, dpi)
-);
-
-CREATE TABLE administracion.usuarios (
-    dpi BIGINT REFERENCES administracion.empleados(dpi),
-    username VARCHAR NOT NULL,
-    password VARCHAR NOT NULL,
-    PRIMARY KEY(dpi)
+    rol administracion.rol_type NOT NULL,
+    username VARCHAR UNIQUE NOT NULL,
+    password VARCHAR NOT NULL
 );
 
 CREATE TABLE bodega.productos (
-    id_producto VARCHAR PRIMARY KEY, -- barcode puede ser VARCHAR si es un código de barras
+    id_producto VARCHAR PRIMARY KEY, -- barcode
     descripcion VARCHAR NOT NULL
 );
 
 CREATE TABLE bodega.productos_sucursal (
     id_sucursal VARCHAR REFERENCES administracion.sucursales(id_sucursal),
     id_producto VARCHAR REFERENCES bodega.productos(id_producto),
-    unidades_en_bodega INT NOT NULL,
-    unidades_en_estanteria INT NOT NULL,
+    unidades_bodega INT CHECK (unidades_bodega >= 0),
+    unidades_estanteria INT CHECK (unidades_estanteria >= 0),
     PRIMARY KEY(id_sucursal, id_producto)
 );
 
 CREATE TABLE inventario.estanteria (
     id_sucursal VARCHAR REFERENCES administracion.sucursales(id_sucursal),
-    id_pasillo BIGINT,
+    id_pasillo INT NOT NULL,
     id_producto VARCHAR REFERENCES bodega.productos(id_producto),
-    unidades_en_pasillo INT NOT NULL,
+    unidades_pasillo INT CHECK (unidades_pasillo >= 0),
     PRIMARY KEY(id_sucursal, id_pasillo, id_producto)
+);
+
+CREATE TABLE caja.cajas (
+    id_caja INT,
+    id_sucursal VARCHAR REFERENCES administracion.sucursales(id_sucursal), --ON DELETE CASCADE,
+    dpi BIGINT REFERENCES administracion.empleados(dpi),--ON DELETE SET NULL,
+    PRIMARY KEY (id_caja, id_sucursal)
 );
 
 CREATE TABLE caja.clientes (
     nit BIGINT PRIMARY KEY,
-    nombre VARCHAR NOT NULL
+    nombre VARCHAR NOT NULL,
+    total_historico NUMERIC CHECK (total_historico >= 0)
 );
 
 CREATE TABLE caja.ventas (
     id_factura BIGINT PRIMARY KEY,
-    id_sucursal VARCHAR REFERENCES administracion.sucursales(id_sucursal),
+    id_caja SMALLINT,
+    id_sucursal VARCHAR,
     nit BIGINT REFERENCES caja.clientes(nit),
-    dpi BIGINT REFERENCES administracion.empleados(dpi), -- Relación con cajeros por dpi
-    total NUMERIC NOT NULL,
-    total_descuento NUMERIC NOT NULL,
-    fecha DATE NOT NULL
+    total NUMERIC CHECK (total >= 0),
+    total_descuento NUMERIC CHECK (total_descuento >= 0),
+    fecha DATE NOT NULL,
+	FOREIGN KEY (id_caja, id_sucursal) REFERENCES caja.cajas(id_caja, id_sucursal)
 );
 
 CREATE TABLE caja.productos_facturados (
     id_factura BIGINT REFERENCES caja.ventas(id_factura),
     id_producto VARCHAR REFERENCES bodega.productos(id_producto),
-    unidades INT NOT NULL,
-    subtotal NUMERIC NOT NULL,
+    unidades INT CHECK (unidades > 0),
+    subtotal NUMERIC CHECK (subtotal >= 0),
     PRIMARY KEY(id_factura, id_producto)
 );
 
-CREATE TYPE nivel_enum AS ENUM ('comun', 'oro', 'platino', 'diamante');
+CREATE TYPE nivel_type AS ENUM ('comun', 'oro', 'platino', 'diamante');
 
 CREATE TABLE caja.tarjetas (
     nit BIGINT REFERENCES caja.clientes(nit),
-	nivel nivel_enum,
-	-- nivel VARCHAR CHECK (nivel IN ('comun', 'oro', 'platino', 'diamante')),
-    puntos INT NOT NULL,
+	nivel nivel_type NOT NULL,-- nivel VARCHAR CHECK (nivel IN ('comun', 'oro', 'platino', 'diamante')),
+    puntos INT CHECK (puntos >= 0),
     PRIMARY KEY(nit)
 );
-
 
 --\q
