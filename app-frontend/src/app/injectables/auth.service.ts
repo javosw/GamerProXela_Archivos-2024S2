@@ -16,6 +16,7 @@ export class AuthService {
     this.http.post(this.url, loginData).subscribe(
       {
         next: (response: any) => {
+          console.log(`@josq[auth=${JSON.stringify(response)}]`);
           //console.log(response);
           //if (response.success) { this.router.navigate(['/dashboard']); } else { console.error('Login failed:', response.message); }
         },
