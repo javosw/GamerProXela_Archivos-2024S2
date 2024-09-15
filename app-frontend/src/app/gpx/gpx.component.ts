@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { HolaNavbarComponent } from '../hola/hola-navbar/hola-navbar.component';
 import { AuthService } from '../services/auth.service';
+import { HolaComponent } from '../hola/hola/hola.component';
 
 // .angular
 // ng g c gpx
@@ -9,7 +10,7 @@ import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'gpx',
   standalone: true,
-  imports: [RouterLink, RouterOutlet, HolaNavbarComponent],
+  imports: [RouterLink, RouterOutlet, HolaComponent],
   templateUrl: './gpx.component.html',
 })
 export class GpxComponent {

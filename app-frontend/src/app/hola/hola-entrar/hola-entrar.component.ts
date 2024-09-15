@@ -3,7 +3,7 @@ import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angul
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'gpx-hola-auth',
+  selector: 'gpx-hola-entrar',
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './hola-entrar.component.html',

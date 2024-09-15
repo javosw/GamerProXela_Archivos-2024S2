@@ -1,6 +1,11 @@
-@if (!tieneSesion) {
-<gpx-hola-navbar></gpx-hola-navbar>
+<!-- if(!tieneSesion){HOLA}elif(rol == admin){ADMINBOARD} elif(rol == caja){CAJABOARD}-->
+
+
+<!-- import HolaComp, AdminBoard, CajaBoard -->
+
+@if(tieneSesion){
+<router-outlet></router-outlet>
 }
-<main>
-    <router-outlet></router-outlet>
-</main>
+@else{
+<gpx-hola></gpx-hola>
+}

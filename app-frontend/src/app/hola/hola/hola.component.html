@@ -1,0 +1,8 @@
+<gpx-hola-navbar (quiereEntrar)="quiereEntrar = $event"></gpx-hola-navbar>
+
+@if (!quiereEntrar) {
+<gpx-hola-carrusel></gpx-hola-carrusel>
+}
+@else {
+<gpx-hola-entrar></gpx-hola-entrar>
+}
