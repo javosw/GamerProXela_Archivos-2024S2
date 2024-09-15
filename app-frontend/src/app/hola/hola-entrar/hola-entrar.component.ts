@@ -13,6 +13,7 @@ export class HolaEntrarComponent {
   tieneSesion: boolean;
 
   constructor(private formBuilder: FormBuilder, private auth:AuthService) {
+    this.auth.tieneSesion.subscribe((val)=>{this.tieneSesion = val;});
     this.tieneSesion = true;
     this.entrarForm = this.formBuilder.group({
       user: [''],
@@ -24,7 +25,6 @@ export class HolaEntrarComponent {
   // entrarForm = new FormGroup({ user: new FormControl(''), password: new FormControl('') });
 
   ngOnInit(){
-    this.auth.tieneSesion.subscribe((val)=>{this.tieneSesion = val;});
   }
 
   onSubmit() {

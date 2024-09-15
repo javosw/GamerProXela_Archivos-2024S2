@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +10,11 @@ import { Observable, Subject } from 'rxjs';
 export class AuthService {
 
   url: string = 'http://localhost/gpx/entrar';
-  tieneSesion: Subject<boolean> = new Subject();
+  tieneSesion:BehaviorSubject<boolean>;
 
   constructor(private http: HttpClient, private router: Router) { 
+    this.tieneSesion = new BehaviorSubject(false);
   }
-
- // estaAutenticado: Subject<boolean>;
 
   checkCredenciales(loginData: AbstractControl) {
     this.http.post(this.url, loginData).subscribe(

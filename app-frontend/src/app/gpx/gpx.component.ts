@@ -16,7 +16,7 @@ export class GpxComponent {
   tieneSesion: boolean;
 
   constructor(private auth: AuthService) {
-    this.tieneSesion = false;
+    this.tieneSesion = this.auth.tieneSesion.value;
   }
 
   ngOnInit(){
