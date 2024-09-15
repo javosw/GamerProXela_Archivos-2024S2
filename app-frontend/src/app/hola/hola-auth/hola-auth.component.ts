@@ -24,7 +24,8 @@ export class HolaAuthComponent {
   onSubmit() {
 
     //this.auth.checkCredencialesWithForm(this.entrarForm.value);
-    console.log(this.entrarForm.get("user")?.value+" : "+this.entrarForm.get("pass")?.value);
+    console.log(`@josq[entrar=${JSON.stringify(this.entrarForm.value)}]`);
+    //console.log(this.entrarForm.get("user")?.value+" : "+this.entrarForm.get("pass")?.value);
     this.auth.checkCredenciales(this.entrarForm.value);
 
     //console.warn(this.entrarForm.value);

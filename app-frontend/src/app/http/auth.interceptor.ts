@@ -5,7 +5,7 @@ import { catchError, throwError } from 'rxjs';
 
 // ng g interceptor /http/auth
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  console.error(`@josq[${req.url}]`);
+  console.log(`@josq[intercept=${req.url}]`);
   let router: Router = inject(Router);
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
