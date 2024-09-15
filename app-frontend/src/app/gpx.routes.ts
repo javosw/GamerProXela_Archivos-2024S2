@@ -5,7 +5,7 @@ import { SinAuthComponent } from './sin-auth/sin-auth.component';
 import { AdminBoardComponent } from './admin/admin-board/admin-board.component';
 
 export const gpxRoutes: Routes = [
-    { path:"board", component: AdminBoardComponent },
+    { path:"admin/board", component: AdminBoardComponent },
     { path:"sin-auth", component: SinAuthComponent },
     { path:"entrar", component: HolaEntrarComponent },
     { path:"", component: HolaCarruselComponent },
