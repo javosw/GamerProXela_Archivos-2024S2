@@ -1,0 +1,73 @@
+<div class="container mt-3 mb-3">
+    <h2>Agregar empleado</h2>
+    <hr/>
+    <form [formGroup]="empleadoForm" (ngSubmit)="onSubmit()" class="mb-3">
+        <div class="mb-3 row">
+            <label for="dpi" class="col-sm-3 col-form-label">DPI</label>
+            <div class="col-sm-9">
+                <input formControlName="dpi" id="dpi" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="nombre" class="col-sm-3 col-form-label">Nombre completo</label>
+            <div class="col-sm-9">
+                <input formControlName="nombre" id="nombre" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <div class="dropdown col-sm-3">
+                <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Sucursal
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" (click)="setSucursal('parque')">parque</a></li>
+                    <li><a class="dropdown-item" (click)="setSucursal('centro 1')">centro 1</a></li>
+                    <li><a class="dropdown-item" (click)="setSucursal('centro 2')">centro 2</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-9">
+                <input formControlName="sucursal" id="sucursal" [value]="getSucursal()" readonly type="text"
+                    class="form-control" value="">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <div class="dropdown col-sm-3">
+                <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Rol
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" (click)="setRol('caja')">caja</a></li>
+                    <li><a class="dropdown-item" (click)="setRol('bodega')">bodega</a></li>
+                    <li><a class="dropdown-item" (click)="setRol('inventario')">inventario</a></li>
+                    <li><a class="dropdown-item" (click)="setRol('administracion')">administracion</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-9">
+                <input formControlName="rol" id="rol" [value]="getRol()" readonly type="text" class="form-control">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="username" class="col-sm-3 col-form-label">Username</label>
+            <div class="col-sm-9">
+                <input formControlName="username" id="username" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="password" class="col-sm-3 col-form-label">Password</label>
+            <div class="col-sm-9">
+                <input formControlName="password" id="password" type="password" class="form-control">
+            </div>
+        </div>
+        <hr/>
+        <button type="submit" class="btn btn-outline-primary">AGREGAR</button>
+    </form>
+
+    @if (!fueAgregado) {
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        El empleado especificado no pudo ser agregado.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    }
+</div>

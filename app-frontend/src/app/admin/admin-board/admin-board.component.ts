@@ -1,11 +1,18 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-admin-board',
+  selector: 'gpx-admin-board',
   standalone: true,
   imports: [],
   templateUrl: './admin-board.component.html',
 })
 export class AdminBoardComponent {
 
+  constructor(private router:Router){
+  }
+
+  navegar(url:string){
+    this.router.navigate([url]);
+  }
 }
