@@ -1,12 +1,14 @@
 <?php
 
 class User{
-    public $nombre;
+    public $username;
     public $rol;
+    public $nombre;
 
-    public function __construct($nombre,$rol) {
-        $this->nombre = $nombre;
+    public function __construct($username,$rol,$nombre) {
+        $this->username = $username;
         $this->rol = $rol;
+        $this->nombre = $nombre;
     }
 
 }

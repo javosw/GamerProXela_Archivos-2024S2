@@ -46,7 +46,7 @@ if(preg_match('/^\/gpx\/entrar/', $uri)) {
         $json_body = json_decode($body);
 
         require_once $aqui.'\controller\AuthController.php';
-        AuthController::entrar($json_body->user,$json_body->pass);
+        AuthController::entrar($json_body->username,$json_body->password);
         exit;
     }
     else if($_SERVER['REQUEST_METHOD'] == 'OPTIONS'){

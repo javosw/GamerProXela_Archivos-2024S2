@@ -11,17 +11,17 @@ class AuthController
     }
 
     private static function haEntrado() : bool {
-        return isset($_SESSION['user']) && isset($_SESSION['nombre']) && isset($_SESSION['rol']);
+        return isset($_SESSION['username']) && isset($_SESSION['nombre']) && isset($_SESSION['rol']);
     }
 
-    public static function entrar($user, $pass)
+    public static function entrar($username, $password)
     {
         session_start();
 
         if (self::haEntrado()) {
 
             $resp = array(
-                'user' => $_SESSION['user'],
+                'username' => $_SESSION['username'],
                 'nombre' => $_SESSION['nombre'],
                 'rol' => $_SESSION['rol']
             );
@@ -39,14 +39,14 @@ class AuthController
             require_once __DIR__ . '/../model/User.php';
 
             try {
-                $user_data = AuthModel::getUser($user, $pass);
+                $user_data = AuthModel::getUser($username, $password);
 
-                $_SESSION['user'] = $user;
+                $_SESSION['username'] = $username;
                 $_SESSION['nombre'] = $user_data->nombre;
                 $_SESSION['rol'] = $user_data->rol;
 
                 $resp = array(
-                    'user' => $_SESSION['user'],
+                    'username' => $_SESSION['username'],
                     'nombre' => $_SESSION['nombre'],
                     'rol' => $_SESSION['rol']
                 );

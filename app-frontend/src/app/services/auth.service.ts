@@ -22,6 +22,12 @@ export class AuthService {
         next: (response: any) => {
           console.log(`@service[next=${JSON.stringify(response)}]`);
           this.tieneSesion.next(true);
+
+          let user = response as { username:string, rol:string, nombre:string };
+
+          if(user.rol == 'administracion'){
+            this.router.navigate(['admin/board']);
+          }
           //console.log(response);
           //if (response.success) { this.router.navigate(['/dashboard']); } else { console.error('Login failed:', response.message); }
         },

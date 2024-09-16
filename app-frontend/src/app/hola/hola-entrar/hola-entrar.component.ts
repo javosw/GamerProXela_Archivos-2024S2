@@ -16,8 +16,8 @@ export class HolaEntrarComponent {
     this.auth.tieneSesion.subscribe((val)=>{this.tieneSesion = val;});
     this.tieneSesion = true;
     this.entrarForm = this.formBuilder.group({
-      user: [''],
-      pass: [''],
+      username: [''],
+      password: [''],
     });
   }
   // Replacing a form control value
