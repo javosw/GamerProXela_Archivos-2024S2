@@ -17,6 +17,11 @@ CREATE TABLE administracion.sucursales (
     nombre VARCHAR NOT NULL,
     ubicacion VARCHAR NOT NULL
 );
+INSERT INTO administracion.sucursales VALUES 
+('parque','Parque Central Xela','Zona 1'),
+('centro1','Centro Comercial Pradera','Zona 3'),
+('centro2','Centro Comercial Mont Blanc','Zona 3')
+;
 
 CREATE TYPE administracion.rol_type AS ENUM ('caja', 'bodega', 'inventario', 'administracion');
 

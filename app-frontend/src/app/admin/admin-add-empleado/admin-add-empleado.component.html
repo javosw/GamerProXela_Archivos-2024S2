@@ -1,6 +1,6 @@
 <div class="container mt-3 mb-3">
     <h2>Agregar empleado</h2>
-    <hr/>
+    <hr />
     <form [formGroup]="empleadoForm" (ngSubmit)="onSubmit()" class="mb-3">
         <div class="mb-3 row">
             <label for="dpi" class="col-sm-3 col-form-label">DPI</label>
@@ -60,14 +60,22 @@
                 <input formControlName="password" id="password" type="password" class="form-control">
             </div>
         </div>
-        <hr/>
-        <button type="submit" class="btn btn-outline-primary">AGREGAR</button>
+        <hr />
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-outline-primary">AGREGAR</button>
+            <button (click)="navegar('admin/board')" type="button" class="btn btn-outline-light">CANCELAR</button>
+        </div>
     </form>
 
-    @if (!fueAgregado) {
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        El empleado especificado no pudo ser agregado.
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    @if (fueEnviado && !fueAgregado) {
+    <div class="alert alert-warning" role="alert">
+        Operacion fallida?!
     </div>
     }
+    @else if(fueEnviado && fueAgregado) {
+    <div class="alert alert-info" role="alert">
+        Operacion exitosa!
+    </div>
+    }
+
 </div>

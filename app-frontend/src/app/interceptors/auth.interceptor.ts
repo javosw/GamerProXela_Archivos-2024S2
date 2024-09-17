@@ -15,6 +15,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     catchError((error: HttpErrorResponse) => {
       console.error(`@intercept[${error.status}]`);
 
+      // aqui solo se manejan errores 401 (no auth), otros errores se manejan desde sus requests
       if (error.status === 401 && req.url !== 'http://localhost/gpx/entrar') {
         console.log(`@catchError[navigate=entrar]`);
         router.navigate(['entrar']);

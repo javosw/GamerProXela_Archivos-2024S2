@@ -13,16 +13,19 @@ empleado
 	
 empresa 
 	nombre: GamerProXela
-	tienen varias sucursales en la misma ciudad
+	sucursales
+		parque
+		centro1
+		centro2
 	registros
 		productos
 			ubicacion en sucursal
 				estanteria
 				bodega: cada sucursal tiene una bodega
-			tipos
-				sucursal parque: 100
-				sucursal centro1: 75
-				sucursal centro2: 75
+			(ficticio) tipos existentes
+				en parque: 100
+				en centro1: 75
+				en centro2: 75
 			sql
 				agregar producto usando INSERT
 				(ficticio) agregar productos a cada sucursal (estanteria y bodega)

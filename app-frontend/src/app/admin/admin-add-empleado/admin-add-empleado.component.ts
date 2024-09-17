@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AdminService } from '../../services/admin.service';
 
 @Component({
   selector: 'gpx-admin-add-empleado',
@@ -10,9 +12,11 @@ import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angul
 export class AdminAddEmpleadoComponent {
   empleadoForm: FormGroup;
   fueAgregado: boolean;
+  fueEnviado:boolean;
 
-  constructor(private formBuilder: FormBuilder) {
-    this.fueAgregado = true;
+  constructor(private formBuilder: FormBuilder, private adminServ:AdminService ,private router:Router) {
+    this.fueAgregado = false;
+    this.fueEnviado = false;
     this.empleadoForm = this.formBuilder.group({
       dpi: [''],
       nombre: [''],
@@ -22,6 +26,25 @@ export class AdminAddEmpleadoComponent {
       password: [''],
     });
   }
+
+  onSubmit() {
+    this.fueEnviado = true;
+    this.adminServ.addEmpleado(this.empleadoForm.value).subscribe({
+      next: (response: any) => {
+        this.fueAgregado = true;
+      },
+      error: (error) => {
+        this.fueAgregado = false;
+      }
+    });
+  }
+
+  navegar(url:string){
+    this.router.navigate([url]);
+  }
+
+
+// ZZZ[FORM] --------------------------------------------
 
   getRol() {
     return this.empleadoForm.get('rol')?.value;
@@ -35,9 +58,6 @@ export class AdminAddEmpleadoComponent {
   }
   setSucursal(sucursal: string) {
     this.empleadoForm.get('sucursal')?.setValue(sucursal);
-  }
-
-  onSubmit() {
   }
 
 }
