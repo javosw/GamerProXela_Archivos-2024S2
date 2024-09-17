@@ -9,7 +9,6 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 })
 export class AuthService {
 
-  url: string = 'http://localhost/gpx/entrar';
   tieneSesion:BehaviorSubject<boolean>;
 
   constructor(private http: HttpClient, private router: Router) { 
@@ -17,15 +16,17 @@ export class AuthService {
   }
 
   checkCredenciales(loginData: AbstractControl) {
-    this.http.post(this.url, loginData).subscribe(
+    let url: string = 'http://localhost/gpx/entrar';
+
+    this.http.post<{ username:string, rol:string, nombre:string }>(url, loginData).subscribe(
       {
-        next: (response: any) => {
+        next: (response: { username:string, rol:string, nombre:string }) => {
           console.log(`@service[next=${JSON.stringify(response)}]`);
           this.tieneSesion.next(true);
 
-          let user = response as { username:string, rol:string, nombre:string };
+          //let user = response as { username:string, rol:string, nombre:string };
 
-          if(user.rol == 'administracion'){
+          if(response.rol == 'administracion'){
             this.router.navigate(['admin/board']);
           }
           //console.log(response);
@@ -34,14 +35,14 @@ export class AuthService {
         error: (error) => {
           console.error("@service[error]")
           this.tieneSesion.next(false);
-
-          //console.error('Error occurred:', error);
         }
       }
     );
 
   }
 
+
+  /*
   ejemploGet(user: string, pass: string) {
     const params = new HttpParams()
       .set('user', user)
@@ -49,15 +50,12 @@ export class AuthService {
     this.http.get(this.url, { params }).subscribe(
       {
         next: (response: any) => {
-          //console.log(response);
-          //if (response.success) { this.router.navigate(['/dashboard']); } else { console.error('Login failed:', response.message); }
         },
         error: (error) => {
-          //console.error('Error occurred:', error);
         }
       }
     );
   }
-
+*/
 
 }

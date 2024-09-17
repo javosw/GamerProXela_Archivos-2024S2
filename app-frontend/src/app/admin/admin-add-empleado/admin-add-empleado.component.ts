@@ -14,7 +14,7 @@ export class AdminAddEmpleadoComponent {
   fueAgregado: boolean;
   fueEnviado:boolean;
 
-  constructor(private formBuilder: FormBuilder, private adminServ:AdminService ,private router:Router) {
+  constructor(private formBuilder: FormBuilder, private adminServ:AdminService, private router:Router) {
     this.fueAgregado = false;
     this.fueEnviado = false;
     this.empleadoForm = this.formBuilder.group({
@@ -28,10 +28,13 @@ export class AdminAddEmpleadoComponent {
   }
 
   onSubmit() {
-    this.fueEnviado = true;
+    //alert(JSON.stringify(this.empleadoForm.value));
     this.adminServ.addEmpleado(this.empleadoForm.value).subscribe({
       next: (response: any) => {
         this.fueAgregado = true;
+      },
+      complete: ()=>{
+        this.fueEnviado = true;
       },
       error: (error) => {
         this.fueAgregado = false;
