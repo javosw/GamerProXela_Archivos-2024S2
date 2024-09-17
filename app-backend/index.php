@@ -30,69 +30,47 @@ $aqui = __DIR__;
 
 header("Content-Type: application/json");
 
-if(preg_match('/^\/gpx\/entrar/', $uri)) {
-    header('Access-Control-Allow-Origin: *');
-    header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-    //header('Access-Control-Allow-Headers: Content-Type, Authorization');
-    header('Access-Control-Allow-Headers: *');
+// para preflight requests
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+//header('Access-Control-Allow-Headers: Content-Type, Authorization');
+header('Access-Control-Allow-Headers: *');
 
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-
-        // leer un json
-        // json_decode($body, true) para acceder con arrays
-        // json_decode($body) para acceder con objetos
-
-        $body = file_get_contents('php://input');
-        $json_body = json_decode($body);
-
-        require_once $aqui.'\controller\AuthController.php';
-        AuthController::entrar($json_body->username,$json_body->password);
-        exit;
-    }
-    else if($_SERVER['REQUEST_METHOD'] == 'OPTIONS'){
-
-    }
-}
-else if(preg_match('/^\/gpx\/admin\/empleados/', $uri)) {
-    header('Access-Control-Allow-Origin: *');
-    header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-    //header('Access-Control-Allow-Headers: Content-Type, Authorization');
-    header('Access-Control-Allow-Headers: *');
-
-    require_once $aqui.'\controller\AdminController.php';
-
-    // leer parametros usando $_GET['user'] es solo util para get, pero en post angular ignora los parametros en url
-    if($_SERVER['REQUEST_METHOD'] == 'GET'){
-
-        if(isset($_GET['dpi']) && isset($_GET['nombre'])){    
-            AdminController::addEmpleado($_GET['dpi'],$_GET['nombre']);
-        }
-    }
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    exit;
 }
 
-/*
-else if(preg_match('/^\/holaMundo\/jugadores/', $uri)) {
-    require_once $aqui.'\controller\JugadoresController.php';
-    JugadoresController::jugadores();
-}
-else if(preg_match('/^\/holaMundo\/partidos/', $uri)) {
-    require_once $aqui.'\controller\PartidosController.php';
+// leer un json
+// json_decode($body, true) para acceder con arrays
+// json_decode($body) para acceder con objetos
 
-    if(!empty($_POST['competicion'])){
-        PartidosController::partidosPorCompeticion($_POST['competicion']);
+$raw_body = file_get_contents('php://input');
+$json_body = json_decode($raw_body);
+
+if (preg_match('/^\/gpx\/entrar/', $uri)) {
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+        require_once $aqui . '\controller\AuthController.php';
+        AuthController::entrar($json_body->username, $json_body->password);
     }
-    else {
-        PartidosController::competiciones();
+    exit;
+} else if (preg_match('/^\/gpx\/admin\/empleados\/add/', $uri)) {
+    require_once $aqui . '\model\AdminModel.php';
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+        AdminModel::addEmpleado(
+            $json_body->dpi,
+            $json_body->nombre,
+            $json_body->sucursal,
+            $json_body->rol,
+            $json_body->username,
+            $json_body->password
+        );
     }
-}
-else if(preg_match('/^\/holaMundo\/noticias/', $uri)) {
-    require_once $aqui.'\controller\NoticiasController.php';
-    NoticiasController::ultimasNoticias();
-}
-else if(preg_match('/^\/holaMundo\/api\/jugadores/', $uri)) {
-    require_once $aqui.'\controller\JugadoresController.php';
-    JugadoresController::jugadoresAPI();
-}*/
+    exit;
+} 
 else {
     http_response_code(404);
 }

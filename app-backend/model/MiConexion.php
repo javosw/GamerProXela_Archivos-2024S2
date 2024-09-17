@@ -17,7 +17,7 @@ class CustomPDO {
             $my_pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $my_pdo;
         } catch (PDOException $e) {
-            echo '{"JOSQ":"'.$e->getMessage().'"}';
+            //echo '{"JOSQ":"'.$e->getMessage().'"}';
         }
     }
 

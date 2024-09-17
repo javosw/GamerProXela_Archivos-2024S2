@@ -12,7 +12,7 @@ import { AdminService } from '../../services/admin.service';
 export class AdminAddEmpleadoComponent {
   empleadoForm: FormGroup;
   fueAgregado: boolean;
-  fueEnviado:boolean;
+  fueEnviado: boolean;
 
   constructor(private formBuilder: FormBuilder, private adminServ:AdminService, private router:Router) {
     this.fueAgregado = false;
@@ -28,15 +28,18 @@ export class AdminAddEmpleadoComponent {
   }
 
   onSubmit() {
-    //alert(JSON.stringify(this.empleadoForm.value));
+    this.fueEnviado = false;
+
     this.adminServ.addEmpleado(this.empleadoForm.value).subscribe({
       next: (response: any) => {
+        this.fueEnviado = true;
         this.fueAgregado = true;
       },
       complete: ()=>{
         this.fueEnviado = true;
       },
       error: (error) => {
+        this.fueEnviado = true;
         this.fueAgregado = false;
       }
     });

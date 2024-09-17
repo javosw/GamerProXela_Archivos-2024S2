@@ -21,7 +21,7 @@ export class AuthService {
     this.http.post<{ username:string, rol:string, nombre:string }>(url, loginData).subscribe(
       {
         next: (response: { username:string, rol:string, nombre:string }) => {
-          console.log(`@service[next=${JSON.stringify(response)}]`);
+          console.log(`@AuthService[next=${JSON.stringify(response)}]`);
           this.tieneSesion.next(true);
 
           //let user = response as { username:string, rol:string, nombre:string };
@@ -29,11 +29,9 @@ export class AuthService {
           if(response.rol == 'administracion'){
             this.router.navigate(['admin/board']);
           }
-          //console.log(response);
-          //if (response.success) { this.router.navigate(['/dashboard']); } else { console.error('Login failed:', response.message); }
         },
         error: (error) => {
-          console.error("@service[error]")
+          console.error("@AuthService[error]")
           this.tieneSesion.next(false);
         }
       }

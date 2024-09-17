@@ -12,7 +12,7 @@ export class AdminService {
   constructor(private http: HttpClient, private router: Router) { }
 
   addEmpleado(form: AbstractControl): Observable<any> {
-    let url = 'http://localhost/gpx/admin/empleados';
+    let url = 'http://localhost/gpx/admin/empleados/add';
 
     return this.http.post(url, form);
   }
