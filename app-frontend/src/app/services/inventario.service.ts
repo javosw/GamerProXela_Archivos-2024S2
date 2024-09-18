@@ -7,17 +7,22 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class BodegaService {
+export class InventarioService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
   addProducto(form: AbstractControl): Observable<any> {
-    let url = 'http://localhost/gpx/bodega/productos/add';
+    let url = 'http://localhost/gpx/productos/add';
     return this.http.post<any>(url, form);
   }
 
   getProductos(): Observable<any> {
-    let url = 'http://localhost/gpx/bodega/productos';
+    let url = 'http://localhost/gpx/productos';
     return this.http.get<any>(url);
+  }
+
+  modEstanteria(form: AbstractControl): Observable<any>{
+    let url = 'http://localhost/gpx/estanteria/mod';
+    return this.http.post<any>(url, form);
   }
 }

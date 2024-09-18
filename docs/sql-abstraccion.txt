@@ -14,24 +14,18 @@ GamerProXela:DATABASE {
 			password:string
 		}
 	}
-	Bodega:SCHEMA {
+	Inventario:SCHEMA {
 		Productos:TABLE {
 			(PK) id_producto:barcode
 			nombre:string
+			unidades_vendidas:number
 		}
-		ProductosSucursal:TABLE {
-			(PK) Sucursales.id_sucursal
-			(PK) Productos.id_producto
-			unidades_en_bodega:number
-			unidades_en_estanteria:number
-		}
-	}
-	Inventario:SCHEMA {
 		Estanteria:TABLE {
 			(PK) Sucursales.id_sucursal
-			(PK) id_pasillo:number
 			(PK) Productos.id_producto
-			unidades_en_pasillo:number
+			unidades_bodega:number
+			unidades_estanteria:number
+			id_pasillo:number
 		}
 	}
 	Caja:SCHEMA {

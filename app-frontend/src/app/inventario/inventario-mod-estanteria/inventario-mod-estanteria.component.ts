@@ -4,12 +4,12 @@ import { Router } from '@angular/router';
 import { InventarioService } from '../../services/inventario.service';
 
 @Component({
-  selector: 'app-bodega-add-producto',
+  selector: 'app-inventario-mod-estanteria',
   standalone: true,
   imports: [ReactiveFormsModule],
-  templateUrl: './bodega-add-producto.component.html'
+  templateUrl: './inventario-mod-estanteria.component.html'
 })
-export class BodegaAddProductoComponent {
+export class InventarioModEstanteriaComponent {
   productoForm: FormGroup;
   fueAgregado: boolean;
   fueEnviado: boolean;
@@ -19,7 +19,7 @@ export class BodegaAddProductoComponent {
     this.fueEnviado = false;
     this.productoForm = this.formBuilder.group({
       barcode: [''],
-      nombre: [''],
+      pasillo: [''],
       unidades: [''],
     });
   }
@@ -27,7 +27,7 @@ export class BodegaAddProductoComponent {
   onSubmit() {
     this.fueEnviado = false;
 
-    this.bodegaServ.addProducto(this.productoForm.value).subscribe({
+    this.bodegaServ.modEstanteria(this.productoForm.value).subscribe({
       next: (response: any) => {
         this.fueEnviado = true;
         this.fueAgregado = true;
@@ -45,5 +45,6 @@ export class BodegaAddProductoComponent {
   navegar(url:string){
     this.router.navigate([url]);
   }
+
 
 }

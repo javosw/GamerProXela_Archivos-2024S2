@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="container mt-3 mb-3">
+        <h2 (click)="navegar('inventario/board')">Modificar estanteria</h2>
+        <hr />
+        <form [formGroup]="productoForm" (ngSubmit)="onSubmit()" class="mb-3">
+            <div class="mb-3 row">
+                <label for="barcode" class="col-sm-3 col-form-label">Barcode</label>
+                <div class="col-sm-9">
+                    <input formControlName="barcode" id="barcode" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="pasillo" class="col-sm-3 col-form-label">Pasillo</label>
+                <div class="col-sm-9">
+                    <input formControlName="pasillo" id="pasillo" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="unidades" class="col-sm-3 col-form-label">Unidades</label>
+                <div class="col-sm-9">
+                    <input formControlName="unidades" id="unidades" type="text" class="form-control">
+                </div>
+            </div>
+
+            <hr />
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-outline-primary">AGREGAR</button>
+                <button (click)="navegar('inventario/board')" type="button" class="btn btn-outline-light">CANCELAR</button>
+            </div>
+        </form>
+    
+        @if (fueEnviado && !fueAgregado) {
+        <div class="alert alert-warning" role="alert">
+            Operacion fallida?!
+        </div>
+        }
+        @else if(fueEnviado && fueAgregado) {
+        <div class="alert alert-info" role="alert">
+            Operacion exitosa!
+        </div>
+        }
+    </div>
+</div>
+

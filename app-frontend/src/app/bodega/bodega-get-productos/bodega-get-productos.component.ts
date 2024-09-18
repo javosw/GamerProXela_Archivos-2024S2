@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { BodegaService } from '../../services/bodega.service';
+import { InventarioService } from '../../services/inventario.service';
 
 @Component({
   selector: 'app-bodega-get-productos',
@@ -12,7 +12,7 @@ export class BodegaGetProductosComponent {
   productos;
   furFormEnviado: boolean;
 
-  constructor(private bodegaServ: BodegaService, private router: Router) {
+  constructor(private bodegaServ: InventarioService, private router: Router) {
     this.furFormEnviado = false;
     this.productos = new Array<{ barcode: number, nombre: string, unidades: number }>();
   }

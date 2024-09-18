@@ -8,12 +8,16 @@ import { AdminGetEmpleadosComponent } from './admin/admin-get-empleados/admin-ge
 import { BodegaBoardComponent } from './bodega/bodega-board/bodega-board.component';
 import { BodegaGetProductosComponent } from './bodega/bodega-get-productos/bodega-get-productos.component';
 import { BodegaAddProductoComponent } from './bodega/bodega-add-producto/bodega-add-producto.component';
+import { InventarioModEstanteriaComponent } from './inventario/inventario-mod-estanteria/inventario-mod-estanteria.component';
+import { InventarioBoardComponent } from './inventario/inventario-board/inventario-board.component';
 
 export const gpxRoutes: Routes = [
-    { path:"test", component: BodegaBoardComponent},
+    { path:"test", component: InventarioBoardComponent},
     { path:"bodega/board", component: BodegaBoardComponent },
     { path:"bodega/productos", component: BodegaGetProductosComponent },
     { path:"bodega/productos/add", component: BodegaAddProductoComponent },
+    { path:"inventario/board", component: InventarioBoardComponent },
+    { path:"inventario/estanteria/mod", component: InventarioModEstanteriaComponent },
     { path:"admin/empleados", component: AdminGetEmpleadosComponent },
     { path:"admin/empleados/add", component: AdminAddEmpleadoComponent },
     { path:"admin/board", component: AdminBoardComponent },

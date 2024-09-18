@@ -8,9 +8,11 @@ WITH
 \c gpx
 
 CREATE SCHEMA administracion;
-CREATE SCHEMA bodega;
 CREATE SCHEMA inventario;
 CREATE SCHEMA caja;
+
+-- schemas
+\dn
 
 CREATE TABLE administracion.sucursales (
     id_sucursal VARCHAR PRIMARY KEY,
@@ -34,26 +36,28 @@ CREATE TABLE administracion.empleados (
     password VARCHAR NOT NULL
 );
 
-CREATE TABLE bodega.productos (
-    id_producto VARCHAR PRIMARY KEY, -- barcode
-    nombre VARCHAR NOT NULL
-);
+\dt administracion.*
+\d administracion.sucursales
+\d administracion.empleados
 
-CREATE TABLE bodega.productos_sucursal (
-    id_sucursal VARCHAR REFERENCES administracion.sucursales(id_sucursal),
-    id_producto VARCHAR REFERENCES bodega.productos(id_producto),
-    unidades_bodega INT CHECK (unidades_bodega >= 0),
-    unidades_estanteria INT CHECK (unidades_estanteria >= 0),
-    PRIMARY KEY(id_sucursal, id_producto)
+CREATE TABLE inventario.productos (
+    id_producto VARCHAR PRIMARY KEY,
+    nombre VARCHAR NOT NULL,
+    unidades_vendidas INT CHECK (unidades_vendidas >= 0)
 );
 
 CREATE TABLE inventario.estanteria (
-    id_sucursal VARCHAR REFERENCES administracion.sucursales(id_sucursal),
-    id_pasillo INT NOT NULL,
-    id_producto VARCHAR REFERENCES bodega.productos(id_producto),
-    unidades_pasillo INT CHECK (unidades_pasillo >= 0),
-    PRIMARY KEY(id_sucursal, id_pasillo, id_producto)
+    id_sucursal VARCHAR NOT NULL REFERENCES administracion.sucursales(id_sucursal),
+    id_producto VARCHAR NOT NULL REFERENCES inventario.productos(id_producto),
+    unidades_bodega INTEGER CHECK (unidades_bodega >= 0),
+    unidades_estanteria INTEGER CHECK (unidades_estanteria >= 0),
+    id_pasillo INTEGER CHECK (id_pasillo >= -1),
+    PRIMARY KEY (id_sucursal, id_producto)
 );
+
+\dt inventario.*
+\d inventario.productos
+\d inventario.estanteria
 
 CREATE TABLE caja.cajas (
     id_caja INT,
@@ -81,7 +85,7 @@ CREATE TABLE caja.ventas (
 
 CREATE TABLE caja.productos_facturados (
     id_factura BIGINT REFERENCES caja.ventas(id_factura),
-    id_producto VARCHAR REFERENCES bodega.productos(id_producto),
+    id_producto VARCHAR REFERENCES inventario.productos(id_producto),
     unidades INT CHECK (unidades > 0),
     subtotal NUMERIC CHECK (subtotal >= 0),
     PRIMARY KEY(id_factura, id_producto)
@@ -95,5 +99,12 @@ CREATE TABLE caja.tarjetas (
     puntos INT CHECK (puntos >= 0),
     PRIMARY KEY(nit)
 );
+
+\dt caja.*
+\d caja.cajas
+\d caja.clientes
+\d caja.ventas
+\d caja.productos_facturados
+\d caja.tarjetas
 
 --\q
