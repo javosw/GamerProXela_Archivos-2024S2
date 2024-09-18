@@ -71,6 +71,14 @@ if (preg_match('/^\/gpx\/entrar/', $uri)) {
     }
     exit;
 } 
+else if (preg_match('/^\/gpx\/admin\/empleados/', $uri)){
+    require_once $aqui . '\model\AdminModel.php';
+    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+        AdminModel::getEmpleados();
+    }
+    exit;
+}
 else {
     http_response_code(404);
 }

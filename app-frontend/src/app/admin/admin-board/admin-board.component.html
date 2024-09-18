@@ -1,55 +1,4 @@
 <div class="container mt-3 mb-3">
-    <h3 class="mb-3">Reportes</h3>
-    <div class="container">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            <div class="col">
-                <div class="card">
-                    <div class="card-header">Descuentos</div>
-                    <div class="card-body">
-                        <p class="card-text">Inspeccione los descuentos por intervalo de tiempo.</p>
-                        <a href="#" class="btn btn-outline-primary">A supervisar</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-header">Ventas</div>
-                    <div class="card-body">
-                        <p class="card-text">Inspeccione las 10 ventas mas grandes por intervalo de tiempo.</p>
-                        <a href="#" class="btn btn-outline-primary">A supervisar</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-header">Sucursales</div>
-                    <div class="card-body">
-                        <p class="card-text">Inspeccione las 2 sucursales con mas ingresos.</p>
-                        <a href="#" class="btn btn-outline-primary">A supervisar</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-header">Productos</div>
-                    <div class="card-body">
-                        <p class="card-text">Inspeccione los 10 productos con mas unidades vendidas.</p>
-                        <a href="#" class="btn btn-outline-primary">A supervisar</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-header">Clientes distinguidos</div>
-                    <div class="card-body">
-                        <p class="card-text">Inspeccione los 10 clientes que mas han gastado en la empresa.</p>
-                        <a href="#" class="btn btn-outline-primary">A supervisar</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <hr>
     <h3 class="mb-3">Tarjetas</h3>
     <div class="container">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -58,7 +7,58 @@
                     <div class="card-header">Modificar tarjeta</div>
                     <div class="card-body">
                         <p class="card-text">El nivel de la tarjeta de los clientes depende de su consumo en la empresa.</p>
-                        <a href="#" class="btn btn-outline-primary">A modificar</a>
+                        <a href="#" class="btn btn-outline-primary">entrar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <h3 class="mb-3">Reportes</h3>
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">Descuentos</div>
+                    <div class="card-body">
+                        <p class="card-text">Inspeccione los descuentos por intervalo de tiempo.</p>
+                        <a href="#" class="btn btn-outline-primary">entrar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">Ventas</div>
+                    <div class="card-body">
+                        <p class="card-text">Inspeccione las 10 ventas mas grandes por intervalo de tiempo.</p>
+                        <a href="#" class="btn btn-outline-primary">entrar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">Sucursales</div>
+                    <div class="card-body">
+                        <p class="card-text">Inspeccione las 2 sucursales con mas ingresos.</p>
+                        <a href="#" class="btn btn-outline-primary">entrar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">Productos</div>
+                    <div class="card-body">
+                        <p class="card-text">Inspeccione los 10 productos con mas unidades vendidas.</p>
+                        <a href="#" class="btn btn-outline-primary">entrar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">Clientes distinguidos</div>
+                    <div class="card-body">
+                        <p class="card-text">Inspeccione los 10 clientes que mas han gastado en la empresa.</p>
+                        <a href="#" class="btn btn-outline-primary">entrar</a>
                     </div>
                 </div>
             </div>
@@ -70,10 +70,10 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             <div class="col">
                 <div class="card">
-                    <div class="card-header">Listar empleados</div>
+                    <div class="card-header">Mostrar empleados</div>
                     <div class="card-body">
-                        <p class="card-text">Una tabla que muestra los empleados.</p>
-                        <a href="#" class="btn btn-outline-primary">A listar</a>
+                        <p class="card-text">Vea los empleados de las sucursales.</p>
+                        <a (click)="navegar('admin/empleados')" class="btn btn-outline-primary">entrar</a>
                     </div>
                 </div>
             </div>
@@ -82,10 +82,11 @@
                     <div class="card-header">Agregar empleado</div>
                     <div class="card-body">
                         <p class="card-text">Cada empleado debe tener una sucursal y un rol.</p>
-                        <a (click)="navegar('admin/empleados/add')" class="btn btn-outline-primary">A agregar</a>
+                        <a (click)="navegar('admin/empleados/add')" class="btn btn-outline-primary">entrar</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </div>

@@ -13,7 +13,12 @@ export class AdminService {
 
   addEmpleado(form: AbstractControl): Observable<any> {
     let url = 'http://localhost/gpx/admin/empleados/add';
-
-    return this.http.post(url, form);
+    return this.http.post<any>(url, form);
   }
+
+  getEmpleados(): Observable<any> {
+    let url = 'http://localhost/gpx/admin/empleados';
+    return this.http.get<any>(url);
+  }
+
 }
