@@ -12,6 +12,8 @@ export class AdminGetEmpleadosComponent {
   empleados;
   furFormEnviado: boolean;
 
+  ruta_AdminBoard = 'admin/board';
+
   constructor(private adminServ: AdminService, private router: Router) {
     this.furFormEnviado = false;
     this.empleados = new Array<{ dpi: number, nombre: string, rol: string, sucursal: string, username: string }>();

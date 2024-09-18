@@ -10,6 +10,8 @@ import { AdminService } from '../../services/admin.service';
   templateUrl: './admin-add-empleado.component.html',
 })
 export class AdminAddEmpleadoComponent {
+  ruta_AdminBoard = 'admin/board';
+
   empleadoForm: FormGroup;
   fueAgregado: boolean;
   fueEnviado: boolean;

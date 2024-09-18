@@ -1,6 +1,6 @@
 <div class="container">
     <div class="container mt-3 mb-3">
-        <h2 (click)="navegar('inventario/board')">Modificar estanteria</h2>
+        <h2 (click)="navegar(ruta_InventarioBoard)">Modificar estanteria</h2>
         <hr />
         <form [formGroup]="productoForm" (ngSubmit)="onSubmit()" class="mb-3">
             <div class="mb-3 row">
@@ -25,7 +25,7 @@
             <hr />
             <div class="d-flex justify-content-between">
                 <button type="submit" class="btn btn-outline-primary">AGREGAR</button>
-                <button (click)="navegar('inventario/board')" type="button" class="btn btn-outline-light">CANCELAR</button>
+                <button (click)="navegar(ruta_InventarioBoard)" type="button" class="btn btn-outline-light">CANCELAR</button>
             </div>
         </form>
     

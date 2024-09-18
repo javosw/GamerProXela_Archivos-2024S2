@@ -1,6 +1,6 @@
 <div class="container">
     <div class="container mt-3 mb-3">
-        <h2 (click)="navegar('admin/board')">Agregar empleado</h2>
+        <h2 (click)="navegar(ruta_AdminBoard)">Agregar empleado</h2>
         <hr />
         <form [formGroup]="empleadoForm" (ngSubmit)="onSubmit()" class="mb-3">
             <div class="mb-3 row">
@@ -64,7 +64,7 @@
             <hr />
             <div class="d-flex justify-content-between">
                 <button type="submit" class="btn btn-outline-primary">AGREGAR</button>
-                <button (click)="navegar('admin/board')" type="button" class="btn btn-outline-light">CANCELAR</button>
+                <button (click)="navegar(ruta_AdminBoard)" type="button" class="btn btn-outline-light">CANCELAR</button>
             </div>
         </form>
     

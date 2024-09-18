@@ -14,6 +14,8 @@ export class BodegaAddProductoComponent {
   fueAgregado: boolean;
   fueEnviado: boolean;
 
+  ruta_BodegaBoard = 'bodega/board';
+
   constructor(private formBuilder: FormBuilder, private bodegaServ:InventarioService, private router:Router) {
     this.fueAgregado = false;
     this.fueEnviado = false;

@@ -8,9 +8,10 @@ import { Router } from '@angular/router';
   templateUrl: './bodega-board.component.html'
 })
 export class BodegaBoardComponent {
+  ruta_addProducto = 'bodega/productos/add';
+  ruta_getProductos = 'bodega/productos';
 
-  constructor(private router:Router){
-  }
+  constructor(private router:Router){}
 
   navegar(url:string){
     this.router.navigate([url]);

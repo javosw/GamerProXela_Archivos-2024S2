@@ -14,6 +14,8 @@ export class InventarioModEstanteriaComponent {
   fueAgregado: boolean;
   fueEnviado: boolean;
 
+  ruta_InventarioBoard = 'inventario/board';
+
   constructor(private formBuilder: FormBuilder, private bodegaServ:InventarioService, private router:Router) {
     this.fueAgregado = false;
     this.fueEnviado = false;

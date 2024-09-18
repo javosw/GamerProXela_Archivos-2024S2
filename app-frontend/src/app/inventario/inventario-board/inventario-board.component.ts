@@ -8,9 +8,9 @@ import { Router } from '@angular/router';
   templateUrl: './inventario-board.component.html'
 })
 export class InventarioBoardComponent {
+  ruta_ModEstanteria:string = 'inventario/estanteria/mod';
 
-  constructor(private router:Router){
-  }
+  constructor(private router:Router){}
 
   navegar(url:string){
     this.router.navigate([url]);
