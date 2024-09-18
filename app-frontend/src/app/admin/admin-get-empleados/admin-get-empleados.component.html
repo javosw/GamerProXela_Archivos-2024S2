@@ -1,8 +1,8 @@
 <div class="container">
     <div class="container mt-3 mb-3">
-        <h2>Empleados</h2>
+        <h2 (click)="navegar('admin/board')">Empleados</h2>
         <hr />
-        @if (fueronEmpleadosRecibidos && empleados.length > 0) {
+        @if (furFormEnviado && empleados.length > 0) {
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
@@ -26,16 +26,15 @@
             </tbody>
         </table>
         }
-        @else if(fueronEmpleadosRecibidos && empleados.length == 0) {
+        @else if(furFormEnviado && empleados.length == 0) {
         <div class="alert alert-info" role="alert">
             No hay empleados?
         </div>
         }
-        @else if(fueronEmpleadosRecibidos && !empleados) {
+        @else if(furFormEnviado && !empleados) {
         <div class="alert alert-warning" role="alert">
             Operacion fallida?!
         </div>
         }
-        <button (click)="navegar('admin/board')" type="button" class="btn btn-outline-light">OK</button>
     </div>
 </div>

@@ -5,9 +5,15 @@ import { AdminBoardComponent } from './admin/admin-board/admin-board.component';
 import { HolaComponent } from './hola/hola/hola.component';
 import { AdminAddEmpleadoComponent } from './admin/admin-add-empleado/admin-add-empleado.component';
 import { AdminGetEmpleadosComponent } from './admin/admin-get-empleados/admin-get-empleados.component';
+import { BodegaBoardComponent } from './bodega/bodega-board/bodega-board.component';
+import { BodegaGetProductosComponent } from './bodega/bodega-get-productos/bodega-get-productos.component';
+import { BodegaAddProductoComponent } from './bodega/bodega-add-producto/bodega-add-producto.component';
 
 export const gpxRoutes: Routes = [
-    { path:"test", component: AdminGetEmpleadosComponent},
+    { path:"test", component: BodegaBoardComponent},
+    { path:"bodega/board", component: BodegaBoardComponent },
+    { path:"bodega/productos", component: BodegaGetProductosComponent },
+    { path:"bodega/productos/add", component: BodegaAddProductoComponent },
     { path:"admin/empleados", component: AdminGetEmpleadosComponent },
     { path:"admin/empleados/add", component: AdminAddEmpleadoComponent },
     { path:"admin/board", component: AdminBoardComponent },

@@ -9,13 +9,13 @@ import { Router } from '@angular/router';
   templateUrl: './admin-get-empleados.component.html'
 })
 export class AdminGetEmpleadosComponent {
+  empleados;
+  furFormEnviado: boolean;
+
   constructor(private adminServ: AdminService, private router: Router) {
-    this.fueronEmpleadosRecibidos = false;
+    this.furFormEnviado = false;
     this.empleados = new Array<{ dpi: number, nombre: string, rol: string, sucursal: string, username: string }>();
   }
-
-  empleados;
-  fueronEmpleadosRecibidos: boolean;
 
   ngOnInit() {
     this.getEmpleados();
@@ -25,13 +25,13 @@ export class AdminGetEmpleadosComponent {
     this.adminServ.getEmpleados().subscribe({
       next: (response: { dpi: number, nombre: string, rol: string, sucursal: string, username: string }[]) => {
         this.empleados = response;
-        this.fueronEmpleadosRecibidos = true;
+        this.furFormEnviado = true;
       },
       complete: () => {
-        this.fueronEmpleadosRecibidos = true;
+        this.furFormEnviado = true;
       },
       error: (error) => {
-        this.fueronEmpleadosRecibidos = true;
+        this.furFormEnviado = true;
       }
     });
   }

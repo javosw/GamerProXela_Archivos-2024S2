@@ -70,12 +70,8 @@ empresa
 				new tarjeta
 			rol bodega
 				vistas
-					tabla productos en sucursal (bodega/estanteria)
-					mod producto
+					get productos (bodega/estanteria)
 					new producto
-				tabla productos en sucursal
-				mod producto
-					aqui se aumenta/disminuye los productos en <<bodega>>
 				new producto
 					aqui se crea un nuevo producto en Productos
 					cada new se realiza en la sucursal del rol bodega
@@ -83,8 +79,12 @@ empresa
 				vistas
 					tabla productos en sucursal (bodega/estanteria)
 					tabla productos en pasillos
+					mod producto
 					add estanteria
 					mod estanteria
+				mod producto
+					aqui se <<disminuye>> los productos en <<bodega>> 
+					y <<aumentan>> los productos de <<estanteria>>
 				new estanteria
 					bodega.mod(producto,unidades) -> estanteria.new(producto,unidades,pasillo)
 				mod estanteria

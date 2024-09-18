@@ -36,7 +36,7 @@ CREATE TABLE administracion.empleados (
 
 CREATE TABLE bodega.productos (
     id_producto VARCHAR PRIMARY KEY, -- barcode
-    descripcion VARCHAR NOT NULL
+    nombre VARCHAR NOT NULL
 );
 
 CREATE TABLE bodega.productos_sucursal (

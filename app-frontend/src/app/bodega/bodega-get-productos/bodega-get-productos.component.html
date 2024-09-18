@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="container mt-3 mb-3">
+        <h2 (click)="navegar('bodega/board')">Productos</h2>
+        <hr />
+        @if (furFormEnviado && productos.length > 0) {
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>barcode</th>
+                    <th>nombre</th>
+                    <th>unidades</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(prod of productos; track prod.barcode) {
+                <tr>
+                    <td>{{prod.barcode}}</td>
+                    <td>{{prod.nombre}}</td>
+                    <td>{{prod.unidades}}</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        }
+        @else if(furFormEnviado && productos.length == 0) {
+        <div class="alert alert-info" role="alert">
+            No hay productos?
+        </div>
+        }
+        @else if(furFormEnviado && !productos) {
+        <div class="alert alert-warning" role="alert">
+            Operacion fallida?!
+        </div>
+        }
+    </div>
+</div>

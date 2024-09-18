@@ -17,7 +17,7 @@ GamerProXela:DATABASE {
 	Bodega:SCHEMA {
 		Productos:TABLE {
 			(PK) id_producto:barcode
-			descripcion:string
+			nombre:string
 		}
 		ProductosSucursal:TABLE {
 			(PK) Sucursales.id_sucursal

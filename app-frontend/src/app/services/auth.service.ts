@@ -29,6 +29,9 @@ export class AuthService {
           if(response.rol == 'administracion'){
             this.router.navigate(['admin/board']);
           }
+          else if(response.rol == 'bodega'){
+            this.router.navigate(['bodega/board']);
+          }
         },
         error: (error) => {
           console.error("@AuthService[error]")
