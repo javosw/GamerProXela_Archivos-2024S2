@@ -50,7 +50,7 @@ CREATE TABLE inventario.estanteria (
     id_sucursal VARCHAR NOT NULL REFERENCES administracion.sucursales(id_sucursal),
     id_producto VARCHAR NOT NULL REFERENCES inventario.productos(id_producto),
     unidades_bodega INTEGER CHECK (unidades_bodega >= 0),
-    unidades_estanteria INTEGER CHECK (unidades_estanteria >= 0),
+    unidades_pasillo INTEGER CHECK (unidades_pasillo >= 0),
     id_pasillo INTEGER CHECK (id_pasillo >= -1),
     PRIMARY KEY (id_sucursal, id_producto)
 );

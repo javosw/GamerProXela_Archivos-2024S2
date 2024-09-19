@@ -1,14 +1,14 @@
-<div class="container">
-    <div class="container mt-3 mb-3">
-        <h2 (click)="navegar(ruta_InventarioBoard)">Modificar estanteria</h2>
-        <hr />
-        <form [formGroup]="productoForm" (ngSubmit)="onSubmit()" class="mb-3">
-            <div class="mb-3 row">
-                <label for="barcode" class="col-sm-3 col-form-label">Barcode</label>
-                <div class="col-sm-9">
-                    <input formControlName="barcode" id="barcode" type="text" class="form-control">
-                </div>
-            </div>
+<!--
+div class="card">
+    <div class="card-body">
+    </div>
+</div
+-->
+@if(activar){
+<tr>
+    <td colspan="4">
+        <form [formGroup]="addPasilloForm" (ngSubmit)="onSubmit()" class="mb-3">
+            <input formControlName="barcode" [value]="barcode" type="hidden" class="form-control">
             <div class="mb-3 row">
                 <label for="pasillo" class="col-sm-3 col-form-label">Pasillo</label>
                 <div class="col-sm-9">
@@ -21,14 +21,12 @@
                     <input formControlName="unidades" id="unidades" type="text" class="form-control">
                 </div>
             </div>
-
             <hr />
             <div class="d-flex justify-content-between">
                 <button type="submit" class="btn btn-outline-primary">AGREGAR</button>
-                <button (click)="navegar(ruta_InventarioBoard)" type="button" class="btn btn-outline-light">CANCELAR</button>
+                <button (click)="activar = false" type="button" class="btn btn-outline-light">CANCELAR</button>
             </div>
         </form>
-    
         @if (fueEnviado && !fueAgregado) {
         <div class="alert alert-warning" role="alert">
             Operacion fallida?!
@@ -39,6 +37,6 @@
             Operacion exitosa!
         </div>
         }
-    </div>
-</div>
-
+    </td>
+</tr>
+}

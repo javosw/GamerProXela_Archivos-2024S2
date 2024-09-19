@@ -24,7 +24,7 @@ GamerProXela:DATABASE {
 			(PK) Sucursales.id_sucursal
 			(PK) Productos.id_producto
 			unidades_bodega:number
-			unidades_estanteria:number
+			unidades_pasillo:number
 			id_pasillo:number
 		}
 	}
