@@ -6,8 +6,6 @@
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <!-- { barcode: string, nombre: string, 
-                      unidades_bodega: number, unidades_pasillo: number } -->
                     <th>barcode</th>
                     <th>nombre</th>
                     <th>en bodega</th>
@@ -15,8 +13,21 @@
                     <th>en pasillo</th>
                 </tr>
             </thead>
+        </table>
+
+        @for(p of productos; track p.barcode) {
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>barcode</th>
+                    <th>nombre</th>
+                    <th>en bodega</th>
+                    <th>pasillo</th>
+                    <th>en pasillo</th>
+                </tr>
+            </thead>
+
             <tbody>
-                @for(p of productos; track p.barcode) {
                 <tr (click)="mod.toggleActivar()">
                     <td>{{p.barcode}}</td>
                     <td>{{p.nombre}}</td>
@@ -24,11 +35,12 @@
                     <td>{{p.pasillo}}</td>
                     <td>{{p.unidades_pasillo}}</td>
                 </tr>
-                <gpx-mod-estanteria #mod [barcode]="p.barcode" (productoChange)="modEstanteria($event)">
-                </gpx-mod-estanteria>
-                }
             </tbody>
         </table>
+        <gpx-mod-estanteria #mod [barcode]="p.barcode" (productoChange)="modEstanteria($event)">
+        </gpx-mod-estanteria>
+
+        }
         }
         @else if(fueRespuestaRecibida && productos.length == 0) {
         <div class="alert alert-info" role="alert">

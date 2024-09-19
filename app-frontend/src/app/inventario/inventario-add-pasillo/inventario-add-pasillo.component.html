@@ -1,13 +1,9 @@
 <!--
-div class="card">
-    <div class="card-body">
-    </div>
-</div
 -->
 @if(activar){
-<tr>
-    <td colspan="4">
-        <form [formGroup]="addPasilloForm" (ngSubmit)="onSubmit()" class="mb-3">
+<div class="card">
+    <div class="card-body">
+        <form [formGroup]="addPasilloForm" (ngSubmit)="onSubmit()">
             <input formControlName="barcode" [value]="barcode" type="hidden" class="form-control">
             <div class="mb-3 row">
                 <label for="pasillo" class="col-sm-3 col-form-label">Pasillo</label>
@@ -37,6 +33,7 @@ div class="card">
             Operacion exitosa!
         </div>
         }
-    </td>
-</tr>
+    </div>
+</div>
+
 }
