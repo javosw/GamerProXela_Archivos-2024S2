@@ -37,8 +37,8 @@ export class InventarioAddPasilloComponent {
   }
 
   modEstanteria(formValue:any){
-    let mod = formValue as { barcode: string, pasillo: number, unidades: number };
-    this.productoChange.emit({ barcode: mod.barcode, unidades_pasillo: mod.unidades, pasillo: mod.pasillo });
+    let pForm = formValue as { barcode: string, pasillo: number, unidades: number };
+    this.productoChange.emit({ barcode: pForm.barcode, unidades_pasillo: pForm.unidades, pasillo: pForm.pasillo });
   }
 
   onSubmit() {

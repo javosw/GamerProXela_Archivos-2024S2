@@ -19,13 +19,10 @@ export class InventarioEstanteriaComponent {
   constructor(private inventarioServ: InventarioService, private router: Router) {
   }
 
-  modEstanteria(pPasillo: ModProducto){
-    let pBodega: Producto|undefined = this.productos.find((p) => { p.barcode == pPasillo.barcode; });
-
-    if(pBodega != undefined){
-      pBodega.unidades_pasillo = pPasillo.unidades_pasillo;
-      pBodega.unidades_bodega = pBodega.unidades_bodega - pPasillo.pasillo;
-    }
+  modEstanteria(pEstanteria: Producto, pPasillo: ModProducto){
+    pEstanteria.pasillo = pPasillo.pasillo;
+    pEstanteria.unidades_pasillo = pPasillo.unidades_pasillo;
+    pEstanteria.unidades_bodega = pEstanteria.unidades_bodega - pPasillo.pasillo;
   }
   
   ngOnInit() {

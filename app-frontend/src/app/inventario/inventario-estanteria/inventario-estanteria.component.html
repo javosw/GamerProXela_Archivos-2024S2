@@ -37,7 +37,7 @@
                 </tr>
             </tbody>
         </table>
-        <gpx-mod-estanteria #mod [barcode]="p.barcode" (productoChange)="modEstanteria($event)">
+        <gpx-mod-estanteria #mod [barcode]="p.barcode" (productoChange)="modEstanteria(p,$event)">
         </gpx-mod-estanteria>
 
         }

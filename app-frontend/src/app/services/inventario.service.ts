@@ -30,8 +30,11 @@ export class InventarioService {
     return this.http.get<any>(url);*/
   }
 
+  // form.value: { barcode: string, pasillo: number, unidades: number }
   addPasillo(form: AbstractControl): Observable<any>{
-    let url = 'http://localhost/gpx/estanteria/mod';
-    return this.http.post<any>(url, form);
+    return of({http:200});
+    
+    /*let url = 'http://localhost/gpx/estanteria/mod';
+    return this.http.post<any>(url, form);*/
   }
 }
