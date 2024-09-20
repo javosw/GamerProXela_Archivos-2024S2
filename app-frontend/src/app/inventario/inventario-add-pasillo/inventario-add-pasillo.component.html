@@ -1,28 +1,60 @@
-<!--
--->
-@if(activar){
-<div class="card">
-    <div class="card-body">
-        <form [formGroup]="addPasilloForm" (ngSubmit)="onSubmit()">
-            <input formControlName="barcode" [ngModel]="barcode" type="hidden" class="form-control">
-            <div class="mb-3 row">
-                <label for="pasillo" class="col-sm-3 col-form-label">Pasillo</label>
-                <div class="col-sm-9">
-                    <input formControlName="pasillo" id="pasillo" type="text" class="form-control">
-                </div>
-            </div>
-            <div class="mb-3 row">
-                <label for="unidades" class="col-sm-3 col-form-label">Unidades</label>
-                <div class="col-sm-9">
-                    <input formControlName="unidades" id="unidades" type="text" class="form-control">
-                </div>
-            </div>
+<div class="container mt-3 mb-3">
+    <div class="container pt-3 pb-3 border">
+        <h2 (click)="navegar(ruta_Estanteria)">Agregar productos a pasillo</h2>
+        <hr />
+        <div class="container border pt-3 pb-3 mb-3">
+            <h4>Producto seleccionado</h4>
             <hr />
-            <div class="d-flex justify-content-between">
-                <button type="submit" class="btn btn-outline-primary">AGREGAR</button>
-                <button (click)="activar = false" type="button" class="btn btn-outline-light">CANCELAR</button>
+            <div class="table-responsive border">
+                <table class="table table-striped-columns table-hover border">
+                    <thead>
+                        <tr>
+                            <th>barcode</th>
+                            <th>nombre</th>
+                            <th>en bodega</th>
+                            <th>pasillo</th>
+                            <th>en pasillo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{producto.barcode}}</td>
+                            <td>{{producto.nombre}}</td>
+                            <td>{{producto.unidades_bodega}}</td>
+                            <td>{{producto.pasillo}}</td>
+                            <td>{{producto.unidades_pasillo}}</td>    
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-        </form>
+        </div>
+
+        <div class="container border pt-3 pb-3">
+            <h4>Mueva unidades del producto a pasillo</h4>
+            <hr />
+            <form [formGroup]="addPasilloForm" (ngSubmit)="onSubmit()">
+                <input formControlName="barcode" [ngModel]="barcode" type="hidden" class="form-control">
+                <div class="mb-3 row">
+                    <label for="pasillo" class="col-sm-3 col-form-label">Pasillo</label>
+                    <div class="col-sm-9">
+                        <input formControlName="pasillo" id="pasillo" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="unidades" class="col-sm-3 col-form-label">Unidades</label>
+                    <div class="col-sm-9">
+                        <input formControlName="unidades" id="unidades" type="text" class="form-control">
+                    </div>
+                </div>
+                <hr />
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-outline-primary">AGREGAR</button>
+                    <button (click)="navegar(ruta_Estanteria)" type="button"
+                        class="btn btn-outline-light">CANCELAR</button>
+                </div>
+            </form>
+        </div>
+
         @if (fueEnviado && !fueAgregado) {
         <div class="alert alert-warning" role="alert">
             Operacion fallida?!
@@ -35,5 +67,3 @@
         }
     </div>
 </div>
-
-}

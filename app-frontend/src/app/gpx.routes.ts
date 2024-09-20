@@ -18,6 +18,7 @@ export const gpxRoutes: Routes = [
     { path:"bodega/productos", component: BodegaGetProductosComponent },
     { path:"bodega/productos/add", component: BodegaAddProductoComponent },
     { path:"inventario/board", component: InventarioBoardComponent },
+    { path:"inventario/estanteria", component: InventarioEstanteriaComponent },
     { path:"inventario/estanteria/mod", component: InventarioAddPasilloComponent },
     { path:"admin/empleados", component: AdminGetEmpleadosComponent },
     { path:"admin/empleados/add", component: AdminAddEmpleadoComponent },

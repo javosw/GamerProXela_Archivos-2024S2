@@ -2,10 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { InventarioService } from '../../services/inventario.service';
 import { InventarioAddPasilloComponent } from "../inventario-add-pasillo/inventario-add-pasillo.component";
-
-type Producto = { barcode: string; nombre: string; pasillo: number; unidades_bodega: number; unidades_pasillo: number };
-type ModProducto = { barcode: string; pasillo: number; unidades_pasillo: number };
-
+import { Producto, ModProducto } from '../data/InventarioTipos'; 
+import { ruta_Estanteria, ruta_AddPasillo, ruta_InventarioBoard } from '../data/rutas';
 @Component({
   selector: 'app-inventario-estanteria',
   standalone: true,
@@ -15,6 +13,9 @@ type ModProducto = { barcode: string; pasillo: number; unidades_pasillo: number 
 export class InventarioEstanteriaComponent {
   productos = new Array<Producto>();
   fueRespuestaRecibida: boolean = false;
+
+  ruta_InventarioBoard = ruta_InventarioBoard;
+  ruta_AddPasillo = ruta_AddPasillo;
 
   constructor(private inventarioServ: InventarioService, private router: Router) {
   }
@@ -45,7 +46,12 @@ export class InventarioEstanteriaComponent {
     });
   }
 
+
   navegar(url: string) {
     this.router.navigate([url]);
+  }
+
+  navegarQuery(url: string, barcode:string) {
+    this.router.navigate([url],{ queryParams: { barcode:barcode } });
   }
 }
