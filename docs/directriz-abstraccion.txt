@@ -38,54 +38,6 @@ empresa
 			(ficticio) para cada sucursal
 				6 rol cajero + 4 rol inventario + 1 rol bodega
 			cada rol tiene diferente interfaz visual
-			rol cajero
-				1 cajero <- 1 caja
-				(ficticio) en cada sucursal agregar 5 ventas
-				venta
-					id_factura: numero
-					nit: numero | null
-					cliente-nombre
-					cajero-nombre
-					productos: producto[]
-						1-* productos
-						cada producto puede tener descuento
-					total
-						sin descuento
-						con descuento
-					puntos
-						1 pt = 1 quetzal
-				cliente
-					id_cliente: nit
-				vistas
-					new venta
-					new cliente
-					mod cliente
-					new tarjeta
-				add venta
-					cada venta se realiza en la sucursal del rol cajero
-				new cliente
-					cada cliente debe estar disponible en todas las sucursales
-				mod cliente
-					se requiere usuario y contrasena de un rol administrador
-				new tarjeta
-			rol bodega
-				vistas
-					get productos (bodega/estanteria)
-					new producto
-				new producto
-					aqui se crea un nuevo producto en Productos
-					cada new se realiza en la sucursal del rol bodega
-			rol inventario
-				vistas
-					add estanteria
-					mod estanteria
-				add estanteria
-					aqui se <<disminuye>> los productos en <<bodega>> 
-					y <<aumentan>> los productos de <<estanteria>>
-					bodega.mod(producto,unidades) -> estanteria.new(producto,unidades,pasillo)
-				mod estanteria
-					tabla productos en sucursal (pasillos/bodega)
-					bodega.mod(producto,unidades) -> estanteria.mod(producto,unidades,pasillo)
 			rol administrador
 				vistas
 					reportes
@@ -116,6 +68,54 @@ empresa
 					nivel diamante
 						requisitos: 30000 + tarjeta platino
 						30 pt / 200
+			rol bodega
+				vistas
+					get productos (bodega/estanteria)
+					new producto
+				new producto
+					aqui se crea un nuevo producto en Productos
+					cada new se realiza en la sucursal del rol bodega
+			rol inventario
+				vistas
+					add estanteria
+					mod estanteria
+				add estanteria
+					aqui se <<disminuye>> los productos en <<bodega>> 
+					y <<aumentan>> los productos de <<estanteria>>
+					bodega.mod(producto,unidades) -> estanteria.new(producto,unidades,pasillo)
+				mod estanteria
+					tabla productos en sucursal (pasillos/bodega)
+					bodega.mod(producto,unidades) -> estanteria.mod(producto,unidades,pasillo)
+			rol cajero
+				1 cajero <- 1 caja
+				(ficticio) en cada sucursal agregar 5 ventas
+				venta
+					id_factura: numero
+					nit: numero | null
+					cliente-nombre
+					cajero-nombre
+					productos: producto[]
+						1-* productos
+						cada producto puede tener descuento
+					total
+						sin descuento
+						con descuento
+					puntos
+						1 pt = 1 quetzal
+				cliente
+					id_cliente: nit
+				vistas
+					new venta
+					new cliente
+					mod cliente
+					new tarjeta
+				add venta
+					cada venta se realiza en la sucursal del rol cajero
+				new cliente
+					cada cliente debe estar disponible en todas las sucursales
+				mod cliente
+					se requiere usuario y contrasena de un rol administrador
+				new tarjeta
 		sucursales
 		clientes
 			(ficticio) 8 clientes

@@ -11,9 +11,11 @@ import { BodegaAddProductoComponent } from './bodega/bodega-add-producto/bodega-
 import { InventarioAddPasilloComponent } from './inventario/inventario-add-pasillo/inventario-add-pasillo.component';
 import { InventarioBoardComponent } from './inventario/inventario-board/inventario-board.component';
 import { InventarioEstanteriaComponent } from './inventario/inventario-estanteria/inventario-estanteria.component';
+import { CajaBoardComponent } from './caja/caja-board/caja-board.component';
 
 export const gpxRoutes: Routes = [
-    { path:"test", component: InventarioEstanteriaComponent},
+    { path:"test", component: CajaBoardComponent},
+    { path:"caja/board", component: CajaBoardComponent },
     { path:"bodega/board", component: BodegaBoardComponent },
     { path:"bodega/productos", component: BodegaGetProductosComponent },
     { path:"bodega/productos/add", component: BodegaAddProductoComponent },

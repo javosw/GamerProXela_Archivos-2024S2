@@ -1,0 +1,62 @@
+<div class="container mt-3 mb-3">
+    <h1 class="text-center">Caja</h1>
+    <hr/>
+    
+    <div class="container border pt-3 pb-3 mb-3">
+        <h3>Ventas</h3>
+        <hr />
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">Agregar venta</div>
+                    <div class="card-body">
+                        <p class="card-text">Verifique que el cliente tenga NIT sino agreguelo al sistema.</p>
+                        <a (click)="navegar(ruta_AddVenta)" class="btn btn-outline-primary">entrar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container border pt-3 pb-3 mb-3">
+        <h3>Clientes</h3>
+        <hr />
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">Agregar cliente</div>
+                    <div class="card-body">
+                        <p class="card-text">Debe agregar al cliente aqui para poder generar sus compras.</p>
+                        <a (click)="navegar(ruta_AddCliete)" class="btn btn-outline-primary">entrar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">Modificar cliente</div>
+                    <div class="card-body">
+                        <p class="card-text">Necesita permiso de un administrador para realizar modificaciones al cliente.</p>
+                        <a (click)="navegar(ruta_ModCliente)" class="btn btn-outline-primary">entrar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container border pt-3 pb-3 mb-3">
+        <h3>Tarjetas</h3>
+        <hr />
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">Agregar tarjeta</div>
+                    <div class="card-body">
+                        <p class="card-text">Cree una tarjeta de puntos para un cliente, si se lo pide.</p>
+                        <a (click)="navegar(ruta_AddTarjeta)" class="btn btn-outline-primary">entrar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
