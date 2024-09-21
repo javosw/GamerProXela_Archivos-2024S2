@@ -43,6 +43,7 @@ CREATE TABLE administracion.empleados (
 CREATE TABLE inventario.productos (
     id_producto VARCHAR PRIMARY KEY,
     nombre VARCHAR NOT NULL,
+	precio NUMERIC CHECK (precio > 0),
     unidades_vendidas INT CHECK (unidades_vendidas >= 0)
 );
 

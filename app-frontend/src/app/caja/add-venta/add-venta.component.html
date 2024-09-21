@@ -1,0 +1,11 @@
+<div>
+    <button (click)="addComponent()">Add New Component</button>
+
+        @for(component of components; track $index){
+            <gpx-add-producto #addProduct></gpx-add-producto>
+        }
+
+    <button (click)="collectValues()">Collect All Values</button>
+
+    <p>Values: {{ values | json }}</p>
+</div>

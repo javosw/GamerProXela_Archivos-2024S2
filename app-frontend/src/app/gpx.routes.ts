@@ -12,9 +12,10 @@ import { InventarioAddPasilloComponent } from './inventario/inventario-add-pasil
 import { InventarioBoardComponent } from './inventario/inventario-board/inventario-board.component';
 import { InventarioEstanteriaComponent } from './inventario/inventario-estanteria/inventario-estanteria.component';
 import { CajaBoardComponent } from './caja/caja-board/caja-board.component';
+import { AddVentaComponent } from './caja/add-venta/add-venta.component';
 
 export const gpxRoutes: Routes = [
-    { path:"test", component: CajaBoardComponent},
+    { path:"test", component: AddVentaComponent},
     { path:"caja/board", component: CajaBoardComponent },
     { path:"bodega/board", component: BodegaBoardComponent },
     { path:"bodega/productos", component: BodegaGetProductosComponent },
