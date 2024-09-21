@@ -1,3 +1,40 @@
-<div>
-    <input [(ngModel)]="inputValue"/>
+<!--
+
+<div class="card">
+    <div class="card-body">
+    </div>
+    <div class="mb-3 row">
+        <label for="pasillo" class="col-sm-3 col-form-label">Pasillo</label>
+        <div class="col-sm-9">
+            <input formControlName="pasillo" id="pasillo" type="text" class="form-control">
+        </div>
+    </div>
+</div>
+
+-->
+<div class="container border p-3 mb-3">
+    <div class="row">
+        <label class="col-3 col-form-label">Barcode</label>
+        <div class="col-9">
+            <input [(ngModel)]="barcode" (blur)="alerta()" class="form-control bg-primary-subtle" />
+        </div>
+    </div>
+    <div class="row">
+        <label class="col-3 col-form-label">Precio</label>
+        <div class="col-9">
+            <input [ngModel]="precio" readonly class="form-control" />
+        </div>
+    </div>
+    <div class="row">
+        <label class="col-3 col-form-label">Unidades</label>
+        <div class="col-9">
+            <input [(ngModel)]="unidades" class="form-control bg-primary-subtle"/>
+        </div>
+    </div>
+    <div class="row">
+        <label class="col-3 col-form-label">Subtotal</label>
+        <div class="col-9">
+            <input [ngModel]="precio*unidades" readonly class="form-control" />
+        </div>
+    </div>
 </div>
