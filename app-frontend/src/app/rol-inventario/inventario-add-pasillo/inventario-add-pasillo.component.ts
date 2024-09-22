@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InventarioService } from '../../gpx-services/inventario.service';
-import { Producto, ModProducto } from '../../gpx-data/inventario';
+import { Producto, AddPasillo } from '../../gpx-data/invent';
 import { ruta_InventEstanteria } from '../../gpx-rutas/inventario';
 @Component({
   selector: 'gpx-mod-estanteria',
@@ -12,9 +12,9 @@ import { ruta_InventEstanteria } from '../../gpx-rutas/inventario';
 })
 export class InventAddPasilloComponent {
   @Input() barcode: string = '';
-  @Output() productoChange: EventEmitter<ModProducto> = new EventEmitter();
+  @Output() productoChange: EventEmitter<AddPasillo> = new EventEmitter();
 
-  producto:Producto = { barcode: '', nombre: '', pasillo: 0, unidades_bodega: 0, unidades_pasillo: 0 };
+  producto:Producto = { barcode: '', nombre: '', pasillo: 0, en_bodega: 0, en_pasillo: 0 };
 
   addPasilloForm: FormGroup;
   fueAgregado: boolean = false;
@@ -26,7 +26,7 @@ export class InventAddPasilloComponent {
     this.addPasilloForm = this.formBuilder.group({
       barcode: [''],
       pasillo: [''],
-      unidades: [''],
+      en_pasillo: [''],
     });
   }
 
@@ -39,9 +39,8 @@ export class InventAddPasilloComponent {
     });
 
     this.inventServ.getProducto(this.barcode).subscribe({
-      next: (response: any) => {
-        this.producto = response as Producto;
-        this.producto = response;
+      next: (value: Producto) => {
+        this.producto = value;
       },
       complete: () => {
       },
@@ -50,14 +49,17 @@ export class InventAddPasilloComponent {
     });
   }
 
-  modEstanteria(formValue: any) {
-    let pForm = formValue as { barcode: string, pasillo: number, unidades: number };
-    this.productoChange.emit({ barcode: pForm.barcode, unidades_pasillo: pForm.unidades, pasillo: pForm.pasillo });
+  modEstanteria(form: AddPasillo) {
+    this.productoChange.emit({ 
+      barcode: form.barcode, 
+      en_pasillo: form.en_pasillo, 
+      pasillo: form.pasillo 
+    });
   }
 
   onSubmit() {
     this.fueEnviado = false;
-    let formValue = this.addPasilloForm.value;
+    let formValue = this.addPasilloForm.value as AddPasillo;
 
     this.inventServ.addPasillo(formValue).subscribe({
       next: (response: any) => {

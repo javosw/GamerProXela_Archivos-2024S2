@@ -21,9 +21,9 @@
                     <tr>
                         <td>{{p.barcode}}</td>
                         <td>{{p.nombre}}</td>
-                        <td>{{p.unidades_bodega}}</td>
+                        <td>{{p.en_bodega}}</td>
                         <td>{{p.pasillo}}</td>
-                        <td>{{p.unidades_pasillo}}</td>
+                        <td>{{p.en_pasillo}}</td>
                         <td>@if(p.pasillo == -1){<a
                                 class="d-inline-flex focus-ring py-1 px-2 text-decoration-none border "
                                 (click)="navegarQuery(rutas.ruta_InventAddPasillo,p.barcode)">add pasillo</a>}</td>

@@ -3,6 +3,8 @@ import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angul
 import { Router } from '@angular/router';
 import { InventarioService } from '../../gpx-services/inventario.service';
 import { ruta_BodegaBoard } from '../../gpx-rutas/bodega';
+import { AddProducto } from '../../gpx-data/bodega';
+
 @Component({
   selector: 'app-bodega-add-producto',
   standalone: true,
@@ -16,20 +18,20 @@ export class BodegaAddProductoComponent {
 
   rutas:any = {ruta_BodegaBoard}
 
-  constructor(private formBuilder: FormBuilder, private bodegaServ:InventarioService, private router:Router) {
+  constructor(private formBuilder: FormBuilder, private inventServ:InventarioService, private router:Router) {
     this.fueAgregado = false;
     this.fueEnviado = false;
     this.productoForm = this.formBuilder.group({
       barcode: [''],
       nombre: [''],
-      unidades: [''],
+      en_bodega: [''],
     });
   }
 
   onSubmit() {
     this.fueEnviado = false;
 
-    this.bodegaServ.addProducto(this.productoForm.value).subscribe({
+    this.inventServ.addProducto(this.productoForm.value as AddProducto).subscribe({
       next: (response: any) => {
         this.fueEnviado = true;
         this.fueAgregado = true;

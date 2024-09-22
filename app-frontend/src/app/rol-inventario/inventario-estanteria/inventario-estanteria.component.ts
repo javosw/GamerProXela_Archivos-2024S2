@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { InventarioService } from '../../gpx-services/inventario.service';
 import { InventAddPasilloComponent } from "../../rol-inventario/inventario-add-pasillo/inventario-add-pasillo.component";
-import { Producto, ModProducto } from '../../gpx-data/inventario'; 
+import { Producto, AddPasillo } from '../../gpx-data/invent'; 
 import { ruta_InventEstanteria, ruta_InventAddPasillo, ruta_InventBoard } from '../../gpx-rutas/inventario';
 
 @Component({
@@ -23,10 +23,10 @@ export class InventEstanteriaComponent {
   constructor(private inventarioServ: InventarioService, private router: Router) {
   }
 
-  modEstanteria(pEstanteria: Producto, pPasillo: ModProducto){
+  modEstanteria(pEstanteria: Producto, pPasillo: AddPasillo){
     pEstanteria.pasillo = pPasillo.pasillo;
-    pEstanteria.unidades_pasillo = pPasillo.unidades_pasillo;
-    pEstanteria.unidades_bodega = pEstanteria.unidades_bodega - pPasillo.pasillo;
+    pEstanteria.en_pasillo = pPasillo.en_pasillo;
+    pEstanteria.en_bodega = pEstanteria.en_bodega - pPasillo.pasillo;
   }
   
   ngOnInit() {
@@ -35,9 +35,8 @@ export class InventEstanteriaComponent {
 
   getProductos() {
     this.inventarioServ.getProductos().subscribe({
-      next: (response: any) => {
-        this.productos = response as Producto[];
-        this.productos = response;
+      next: (value: Producto[]) => {
+        this.productos = value;
         this.fueRespuestaRecibida = true;
       },
       complete: () => {

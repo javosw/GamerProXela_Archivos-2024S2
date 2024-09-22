@@ -4,6 +4,7 @@ import { AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { GetCliente, GetProducto } from '../gpx-data/caja';
+import { api_CajaGetCliente, api_CajaGetPrecio } from '../gpx-data/gpx-api';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,7 @@ export class CajaService {
 
 
 
-    let url = 'http://localhost/gpx/productos/precio';
+    let url = api_CajaGetPrecio;
 
     let httpParams = new HttpParams().set('barcode', barcode);
 
@@ -39,7 +40,7 @@ export class CajaService {
   }
 
   getCliente(nit:number): Observable<GetCliente> {
-    let url = 'http://localhost/gpx/clientes/nit';
+    let url = api_CajaGetCliente;
 
     let httpParams = new HttpParams().set('nit', nit);
 

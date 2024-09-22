@@ -2,7 +2,7 @@
     <div class="container mt-3 mb-3">
         <h2 (click)="navegar(rutas.ruta_BodegaBoard)">Productos</h2>
         <hr />
-        @if (furFormEnviado && productos.length > 0) {
+        @if (fueFormEnviado && productos.length > 0) {
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
@@ -16,18 +16,18 @@
                 <tr>
                     <td>{{prod.barcode}}</td>
                     <td>{{prod.nombre}}</td>
-                    <td>{{prod.unidades}}</td>
+                    <td>{{prod.en_bodega}}</td>
                 </tr>
                 }
             </tbody>
         </table>
         }
-        @else if(furFormEnviado && productos.length == 0) {
+        @else if(fueFormEnviado && productos.length == 0) {
         <div class="alert alert-info" role="alert">
             No hay productos?
         </div>
         }
-        @else if(furFormEnviado && !productos) {
+        @else if(fueFormEnviado && !productos) {
         <div class="alert alert-warning" role="alert">
             Operacion fallida?!
         </div>

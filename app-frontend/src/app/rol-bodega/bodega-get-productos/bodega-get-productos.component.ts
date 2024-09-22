@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { InventarioService } from '../../gpx-services/inventario.service';
 import { ruta_BodegaBoard } from '../../gpx-rutas/bodega';
+import { Producto } from '../../gpx-data/invent';
 
 @Component({
   selector: 'app-bodega-get-productos',
@@ -10,31 +11,30 @@ import { ruta_BodegaBoard } from '../../gpx-rutas/bodega';
   templateUrl: './bodega-get-productos.component.html'
 })
 export class BodegaGetProductosComponent {
-  productos;
-  furFormEnviado: boolean;
+  productos:Array<Producto> = new Array();
+  fueFormEnviado: boolean = false;
 
-  constructor(private bodegaServ: InventarioService, private router: Router) {
-    this.furFormEnviado = false;
-    this.productos = new Array<{ barcode: number, nombre: string, unidades: number }>();
+  constructor(private inventServ: InventarioService, private router: Router) {
   }
-  rutas:any = {ruta_BodegaBoard}
+
+  rutas: any = { ruta_BodegaBoard }
 
 
   ngOnInit() {
-    this.getEmpleados();
+    this.getProductos();
   }
 
-  getEmpleados() {
-    this.bodegaServ.getProductos().subscribe({
-      next: (response: { barcode: number, nombre: string, unidades: number }[]) => {
-        this.productos = response;
-        this.furFormEnviado = true;
+  getProductos() {
+    this.inventServ.getProductos().subscribe({
+      next: (value: Producto[]) => {
+        this.productos = value;
+        this.fueFormEnviado = true;
       },
       complete: () => {
-        this.furFormEnviado = true;
+        this.fueFormEnviado = true;
       },
       error: (error) => {
-        this.furFormEnviado = true;
+        this.fueFormEnviado = true;
       }
     });
   }

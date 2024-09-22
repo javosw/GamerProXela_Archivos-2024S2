@@ -3,8 +3,12 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-
-type UsuarioAuth = { username: string, rol: string, nombre: string };
+import { UsuarioAuth } from '../gpx-data/auth';
+import { ruta_AdminBoard } from '../gpx-rutas/admin';
+import { ruta_InventBoard } from '../gpx-rutas/inventario';
+import { ruta_BodegaBoard } from '../gpx-rutas/bodega';
+import { ruta_CajaBoard } from '../gpx-rutas/caja';
+import { api_HolaEntrar } from '../gpx-data/gpx-api';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +22,7 @@ export class AuthService {
   }
 
   checkCredenciales(loginData: AbstractControl) {
-    let url: string = 'http://localhost/gpx/entrar';
+    let url: string = api_HolaEntrar;
 
     this.http.post<UsuarioAuth>(url, loginData).subscribe({
       next: (response: UsuarioAuth) => {
@@ -26,16 +30,16 @@ export class AuthService {
         this.tieneSesion.next(true);
 
         if (response.rol == 'administracion') {
-          this.router.navigate(['admin/board']);
+          this.router.navigate([ruta_AdminBoard]);
         }
         else if (response.rol == 'inventario') {
-          this.router.navigate(['inventario/board']);
+          this.router.navigate([ruta_InventBoard]);
         }
         else if (response.rol == 'bodega') {
-          this.router.navigate(['bodega/board']);
+          this.router.navigate([ruta_BodegaBoard]);
         }
         else if (response.rol == 'caja') {
-          this.router.navigate(['caja/board']);
+          this.router.navigate([ruta_CajaBoard]);
         }
       },
       error: (error) => {

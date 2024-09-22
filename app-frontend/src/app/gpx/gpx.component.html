@@ -1,12 +1,12 @@
 <!-- if(!tieneSesion){HOLA}elif(rol == admin){ADMINBOARD} elif(rol == caja){CAJABOARD}-->
 
-
-<!-- import HolaComp, AdminBoard, CajaBoard -->
-
-<!-- @if(tieneSesion || true){ -->
-<!-- @if(tieneSesion){ -->
+<!-- 
+@if(tieneSesion){ 
+@if(tieneSesion || true){ 
+-->
 
 @if(tieneSesion || true){
+    
 <router-outlet></router-outlet>
 }
 @else{
