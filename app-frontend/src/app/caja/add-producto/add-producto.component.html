@@ -1,40 +1,38 @@
-<!--
-
-<div class="card">
-    <div class="card-body">
-    </div>
-    <div class="mb-3 row">
-        <label for="pasillo" class="col-sm-3 col-form-label">Pasillo</label>
-        <div class="col-sm-9">
-            <input formControlName="pasillo" id="pasillo" type="text" class="form-control">
-        </div>
-    </div>
-</div>
-
--->
 <div class="container border p-3 mb-3">
-    <div class="row">
-        <label class="col-3 col-form-label">Barcode</label>
-        <div class="col-9">
-            <input [(ngModel)]="barcode" (blur)="getPrecio(barcode)" class="form-control bg-secondary-subtle" />
+    <div class="container row">
+        <label class="col-2 form-label">Barcode</label>
+        <div class="col-10">
+            <input [(ngModel)]="input_barcode" (blur)="getPrecio(input_barcode)" class="form-control bg-secondary-subtle" />
         </div>
     </div>
-    <div class="row">
-        <label class="col-3 col-form-label">Precio</label>
-        <div class="col-9">
-            <input [ngModel]="precio" readonly class="form-control" />
+    <div class="container row">
+        <label class="col-2 form-label">Unidades</label>
+        <div class="col-10">
+            <input [(ngModel)]="input_unidades" class="form-control bg-secondary-subtle" />
         </div>
     </div>
-    <div class="row">
-        <label class="col-3 col-form-label">Unidades</label>
-        <div class="col-9">
-            <input [(ngModel)]="unidades" class="form-control bg-secondary-subtle"/>
+    <hr/>
+    <div class="container row">
+        <label class="col-2 col-form-label">Nombre</label>
+        <div class="col-10">
+            <input [ngModel]="http_producto.nombre" disabled class="form-control" />
         </div>
     </div>
-    <div class="row">
-        <label class="col-3 col-form-label">Subtotal</label>
-        <div class="col-9">
-            <input [ngModel]="precio*unidades" readonly class="form-control" />
+    <div class="container row">
+        <label class="col-2 col-form-label">Precio</label>
+        <div class="col-10">
+            <input [ngModel]="http_producto.precio" disabled class="form-control" />
         </div>
     </div>
+    <div class="container row">
+        <label class="col-2 col-form-label">Subtotal</label>
+        <div class="col-10">
+            <input [ngModel]="http_producto.precio*input_unidades" disabled class="form-control" />
+        </div>
+    </div>
+    @if (flag_fueEnviado && !flag_existeProducto) {
+    <div class="bg-warning-subtle p-3 border mt-3">
+        NIT incorrecto?!
+    </div>
+    }
 </div>

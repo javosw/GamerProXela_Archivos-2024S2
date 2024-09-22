@@ -19,8 +19,11 @@ export class AddVentaComponent {
   components: number[] = [];
   values: string[] = [];
 
-  nit: number = 0;
-  nombre = '';
+  input_nit: number = 0;
+  http_cliente: GetCliente = {nit:0,nombre:''};
+
+  flag_existeCliente = false;
+  flag_fueEnviado = false;
 
   constructor(private router: Router, private cajaServ:CajaService) { }
 
@@ -31,18 +34,23 @@ export class AddVentaComponent {
   }
 
   collectValues() {
-    this.values = this.productos.map(component => component.barcode);
+    this.values = this.productos.map(component => component.input_barcode);
     alert(JSON.stringify(this.values));
   }
 
   getCliente(nit:number){
     this.cajaServ.getCliente(nit).subscribe({
       next: (value: GetCliente) => {
-        this.nombre = value.nombre;
+        this.http_cliente = value;
+        this.flag_fueEnviado = true;
+        this.flag_existeCliente = true;
       },
-      complete: () => {
+      complete: ()=>{
+        this.flag_fueEnviado = true;
       },
       error: (error) => {
+        this.flag_fueEnviado = true;
+        this.flag_existeCliente = false;
       }
     });
   }

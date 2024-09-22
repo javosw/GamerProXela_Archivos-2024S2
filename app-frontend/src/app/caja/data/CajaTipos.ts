@@ -1,6 +1,7 @@
-export type GetPrecio = {
+export type GetProducto = {
     barcode: string;
     precio: number;
+    nombre: string;
 };
 export type GetCliente = {
     nit:number;

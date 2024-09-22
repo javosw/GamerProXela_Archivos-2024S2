@@ -17,12 +17,19 @@
 
         <hr />
 
-        <div class="row">
+        <div class="container row">
             <label class="col-3 col-form-label">NIT</label>
             <div class="col-9">
-                <input [(ngModel)]="nit" (blur)="getCliente(nit)" class="form-control btn-outline-primary" />
+                <input [(ngModel)]="input_nit" (blur)="getCliente(input_nit)"
+                    class="form-control btn-outline-primary bg-secondary-subtle" />
             </div>
         </div>
+        @if (flag_fueEnviado && !flag_existeCliente) {
+        <div class="bg-warning-subtle p-3 border mt-3">
+            Barcode incorrecto?!
+        </div>
+        }
+
         <hr />
 
         <div class="d-flex justify-content-center">
