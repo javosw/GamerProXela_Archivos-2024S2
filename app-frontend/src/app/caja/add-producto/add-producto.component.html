@@ -16,7 +16,7 @@
     <div class="row">
         <label class="col-3 col-form-label">Barcode</label>
         <div class="col-9">
-            <input [(ngModel)]="barcode" (blur)="alerta()" class="form-control bg-primary-subtle" />
+            <input [(ngModel)]="barcode" (blur)="getPrecio(barcode)" class="form-control bg-secondary-subtle" />
         </div>
     </div>
     <div class="row">
@@ -28,7 +28,7 @@
     <div class="row">
         <label class="col-3 col-form-label">Unidades</label>
         <div class="col-9">
-            <input [(ngModel)]="unidades" class="form-control bg-primary-subtle"/>
+            <input [(ngModel)]="unidades" class="form-control bg-secondary-subtle"/>
         </div>
     </div>
     <div class="row">

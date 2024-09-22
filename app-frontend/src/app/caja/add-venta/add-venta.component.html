@@ -2,29 +2,32 @@
     <div class="container pt-3 pb-3 border">
         <h2 (click)="navegar(ruta_CajaBoard)">Agregar venta</h2>
         <hr />
-        
+
         @for(component of components; track $index){
         <gpx-add-producto #addProduct></gpx-add-producto>
         }
 
-        <div class="d-flex justify-content-between">
-            <button (click)="addComponent()" class="btn btn-outline-primary">AGREGAR</button>
-            <button (click)="collectValues()" class="btn btn-outline-light">COLLECT</button>
+        <div class="d-flex justify-content-center">
+            <button (click)="addComponent()" class="btn btn-outline-primary">AGREGAR PRODUCTO</button>
         </div>
+
         <!--
-        
         <p>Values: {{ values | json }}</p>
-        
         -->
 
-        <hr/>
-        
+        <hr />
+
         <div class="row">
             <label class="col-3 col-form-label">NIT</label>
             <div class="col-9">
-                <input [(ngModel)]="nit" class="form-control bg-primary-subtle" />
+                <input [(ngModel)]="nit" (blur)="getCliente(nit)" class="form-control btn-outline-primary" />
             </div>
         </div>
-    
+        <hr />
+
+        <div class="d-flex justify-content-center">
+            <button (click)="collectValues()" class="btn btn-outline-light">FACTURAR</button>
+        </div>
+
     </div>
 </div>

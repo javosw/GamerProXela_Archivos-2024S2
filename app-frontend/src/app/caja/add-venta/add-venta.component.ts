@@ -4,6 +4,8 @@ import { JsonPipe, ViewportScroller } from '@angular/common';
 import { Router } from '@angular/router';
 import { ruta_CajaBoard } from '../data/rutas';
 import { FormsModule } from '@angular/forms';
+import { CajaService } from '../../services/caja.service';
+import { GetCliente } from '../data/CajaTipos';
 @Component({
   selector: 'app-add-venta',
   standalone: true,
@@ -18,8 +20,9 @@ export class AddVentaComponent {
   values: string[] = [];
 
   nit: number = 0;
+  nombre = '';
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private cajaServ:CajaService) { }
 
   @ViewChildren('addProduct') productos!: QueryList<AddProductoComponent>;
 
@@ -32,6 +35,17 @@ export class AddVentaComponent {
     alert(JSON.stringify(this.values));
   }
 
+  getCliente(nit:number){
+    this.cajaServ.getCliente(nit).subscribe({
+      next: (value: GetCliente) => {
+        this.nombre = value.nombre;
+      },
+      complete: () => {
+      },
+      error: (error) => {
+      }
+    });
+  }
 
   navegar(url: string) {
     this.router.navigate([url]);
