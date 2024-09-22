@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { InventarioService } from '../../gpx-services/inventario.service';
-import { InventarioAddPasilloComponent } from "../inventario-add-pasillo/inventario-add-pasillo.component";
+import { InventarioAddPasilloComponent } from "../../rol-inventario/inventario-add-pasillo/inventario-add-pasillo.component";
 import { Producto, ModProducto } from '../../gpx-data/inventario'; 
 import { ruta_InventEstanteria, ruta_InventAddPasillo, ruta_InventBoard } from '../../gpx-rutas/inventario';
 @Component({
