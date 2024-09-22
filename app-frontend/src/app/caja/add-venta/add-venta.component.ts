@@ -16,9 +16,6 @@ export class AddVentaComponent {
 
   ruta_CajaBoard = ruta_CajaBoard;
 
-  components: number[] = [];
-  values: string[] = [];
-
   input_nit: number = 0;
   http_cliente: GetCliente = {nit:0,nombre:''};
 
@@ -27,15 +24,17 @@ export class AddVentaComponent {
 
   constructor(private router: Router, private cajaServ:CajaService) { }
 
-  @ViewChildren('addProduct') productos!: QueryList<AddProductoComponent>;
+  loop_AddProducto: Array<number> = new Array();
+  @ViewChildren('addProduct') query_AddProducto!: QueryList<AddProductoComponent>;
+  productos: Array<{ barcode: string; unidades: number; }> = new Array();
 
   addComponent() {
-    this.components.push(this.components.length);
+    this.loop_AddProducto.push(this.loop_AddProducto.length);
   }
 
   collectValues() {
-    this.values = this.productos.map(component => component.input_barcode);
-    alert(JSON.stringify(this.values));
+    this.productos = this.query_AddProducto.map((component) => { return { barcode: component.input_barcode, unidades: component.input_unidades } });
+    alert(JSON.stringify(this.productos));
   }
 
   getCliente(nit:number){

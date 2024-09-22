@@ -3,7 +3,7 @@
         <h2 (click)="navegar(ruta_CajaBoard)">Agregar venta</h2>
         <hr />
 
-        @for(component of components; track $index){
+        @for(component of loop_AddProducto; track $index){
         <gpx-add-producto #addProduct></gpx-add-producto>
         }
 
@@ -26,7 +26,7 @@
         </div>
         @if (flag_fueEnviado && !flag_existeCliente) {
         <div class="bg-warning-subtle p-3 border mt-3">
-            Barcode incorrecto?!
+            NIT incorrecto?!
         </div>
         }
 
