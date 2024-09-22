@@ -41,7 +41,7 @@ class AuthController
             try {
                 $user_data = AuthModel::getUser($username, $password);
 
-                $_SESSION['username'] = $username;
+                $_SESSION['username'] = $user_data->username;
                 $_SESSION['nombre'] = $user_data->nombre;
                 $_SESSION['rol'] = $user_data->rol;
 
@@ -55,8 +55,8 @@ class AuthController
                 exit;
             } catch (\Throwable $th) {
                 session_destroy();
-                header('HTTP/1.1 401 ERRORAZO');
-                echo '{"status":"SIN_AUTH"}';
+                header('HTTP/1.1 401');
+                echo '{"http":"401"}';
                 // redireccionar o status=unautorized
                 // otra opcion: llenar los campos faltantes
 
