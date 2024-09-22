@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
-import { GetCliente, GetProducto } from '../caja/data/CajaTipos';
+import { GetCliente, GetProducto } from '../gpx-data/caja';
 
 @Injectable({
   providedIn: 'root'

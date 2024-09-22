@@ -56,18 +56,6 @@ empresa
 						group Ventas.Clientes.nit
 				new trabajador
 				mod tarjeta
-					nivel comun
-						requisitos: solicitud
-						5 pt / 200
-					nivel oro
-						requisitos: 10000 + tarjeta comun
-						10 pt / 200
-					nivel platino
-						requisitos: 20000 + tarjeta oro
-						20 pt / 200
-					nivel diamante
-						requisitos: 30000 + tarjeta platino
-						30 pt / 200
 			rol bodega
 				vistas
 					get productos (bodega/estanteria)
@@ -109,6 +97,7 @@ empresa
 					new cliente
 					mod cliente
 					new tarjeta
+					add descuento
 				add venta
 					cada venta se realiza en la sucursal del rol cajero
 				new cliente
@@ -116,6 +105,26 @@ empresa
 				mod cliente
 					se requiere usuario y contrasena de un rol administrador
 				new tarjeta
+				(backend) add puntos
+					Q1 = 1 pt
+					nivel comun
+						+ 5 pt / Q200
+					nivel oro
+						+ 10 pt / Q200
+					nivel platino
+						+ 20 pt / Q200
+					nivel diamante
+						+ 30 pt / Q200
+				add descuento
+				(backend) mod tarjeta
+					nivel comun
+						requisitos: solicitud
+					nivel oro
+						requisitos: Q10000 + tarjeta comun
+					nivel platino
+						requisitos: Q20000 + tarjeta oro
+					nivel diamante
+						requisitos: Q30000 + tarjeta platino
 		sucursales
 		clientes
 			(ficticio) 8 clientes

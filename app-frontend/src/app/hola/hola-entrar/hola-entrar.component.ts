@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../gpx-services/auth.service';
 
 @Component({
   selector: 'gpx-hola-entrar',

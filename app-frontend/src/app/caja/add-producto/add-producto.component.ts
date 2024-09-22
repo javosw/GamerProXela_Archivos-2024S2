@@ -3,8 +3,8 @@ import { Component, SimpleChanges } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CajaService } from '../../services/caja.service';
-import { GetProducto } from '../data/CajaTipos';
+import { CajaService } from '../../gpx-services/caja.service';
+import { GetProducto } from '../../gpx-data/caja';
 
 @Component({
   selector: 'gpx-add-producto',

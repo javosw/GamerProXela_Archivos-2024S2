@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { InventarioService } from '../../services/inventario.service';
+import { InventarioService } from '../../gpx-services/inventario.service';
 
 @Component({
   selector: 'app-bodega-add-producto',

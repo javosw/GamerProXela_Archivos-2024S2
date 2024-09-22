@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { InventarioService } from '../../services/inventario.service';
-import { Producto, ModProducto } from '../data/InventarioTipos';
-import { ruta_AddPasillo, ruta_Estanteria } from '../data/rutas';
+import { InventarioService } from '../../gpx-services/inventario.service';
+import { Producto, ModProducto } from '../../gpx-data/inventario';
+import { ruta_InventAddPasillo, ruta_InventEstanteria } from '../../gpx-rutas/inventario';
 @Component({
   selector: 'gpx-mod-estanteria',
   standalone: true,
@@ -20,7 +20,7 @@ export class InventarioAddPasilloComponent {
   fueAgregado: boolean = false;
   fueEnviado: boolean = false;
 
-  ruta_Estanteria = ruta_Estanteria;
+  ruta_Estanteria = ruta_InventEstanteria;
 
   constructor(private formBuilder: FormBuilder, private inventServ: InventarioService, private router: Router, private route: ActivatedRoute) {
     this.addPasilloForm = this.formBuilder.group({

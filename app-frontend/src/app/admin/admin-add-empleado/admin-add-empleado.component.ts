@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AdminService } from '../../services/admin.service';
+import { AdminService } from '../../gpx-services/admin.service';
 
 @Component({
   selector: 'gpx-admin-add-empleado',

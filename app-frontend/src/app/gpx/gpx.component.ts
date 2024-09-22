@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { HolaNavbarComponent } from '../hola/hola-navbar/hola-navbar.component';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../gpx-services/auth.service';
 import { HolaComponent } from '../hola/hola/hola.component';
 
 // .angular

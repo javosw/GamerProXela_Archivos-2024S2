@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ruta_AddTarjeta, ruta_ModCliente, ruta_AddCliete, ruta_AddVenta } from '../data/rutas'; 
+import { ruta_CajaAddTarjeta, ruta_CajaModCliente, ruta_CajaAddCliete, ruta_CajaAddVenta } from '../../gpx-rutas/caja'; 
 
 @Component({
   selector: 'app-caja-board',
@@ -9,10 +9,10 @@ import { ruta_AddTarjeta, ruta_ModCliente, ruta_AddCliete, ruta_AddVenta } from 
   templateUrl: './caja-board.component.html',
 })
 export class CajaBoardComponent {
-  ruta_AddTarjeta = ruta_AddTarjeta;
-  ruta_ModCliente = ruta_ModCliente;
-  ruta_AddCliete = ruta_AddCliete;
-  ruta_AddVenta = ruta_AddVenta;
+  ruta_AddTarjeta = ruta_CajaAddTarjeta;
+  ruta_ModCliente = ruta_CajaModCliente;
+  ruta_AddCliete = ruta_CajaAddCliete;
+  ruta_AddVenta = ruta_CajaAddVenta;
 
   constructor(private router:Router){
   }

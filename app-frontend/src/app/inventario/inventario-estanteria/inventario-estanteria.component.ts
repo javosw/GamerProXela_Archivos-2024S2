@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { InventarioService } from '../../services/inventario.service';
+import { InventarioService } from '../../gpx-services/inventario.service';
 import { InventarioAddPasilloComponent } from "../inventario-add-pasillo/inventario-add-pasillo.component";
-import { Producto, ModProducto } from '../data/InventarioTipos'; 
-import { ruta_Estanteria, ruta_AddPasillo, ruta_InventarioBoard } from '../data/rutas';
+import { Producto, ModProducto } from '../../gpx-data/inventario'; 
+import { ruta_InventEstanteria, ruta_InventAddPasillo, ruta_InventBoard } from '../../gpx-rutas/inventario';
 @Component({
   selector: 'app-inventario-estanteria',
   standalone: true,
@@ -14,8 +14,8 @@ export class InventarioEstanteriaComponent {
   productos = new Array<Producto>();
   fueRespuestaRecibida: boolean = false;
 
-  ruta_InventarioBoard = ruta_InventarioBoard;
-  ruta_AddPasillo = ruta_AddPasillo;
+  ruta_InventarioBoard = ruta_InventBoard;
+  ruta_AddPasillo = ruta_InventAddPasillo;
 
   constructor(private inventarioServ: InventarioService, private router: Router) {
   }

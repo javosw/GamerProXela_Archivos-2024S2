@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { InventarioService } from '../../services/inventario.service';
+import { InventarioService } from '../../gpx-services/inventario.service';
 
 @Component({
   selector: 'app-bodega-get-productos',
