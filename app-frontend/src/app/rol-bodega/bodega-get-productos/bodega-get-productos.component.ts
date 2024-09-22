@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { InventarioService } from '../../gpx-services/inventario.service';
+import { ruta_BodegaBoard } from '../../gpx-rutas/bodega';
 
 @Component({
   selector: 'app-bodega-get-productos',
@@ -16,6 +17,8 @@ export class BodegaGetProductosComponent {
     this.furFormEnviado = false;
     this.productos = new Array<{ barcode: number, nombre: string, unidades: number }>();
   }
+  rutas:any = {ruta_BodegaBoard}
+
 
   ngOnInit() {
     this.getEmpleados();

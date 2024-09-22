@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './mod-cliente.component.html',
 })
-export class ModClienteComponent {
+export class CajaModClienteComponent {
 
 }

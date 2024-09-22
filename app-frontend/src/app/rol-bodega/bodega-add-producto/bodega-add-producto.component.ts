@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { InventarioService } from '../../gpx-services/inventario.service';
-
+import { ruta_BodegaBoard } from '../../gpx-rutas/bodega';
 @Component({
   selector: 'app-bodega-add-producto',
   standalone: true,
@@ -14,7 +14,7 @@ export class BodegaAddProductoComponent {
   fueAgregado: boolean;
   fueEnviado: boolean;
 
-  ruta_BodegaBoard = 'bodega/board';
+  rutas:any = {ruta_BodegaBoard}
 
   constructor(private formBuilder: FormBuilder, private bodegaServ:InventarioService, private router:Router) {
     this.fueAgregado = false;

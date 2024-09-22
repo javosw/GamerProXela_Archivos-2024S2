@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import {
+  ruta_BodegaGetProductos,
+  ruta_BodegaAddProducto
+} from '../../gpx-rutas/bodega'
 
 @Component({
   selector: 'app-bodega-board',
@@ -8,12 +12,14 @@ import { Router } from '@angular/router';
   templateUrl: './bodega-board.component.html'
 })
 export class BodegaBoardComponent {
-  ruta_addProducto = 'bodega/productos/add';
-  ruta_getProductos = 'bodega/productos';
+  rutas: any = {
+    ruta_BodegaGetProductos,
+    ruta_BodegaAddProducto
+  };
 
-  constructor(private router:Router){}
+  constructor(private router: Router) { }
 
-  navegar(url:string){
+  navegar(url: string) {
     this.router.navigate([url]);
   }
 

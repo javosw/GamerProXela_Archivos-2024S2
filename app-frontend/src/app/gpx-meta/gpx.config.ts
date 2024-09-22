@@ -3,7 +3,7 @@ import { provideRouter } from '@angular/router';
 
 import { gpxRoutes } from './gpx.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { authInterceptor } from './gpx-interceptors/auth.interceptor';
+import { authInterceptor } from '../gpx-interceptors/auth.interceptor';
 
 export const gpxConfig: ApplicationConfig = {
   providers: [

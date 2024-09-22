@@ -12,7 +12,7 @@ import { GetProducto } from '../../gpx-data/caja';
   imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './add-producto.component.html',
 })
-export class AddProductoComponent {
+export class CajaAddProductoComponent {
   input_barcode = '';
   input_unidades = 0;
 

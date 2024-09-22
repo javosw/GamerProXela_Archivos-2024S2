@@ -7,8 +7,8 @@ import { ruta_InventEstanteria } from '../../gpx-rutas/inventario';
   imports: [],
   templateUrl: './inventario-board.component.html'
 })
-export class InventarioBoardComponent {
-  ruta_Estanteria = ruta_InventEstanteria;
+export class InventBoardComponent {
+  rutas: any = {ruta_InventEstanteria};
 
   constructor(private router:Router){}
 

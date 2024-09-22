@@ -1,5 +1,5 @@
 import { Component, QueryList, ViewChildren } from '@angular/core';
-import { AddProductoComponent } from '../add-producto/add-producto.component';
+import { CajaAddProductoComponent } from '../add-producto/add-producto.component';
 import { JsonPipe, ViewportScroller } from '@angular/common';
 import { Router } from '@angular/router';
 import { ruta_CajaBoard } from '../../gpx-rutas/caja';
@@ -9,12 +9,14 @@ import { GetCliente } from '../../gpx-data/caja';
 @Component({
   selector: 'app-add-venta',
   standalone: true,
-  imports: [FormsModule, AddProductoComponent, JsonPipe],
+  imports: [FormsModule, CajaAddProductoComponent, JsonPipe],
   templateUrl: './add-venta.component.html',
 })
-export class AddVentaComponent {
+export class CajaAddVentaComponent {
 
-  ruta_CajaBoard = ruta_CajaBoard;
+  rutas:any = {
+    ruta_CajaBoard
+  };
 
   input_nit: number = 0;
   http_cliente: GetCliente = {nit:0,nombre:''};
@@ -25,7 +27,7 @@ export class AddVentaComponent {
   constructor(private router: Router, private cajaServ:CajaService) { }
 
   loop_AddProducto: Array<number> = new Array();
-  @ViewChildren('addProduct') query_AddProducto!: QueryList<AddProductoComponent>;
+  @ViewChildren('addProduct') query_AddProducto!: QueryList<CajaAddProductoComponent>;
   productos: Array<{ barcode: string; unidades: number; }> = new Array();
 
   addComponent() {

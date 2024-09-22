@@ -1,6 +1,6 @@
 <div class="container">
     <div class="container mt-3 mb-3">
-        <h2 (click)="navegar(ruta_InventarioBoard)">Productos en sucursal</h2>
+        <h2 (click)="navegar(rutas.ruta_InventBoard)">Productos en sucursal</h2>
         <hr />
         @if (fueRespuestaRecibida && productos.length > 0) {
         <div class="table-responsive">
@@ -26,7 +26,7 @@
                         <td>{{p.unidades_pasillo}}</td>
                         <td>@if(p.pasillo == -1){<a
                                 class="d-inline-flex focus-ring py-1 px-2 text-decoration-none border "
-                                (click)="navegarQuery(ruta_AddPasillo,p.barcode)">add pasillo</a>}</td>
+                                (click)="navegarQuery(rutas.ruta_InventAddPasillo,p.barcode)">add pasillo</a>}</td>
                     </tr>
                     }
                 </tbody>
