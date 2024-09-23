@@ -1,0 +1,6 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "moduleResolution": "Bundler" // "Node10", "Node16" or "NodeNext"
+  }
+}

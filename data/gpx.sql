@@ -28,7 +28,7 @@ INSERT INTO administracion.sucursales VALUES
 CREATE TYPE administracion.rol_type AS ENUM ('caja', 'bodega', 'inventario', 'administracion');
 
 CREATE TABLE administracion.empleados (
-    dpi BIGINT PRIMARY KEY,
+    dpi BIGINT NOT NULL PRIMARY KEY,
     nombre VARCHAR NOT NULL,
     id_sucursal VARCHAR REFERENCES administracion.sucursales(id_sucursal),
     rol administracion.rol_type NOT NULL,
@@ -41,24 +41,20 @@ CREATE TABLE administracion.empleados (
 \d administracion.empleados
 
 CREATE TABLE inventario.productos (
-    id_producto VARCHAR PRIMARY KEY,
+    id_producto VARCHAR UNIQUE NOT NULL,
+	id_sucursal VARCHAR NOT NULL,
     nombre VARCHAR NOT NULL,
 	precio NUMERIC CHECK (precio > 0),
-    unidades_vendidas INT CHECK (unidades_vendidas >= 0)
-);
-
-CREATE TABLE inventario.estanteria (
-    id_sucursal VARCHAR NOT NULL REFERENCES administracion.sucursales(id_sucursal),
-    id_producto VARCHAR NOT NULL REFERENCES inventario.productos(id_producto),
+    unidades_vendidas INTEGER CHECK (unidades_vendidas >= 0),
     unidades_bodega INTEGER CHECK (unidades_bodega >= 0),
     unidades_pasillo INTEGER CHECK (unidades_pasillo >= 0),
     id_pasillo INTEGER CHECK (id_pasillo >= -1),
-    PRIMARY KEY (id_sucursal, id_producto)
+    PRIMARY KEY (id_producto,id_sucursal),
+	FOREIGN KEY (id_sucursal) REFERENCES administracion.sucursales(id_sucursal)
 );
 
 \dt inventario.*
 \d inventario.productos
-\d inventario.estanteria
 
 CREATE TABLE caja.cajas (
     id_caja INT,
