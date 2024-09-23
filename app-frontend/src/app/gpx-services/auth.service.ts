@@ -25,20 +25,20 @@ export class AuthService {
     let url: string = api_HolaEntrar;
 
     this.http.post<UsuarioAuth>(url, loginData).subscribe({
-      next: (response: UsuarioAuth) => {
-        console.log(`@AuthService[next=${JSON.stringify(response)}]`);
+      next: (value: UsuarioAuth) => {
+        console.log(`@AuthService[next=${JSON.stringify(value)}]`);
         this.tieneSesion.next(true);
 
-        if (response.rol == 'administracion') {
+        if (value.rol == 'administracion') {
           this.router.navigate([ruta_AdminBoard]);
         }
-        else if (response.rol == 'inventario') {
+        else if (value.rol == 'inventario') {
           this.router.navigate([ruta_InventBoard]);
         }
-        else if (response.rol == 'bodega') {
+        else if (value.rol == 'bodega') {
           this.router.navigate([ruta_BodegaBoard]);
         }
-        else if (response.rol == 'caja') {
+        else if (value.rol == 'caja') {
           this.router.navigate([ruta_CajaBoard]);
         }
       },
