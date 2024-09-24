@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { InventarioService } from '../../gpx-services/inventario.service';
-import { ruta_BodegaBoard } from '../../gpx-rutas/bodega';
-import { Producto } from '../../gpx-data/invent';
+import { ruta_BodegaBoard } from '../../gpx-rutas/bodega.rutas';
+import { Producto } from '../../gpx-data/invent.data';
 
 @Component({
   selector: 'app-bodega-get-productos',

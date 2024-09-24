@@ -11,10 +11,10 @@ import { InventEstanteriaComponent } from '../rol-inventario/inventario-estanter
 import { CajaBoardComponent } from '../rol-caja/caja-board/caja-board.component';
 import { CajaAddVentaComponent } from '../rol-caja/add-venta/add-venta.component';
 
-import * as bodega from '../gpx-rutas/bodega'
-import * as admin from '../gpx-rutas/admin';
-import * as caja from '../gpx-rutas/caja';
-import * as invent from '../gpx-rutas/inventario';
+import * as bodega from '../gpx-rutas/bodega.rutas'
+import * as admin from '../gpx-rutas/admin.rutas';
+import * as caja from '../gpx-rutas/caja.rutas';
+import * as invent from '../gpx-rutas/invent.rutas';
 
 export const gpxRoutes: Routes = [
     { path: "test", component: CajaAddVentaComponent },

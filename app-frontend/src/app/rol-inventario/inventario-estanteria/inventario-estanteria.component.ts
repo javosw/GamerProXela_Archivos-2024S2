@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { InventarioService } from '../../gpx-services/inventario.service';
 import { InventAddPasilloComponent } from "../../rol-inventario/inventario-add-pasillo/inventario-add-pasillo.component";
-import { Producto, AddPasillo } from '../../gpx-data/invent'; 
-import { ruta_InventEstanteria, ruta_InventAddPasillo, ruta_InventBoard } from '../../gpx-rutas/inventario';
+import { Producto, AddPasillo } from '../../gpx-data/invent.data'; 
+import { ruta_InventEstanteria, ruta_InventAddPasillo, ruta_InventBoard } from '../../gpx-rutas/invent.rutas';
 
 @Component({
   selector: 'app-inventario-estanteria',

@@ -4,8 +4,8 @@ import { AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { api_InventAddPasillo, api_InventAddProducto, api_InventGetProducto, api_InventGetProductos, GpxStatus } from '../gpx-data/gpx-api';
-import { AddPasillo, Producto } from '../gpx-data/invent';
-import { AddProducto } from '../gpx-data/bodega';
+import { AddPasillo, Producto } from '../gpx-data/invent.data';
+import { AddProducto } from '../gpx-data/bodega.data';
 
 @Injectable({
   providedIn: 'root'

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AdminService } from '../../gpx-services/admin.service';
 import { Router } from '@angular/router';
-import { Empleado } from '../../gpx-data/admin';
+import { Empleado } from '../../gpx-data/admin.data';
 
 @Component({
   selector: 'app-admin-get-empleados',

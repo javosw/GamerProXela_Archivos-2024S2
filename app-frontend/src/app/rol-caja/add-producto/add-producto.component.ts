@@ -4,7 +4,7 @@ import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angul
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CajaService } from '../../gpx-services/caja.service';
-import { GetProducto } from '../../gpx-data/caja';
+import { GetProducto } from '../../gpx-data/caja.data';
 
 @Component({
   selector: 'gpx-add-producto',

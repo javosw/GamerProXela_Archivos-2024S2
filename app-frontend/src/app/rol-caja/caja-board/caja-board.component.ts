@@ -6,7 +6,7 @@ import {
   ruta_CajaAddCliete,
   ruta_CajaAddVenta,
   ruta_CajaAddDescuento
-} from '../../gpx-rutas/caja';
+} from '../../gpx-rutas/caja.rutas';
 
 @Component({
   selector: 'app-caja-board',

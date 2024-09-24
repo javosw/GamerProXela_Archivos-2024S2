@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ruta_InventEstanteria } from '../../gpx-rutas/inventario';
+import { ruta_InventEstanteria } from '../../gpx-rutas/invent.rutas';
 @Component({
   selector: 'app-inventario-board',
   standalone: true,

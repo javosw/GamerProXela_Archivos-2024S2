@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InventarioService } from '../../gpx-services/inventario.service';
-import { Producto, AddPasillo } from '../../gpx-data/invent';
-import { ruta_InventEstanteria } from '../../gpx-rutas/inventario';
+import { Producto, AddPasillo } from '../../gpx-data/invent.data';
+import { ruta_InventEstanteria } from '../../gpx-rutas/invent.rutas';
 @Component({
   selector: 'gpx-mod-estanteria',
   standalone: true,

@@ -3,11 +3,11 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { UsuarioAuth } from '../gpx-data/auth';
-import { ruta_AdminBoard } from '../gpx-rutas/admin';
-import { ruta_InventBoard } from '../gpx-rutas/inventario';
-import { ruta_BodegaBoard } from '../gpx-rutas/bodega';
-import { ruta_CajaBoard } from '../gpx-rutas/caja';
+import { UsuarioAuth } from '../gpx-data/auth.data';
+import { ruta_AdminBoard } from '../gpx-rutas/admin.rutas';
+import { ruta_InventBoard } from '../gpx-rutas/invent.rutas';
+import { ruta_BodegaBoard } from '../gpx-rutas/bodega.rutas';
+import { ruta_CajaBoard } from '../gpx-rutas/caja.rutas';
 import { api_HolaEntrar } from '../gpx-data/gpx-api';
 
 @Injectable({

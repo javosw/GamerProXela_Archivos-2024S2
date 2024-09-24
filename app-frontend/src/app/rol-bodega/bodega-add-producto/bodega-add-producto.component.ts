@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { InventarioService } from '../../gpx-services/inventario.service';
-import { ruta_BodegaBoard } from '../../gpx-rutas/bodega';
-import { AddProducto } from '../../gpx-data/bodega';
+import { ruta_BodegaBoard } from '../../gpx-rutas/bodega.rutas';
+import { AddProducto } from '../../gpx-data/bodega.data';
 import { GpxStatus } from '../../gpx-data/gpx-api';
 
 @Component({

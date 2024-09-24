@@ -9,7 +9,7 @@ import {
   ruta_AdminGetMejoresSucursales,
   ruta_AdminGetMejoresProductos,
   ruta_AdminGetMejoresClientes
-} from '../../gpx-rutas/admin';
+} from '../../gpx-rutas/admin.rutas';
 
 @Component({
   selector: 'gpx-admin-board',

@@ -4,7 +4,7 @@ import { AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { api_AdminAddEmpleado, api_AdminGetEmpleados } from '../gpx-data/gpx-api';
-import { Empleado } from '../gpx-data/admin';
+import { Empleado } from '../gpx-data/admin.data';
 
 @Injectable({
   providedIn: 'root'

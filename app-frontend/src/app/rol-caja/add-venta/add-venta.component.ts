@@ -2,10 +2,10 @@ import { Component, QueryList, ViewChildren } from '@angular/core';
 import { CajaAddProductoComponent } from '../add-producto/add-producto.component';
 import { JsonPipe, ViewportScroller } from '@angular/common';
 import { Router } from '@angular/router';
-import { ruta_CajaBoard } from '../../gpx-rutas/caja';
+import { ruta_CajaBoard } from '../../gpx-rutas/caja.rutas';
 import { FormsModule } from '@angular/forms';
 import { CajaService } from '../../gpx-services/caja.service';
-import { GetCliente } from '../../gpx-data/caja';
+import { GetCliente } from '../../gpx-data/caja.data';
 @Component({
   selector: 'app-add-venta',
   standalone: true,

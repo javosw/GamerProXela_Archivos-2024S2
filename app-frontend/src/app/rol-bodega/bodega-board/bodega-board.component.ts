@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import {
   ruta_BodegaGetProductos,
   ruta_BodegaAddProducto
-} from '../../gpx-rutas/bodega'
+} from '../../gpx-rutas/bodega.rutas'
 
 @Component({
   selector: 'app-bodega-board',
