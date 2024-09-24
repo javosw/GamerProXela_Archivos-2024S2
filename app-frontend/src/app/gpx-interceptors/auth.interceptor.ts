@@ -6,18 +6,18 @@ import { AuthService } from '../gpx-services/auth.service';
 
 // ng g interceptor /http/auth
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  console.log(`@josq[intercept=${req.url}]`);
 
   let router: Router = inject(Router);
-  let auth:AuthService = inject(AuthService);
-  
-  return next(req).pipe(
-    catchError((error: HttpErrorResponse) => {
-      console.error(`@authInterceptor[status=${error.status}]`);
+  let auth: AuthService = inject(AuthService);
 
-      // aqui solo se manejan errores 401 (no auth), otros errores se manejan desde sus requests
+  let req_wC = req.clone({
+    withCredentials: true
+  });
+
+  return next(req_wC).pipe(
+    catchError((error: HttpErrorResponse) => {
+
       if (error.status === 401 && req.url !== 'http://localhost/gpx/entrar') {
-        console.log(`@authInterceptor[status=401]`);
         router.navigate(['entrar']);
         auth.tieneSesion.next(false);
       }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
@@ -23,8 +23,9 @@ export class AuthService {
 
   checkCredenciales(loginData: AbstractControl) {
     let url: string = api_HolaEntrar;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-    this.http.post<UsuarioAuth>(url, loginData).subscribe({
+    this.http.post<UsuarioAuth>(url, loginData,{headers:headers}).subscribe({
       next: (value: UsuarioAuth) => {
         this.tieneSesion.next(true);
 

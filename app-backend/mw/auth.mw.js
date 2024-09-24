@@ -1,22 +1,25 @@
 const session = require('express-session');
+const { errorJson } = require('./utils');
 
 const mw_session = session({
     secret: 'gpx',
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: {
-        maxAge: 13*60*1000 //min*seg*mseg
+        secure: false, // Set this to true if you are using HTTPS
+        httpOnly: true, // Prevents client-side scripts from accessing the cookie
+        sameSite: 'lax', // Ensures the cookie is sent with same-site requests
     }
 });
 
 const mw_auth = async (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password;
-    const {model_AuthGetUser} = require('../model/auth.model');
-    const json = await model_AuthGetUser(username,password);
+    const { model_AuthGetUser } = require('../model/auth.model');
+    const json = await model_AuthGetUser(username, password);
 
     res.setHeader('Content-Type', 'application/json');
-    if (json){
+    if (json) {
         req.session.username = json.username;
         req.session.rol = json.rol;
         req.session.nombre = json.nombre;
@@ -24,15 +27,102 @@ const mw_auth = async (req, res, next) => {
 
         res.status(200).send(json);
     }
-    else{
-        res.status(401).send({http:401});
+    else {
+        //res.status(401).send({ http: 404, at: 'mw_auth', dev: 'josq' });
+        res.status(401).send(errorJson(401, 'mw_auth'));
+    }
+}
+
+const mw_checkAnyRol = (req, res, next) => {
+    if (req.path == '/entrar') {
+        return next();
+    }
+
+    if (req.session.rol) {
+        return next();
+        /*
+        const rol = req.session.rol;
+
+        if (rol == 'administracion' || rol == 'inventario' || rol == 'caja' || rol == 'bodega') {
+            return next();
+        } else {
+            return res.status(403).send({ http: 403, at: 'mw_checkSession', dev: 'josq' });
+        }
+        
+        */
+    } else {
+        return res.status(401).send(errorJson(401, 'mw_checkAnyRol'));
+    }
+}
+
+const mw_checkAdminRol = (req, res, next) => {
+    const at = 'mw_checkBodegaRol';
+
+    if (req.session.rol) {
+        const rol = req.session.rol;
+
+        if (rol == 'administracion') {
+            return next();
+        }
+        else {
+            return res.status(403).send(errorJson(403, at));
+        }
+    } else {
+        return res.status(401).send(errorJson(401, at));
+    }
+}
+const mw_checkBodegaRol = (req, res, next) => {
+    const at = 'mw_checkBodegaRol';
+    if (req.session.rol) {
+        const rol = req.session.rol;
+
+        if (rol == 'bodega') {
+            return next();
+        }
+        else {
+            return res.status(403).send(errorJson(403, at));
+        }
+    } else {
+        return res.status(401).send(errorJson(401, at));
+    }
+}
+const mw_checkCajaRol = (req, res, next) => {
+    const at = 'mw_checkCajaRol';
+    if (req.session.rol) {
+        const rol = req.session.rol;
+
+        if (rol == 'caja') {
+            return next();
+        }
+        else {
+            return res.status(403).send(errorJson(403, at));
+        }
+    } else {
+        return res.status(401).send(errorJson(401, at));
+    }
+}
+const mw_checkInventRol = (req, res, next) => {
+    const at = 'mw_checkInventRol';
+    if (req.session.rol) {
+        const rol = req.session.rol;
+
+        if (rol == 'inventario') {
+            return next();
+        }
+        else {
+            return res.status(403).send(errorJson(403, at));
+        }
+    } else {
+        return res.status(401).send(errorJson(401, at));
     }
 }
 
 // -- exports -- exports -- exports -- exports -- exports --
 module.exports = {
     mw_auth,
-    mw_session
+    mw_session,
+    mw_checkAnyRol,
+    mw_checkAdminRol
 };
 
 

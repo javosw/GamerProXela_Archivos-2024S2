@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
@@ -19,6 +19,7 @@ export class AdminService {
   }
 
   getEmpleados(): Observable<Empleado[]> {
+    
     let url = api_AdminGetEmpleados;
     return this.http.get<Empleado[]>(url);
   }
