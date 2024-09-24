@@ -1,12 +1,13 @@
-const { psql_admin } = require('./psql');
+const { CustomPool } = require('./psql');
+
 
 const model_AuthGetUser = async (username,password) => {
-    await psql_admin.connect();
+    client = await CustomPool.connect();
 
     try {
         const text = 'SELECT * FROM administracion.empleados WHERE username=$1 AND password=$2';
         const values = [username,password];
-        const tabla = (await psql_admin.query(text, values)).rows;
+        const tabla = (await client.query(text, values)).rows;
 
         const fila = tabla[0];
         const json = {
@@ -17,9 +18,10 @@ const model_AuthGetUser = async (username,password) => {
         };
         return json;
     } catch (err) {
-        console.error(err);
+        //console.error(err);
     } finally {
-        await psql_admin.end();
+        client.release();
+        //await sql_admin.end();
     }
 }
 

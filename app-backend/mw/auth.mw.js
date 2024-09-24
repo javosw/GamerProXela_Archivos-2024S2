@@ -10,13 +10,23 @@ const mw_session = session({
 });
 
 const mw_auth = async (req, res, next) => {
-    res.setHeader('Content-Type', 'application/json');
     const username = req.body.username;
     const password = req.body.password;
     const {model_AuthGetUser} = require('../model/auth.model');
     const json = await model_AuthGetUser(username,password);
 
-    res.send(`${JSON.stringify(json)}`);
+    res.setHeader('Content-Type', 'application/json');
+    if (json){
+        req.session.username = json.username;
+        req.session.rol = json.rol;
+        req.session.nombre = json.nombre;
+        req.session.sucursal = json.sucursal;
+
+        res.status(200).send(json);
+    }
+    else{
+        res.status(401).send({http:401});
+    }
 }
 
 // -- exports -- exports -- exports -- exports -- exports --

@@ -1,6 +1,6 @@
-const { Client } = require('pg');
+const { Pool } = require('pg');
 
-const psql_admin = new Client({
+const CustomPool = new Pool({
     host: 'localhost',
     port: 5432,
     user: 'postgres',
@@ -9,4 +9,4 @@ const psql_admin = new Client({
 });
 
 // -- exports -- exports -- exports -- exports -- exports --
-module.exports = {psql_admin};
+module.exports = {CustomPool};
