@@ -35,6 +35,7 @@ class AdminModel{
         }
         finally{
             $my_pdo = null;
+            exit;
         }
     }
 
@@ -46,31 +47,26 @@ class AdminModel{
         try {
             $my_pdo->beginTransaction();
 
-            $query = 'SELECT * FROM administracion.get_empleados';
+            $query = 'SELECT * FROM administracion.empleados';
             $stmt = $my_pdo->prepare($query);
             
             if(!$stmt->execute()) { throw new Exception(); }
 
+            //dpi | nombre | id_sucursal | rol | username | password
             $empleados = array();
             while ($row = $stmt->fetch()) {
                 $empleados[] = array(
                     "dpi"       => $row['dpi'],
                     "nombre"    => $row['nombre'],
-                    "sucursal"  => $row['sucursal'],
+                    "sucursal"  => $row['id_sucursal'],
                     "rol"       => $row['rol'],
                     "username"  => $row['username']
-                );/*
-                $empleados[] = array(
-                    "dpi"=>$row[0],
-                    "nombre"=>$row[1],
-                    "sucursal"=>$row[2],
-                    "rol"=>$row[3],
-                    "username"=>$row[4]
-                );*/
+                );
             }
-            echo json_encode($empleados);
 
-            header('HTTP/1.1 200 @josq');
+            header('HTTP/1.1 200 @admin.model.php');
+            echo json_encode($empleados);
+            
             $my_pdo->commit();
 
             //echo json_encode($table,JSON_PRETTY_PRINT);
@@ -80,11 +76,12 @@ class AdminModel{
         catch (\Throwable $th) {
             $my_pdo->rollBack();
 
-            header('HTTP/1.1 400 @josq');
-            echo '{"http":"400"}';
+            header('HTTP/1.1 400 @admin.model.php');
+            echo '{"http":"400","at":"admin.model.php"}';
         }
         finally{
             $my_pdo = null;
+            exit;
         }
 
     }

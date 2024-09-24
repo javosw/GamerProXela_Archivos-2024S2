@@ -1,12 +1,10 @@
-<!-- if(!tieneSesion){HOLA}elif(rol == admin){ADMINBOARD} elif(rol == caja){CAJABOARD}-->
-
 <!-- 
 @if(tieneSesion){ 
 @if(tieneSesion || true){ 
 -->
 
-@if(tieneSesion){ 
-    
+@if(tieneSesion || true){
+
 <router-outlet></router-outlet>
 }
 @else{

@@ -25,15 +25,10 @@ export class CajaService {
   ];
 
 
+//let p = this.precios.find((precio)=>{ return barcode === precio.barcode;});
+//if(p!=undefined) return of(p);
   getPrecio(barcode:string): Observable<GetProducto> {
-    let p = this.precios.find((precio)=>{ return barcode === precio.barcode;});
-    if(p!=undefined) return of(p);
-
-
-
-
     let url = api_CajaGetPrecio;
-
     let httpParams = new HttpParams().set('barcode', barcode);
 
     return this.http.get<GetProducto>(url, {params: httpParams});

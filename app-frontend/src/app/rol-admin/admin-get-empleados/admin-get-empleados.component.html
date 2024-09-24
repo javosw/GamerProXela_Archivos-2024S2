@@ -2,7 +2,7 @@
     <div class="container mt-3 mb-3">
         <h2 (click)="navegar(ruta_AdminBoard)">Empleados</h2>
         <hr />
-        @if (furFormEnviado && empleados.length > 0) {
+        @if (flag_fueFormEnviado && data_empleados.length > 0) {
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
@@ -14,7 +14,7 @@
                 </tr>
             </thead>
             <tbody>
-                @for(empl of empleados; track empl.dpi) {
+                @for(empl of data_empleados; track empl.dpi) {
                 <tr>
                     <td>{{empl.dpi}}</td>
                     <td>{{empl.nombre}}</td>
@@ -26,12 +26,12 @@
             </tbody>
         </table>
         }
-        @else if(furFormEnviado && empleados.length == 0) {
+        @else if(flag_fueFormEnviado && data_empleados.length == 0) {
         <div class="alert alert-info" role="alert">
             No hay empleados?
         </div>
         }
-        @else if(furFormEnviado && !empleados) {
+        @else if(flag_fueFormEnviado && !data_empleados) {
         <div class="alert alert-warning" role="alert">
             Operacion fallida?!
         </div>

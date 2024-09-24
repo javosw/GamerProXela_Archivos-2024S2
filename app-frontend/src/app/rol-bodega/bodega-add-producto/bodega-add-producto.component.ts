@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { InventarioService } from '../../gpx-services/inventario.service';
 import { ruta_BodegaBoard } from '../../gpx-rutas/bodega';
 import { AddProducto } from '../../gpx-data/bodega';
+import { GpxStatus } from '../../gpx-data/gpx-api';
 
 @Component({
   selector: 'app-bodega-add-producto',
@@ -25,6 +26,7 @@ export class BodegaAddProductoComponent {
       barcode: [''],
       nombre: [''],
       en_bodega: [''],
+      precio: ['']
     });
   }
 
@@ -32,7 +34,7 @@ export class BodegaAddProductoComponent {
     this.fueEnviado = false;
 
     this.inventServ.addProducto(this.productoForm.value as AddProducto).subscribe({
-      next: (response: any) => {
+      next: (value: GpxStatus) => {
         this.fueEnviado = true;
         this.fueAgregado = true;
       },

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AdminService } from '../../gpx-services/admin.service';
 import { Router } from '@angular/router';
+import { Empleado } from '../../gpx-data/admin';
 
 @Component({
   selector: 'app-admin-get-empleados',
@@ -9,14 +10,13 @@ import { Router } from '@angular/router';
   templateUrl: './admin-get-empleados.component.html'
 })
 export class AdminGetEmpleadosComponent {
-  empleados;
-  furFormEnviado: boolean;
+  data_empleados = new Array<Empleado>();
+
+  flag_fueFormEnviado: boolean  = false;
 
   ruta_AdminBoard = 'admin/board';
 
   constructor(private adminServ: AdminService, private router: Router) {
-    this.furFormEnviado = false;
-    this.empleados = new Array<{ dpi: number, nombre: string, rol: string, sucursal: string, username: string }>();
   }
 
   ngOnInit() {
@@ -25,15 +25,15 @@ export class AdminGetEmpleadosComponent {
 
   getEmpleados() {
     this.adminServ.getEmpleados().subscribe({
-      next: (response: { dpi: number, nombre: string, rol: string, sucursal: string, username: string }[]) => {
-        this.empleados = response;
-        this.furFormEnviado = true;
+      next: (value: Array<Empleado>) => {
+        this.data_empleados = value;
+        this.flag_fueFormEnviado = true;
       },
       complete: () => {
-        this.furFormEnviado = true;
+        this.flag_fueFormEnviado = true;
       },
       error: (error) => {
-        this.furFormEnviado = true;
+        this.flag_fueFormEnviado = true;
       }
     });
   }

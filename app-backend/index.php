@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 // PARA RUTAS USAR SIEMPRE -> \\\\\
 
@@ -23,13 +24,11 @@ string(24) "/holaMundo/sdfsdfsd/fsdf"
 string(20) "/holaMundo/index.php"
 */
 
-$uri = $_SERVER['REQUEST_URI'];
 
 // if (preg_match('//', $uri)) {}
-$aqui = __DIR__;
+
 
 header("Content-Type: application/json");
-
 // para preflight requests
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
@@ -44,41 +43,47 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 // json_decode($body, true) para acceder con arrays
 // json_decode($body) para acceder con objetos
 
+
+
+/*
+header('HTTP/1.1 200 @josq');
+echo json_encode($user_data);
+
+header('HTTP/1.1 401 @josq');
+echo '{"http":"401"}';
+*/
+$uri = $_SERVER['REQUEST_URI'];
+
 $raw_body = file_get_contents('php://input');
 $json_body = json_decode($raw_body);
 
 if (preg_match('/^\/gpx\/entrar/', $uri)) {
-
+    require_once __DIR__ . '/controller/auth.controller.php';
+    
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        require_once $aqui . '\controller\AuthController.php';
         AuthController::entrar($json_body->username, $json_body->password);
     }
     exit;
-} else if (preg_match('/^\/gpx\/admin\/empleados\/add/', $uri)) {
-    require_once $aqui . '\model\AdminModel.php';
-
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-        AdminModel::addEmpleado(
-            $json_body->dpi,
-            $json_body->nombre,
-            $json_body->sucursal,
-            $json_body->rol,
-            $json_body->username,
-            $json_body->password
-        );
-    }
-    exit;
 } 
-else if (preg_match('/^\/gpx\/admin\/empleados/', $uri)){
-    require_once $aqui . '\model\AdminModel.php';
-    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-
-        AdminModel::getEmpleados();
-    }
-    exit;
-}
 else {
-    http_response_code(404);
+    if($_SESSION['rol'] == 'caja'){
+        require_once __DIR__ . '/index/caja.index.php';
+        exit;
+    }
+    else if($_SESSION['rol'] == 'bodega'){
+        require_once __DIR__ . '/index/bodega.index.php';
+        exit;
+    }
+    else if($_SESSION['rol'] == 'inventario'){
+        require_once __DIR__ . '/index/invent.index.php';
+        exit;
+    }
+    else if($_SESSION['rol'] == 'administracion'){
+        require_once __DIR__ . '/index/admin.index.php';
+        exit;
+    }
+
+    header('HTTP/1.1 401 @josq');
+    echo '{"http":"401"}';        
 }

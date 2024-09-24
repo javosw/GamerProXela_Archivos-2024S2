@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BehaviorSubject, never, Observable, of, Subject } from 'rxjs';
-import { api_InventAddPasillo, api_InventAddProducto, api_InventGetProducto, api_InventGetProductos } from '../gpx-data/gpx-api';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { api_InventAddPasillo, api_InventAddProducto, api_InventGetProducto, api_InventGetProductos, GpxStatus } from '../gpx-data/gpx-api';
 import { AddPasillo, Producto } from '../gpx-data/invent';
 import { AddProducto } from '../gpx-data/bodega';
 
@@ -16,17 +16,15 @@ export class InventarioService {
 
 
   getProducto(barcode: string): Observable<Producto> {
-    let p = this.productos.find((p) => { return p.barcode == barcode })
-    if (p != undefined) return of(p);
-    throw new Error('{http:400}');
-
     let url = api_InventGetProducto + '?barcode=${barcode}';
-    return this.http.get<any>(url);
+    let httpParams = new HttpParams().set('barcode', barcode);
+
+    return this.http.get<Producto>(url,{params: httpParams});
   }
 
-  addProducto(form: AddProducto): Observable<any> {
+  addProducto(form: AddProducto): Observable<GpxStatus> {
     let url = api_InventAddProducto;
-    return this.http.post<any>(url, form);
+    return this.http.post<GpxStatus>(url, form);
   }
 
   productos: Producto[] = [
@@ -38,10 +36,10 @@ export class InventarioService {
   ];
 
   getProductos(): Observable<Producto[]> {
-    return of(this.productos);
+    //return of(this.productos);
 
     let url = api_InventGetProductos;
-    return this.http.get<any>(url);
+    return this.http.get<Producto[]>(url);
   }
 
   // form.value: { barcode: string, pasillo: number, unidades: number }

@@ -4,6 +4,7 @@ import { AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { api_AdminAddEmpleado, api_AdminGetEmpleados } from '../gpx-data/gpx-api';
+import { Empleado } from '../gpx-data/admin';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +18,9 @@ export class AdminService {
     return this.http.post<any>(url, form);
   }
 
-  getEmpleados(): Observable<any> {
+  getEmpleados(): Observable<Empleado[]> {
     let url = api_AdminGetEmpleados;
-    return this.http.get<any>(url);
+    return this.http.get<Empleado[]>(url);
   }
 
 }

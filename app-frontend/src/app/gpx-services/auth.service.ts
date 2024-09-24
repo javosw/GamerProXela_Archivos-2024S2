@@ -26,7 +26,6 @@ export class AuthService {
 
     this.http.post<UsuarioAuth>(url, loginData).subscribe({
       next: (value: UsuarioAuth) => {
-        console.log(`@AuthService[next=${JSON.stringify(value)}]`);
         this.tieneSesion.next(true);
 
         if (value.rol == 'administracion') {
@@ -43,7 +42,6 @@ export class AuthService {
         }
       },
       error: (error) => {
-        console.error("@AuthService[error]")
         this.tieneSesion.next(false);
       }
     });
