@@ -77,7 +77,7 @@ CREATE TABLE caja.ventas (
 CREATE TABLE caja.productos_facturados (
     id_factura INTEGER REFERENCES caja.ventas(id_factura),
     id_producto VARCHAR REFERENCES inventario.productos(id_producto),
-    unidades INT CHECK (unidades > 0),
+    unidades INTEGER CHECK (unidades > 0),
     subtotal NUMERIC CHECK (subtotal >= 0),
     PRIMARY KEY(id_factura, id_producto)
 );

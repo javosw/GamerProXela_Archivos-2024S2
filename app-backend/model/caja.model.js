@@ -43,16 +43,22 @@ const model_CajaGetCliente = async (nit) => {
     }
 }
 
-const model_CajaAddVenta = async (username,nit,total,fecha) => {
+const model_CajaAddVenta = async (username,nit,total,fecha,productos) => {
     client = await CustomPool.connect();
 
     try {
         const text = 'SELECT caja.add_factura($1,$2,$3,$4)';
         const values = [username,nit,total,fecha];
         const tabla = (await client.query(text, values)).rows;
-        console.log(tabla);
-        console.log(tabla[0].add_factura);
+        const idFactura = tabla[0].add_factura;
 
+        /*
+        for (let index = 0; index < productos.length; index++) {
+            const producto = productos[index];
+            const {barcode,unidades,subtotal} = producto;
+        }
+        */
+        
         return true;
     } catch (err) {
     } finally {
