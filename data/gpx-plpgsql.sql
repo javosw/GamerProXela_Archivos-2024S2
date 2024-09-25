@@ -46,4 +46,52 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+
+CREATE OR REPLACE FUNCTION inventario.add_pasillo(
+    p_id_producto VARCHAR,
+    p_id_sucursal VARCHAR,
+    p_id_pasillo INTEGER,
+    p_unidades_pasillo INTEGER
+)
+RETURNS VOID AS $$
+BEGIN
+    -- Update the product's id_pasillo and unidades_pasillo
+    UPDATE inventario.productos
+    SET 
+        id_pasillo = p_id_pasillo,
+        unidades_pasillo = p_unidades_pasillo,
+        unidades_bodega = unidades_bodega - p_unidades_pasillo
+    WHERE 
+        id_producto = p_id_producto
+        AND id_sucursal = p_id_sucursal;
+
+    -- Ensure that unidades_bodega does not go negative
+    IF (SELECT unidades_bodega FROM inventario.productos 
+        WHERE id_producto = p_id_producto AND id_sucursal = p_id_sucursal) < 0 THEN
+        RAISE EXCEPTION 'unidades_bodega cannot be negative';
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION inventario.add_pasillo(
+    p_id_producto VARCHAR,
+    p_id_sucursal VARCHAR,
+    p_id_pasillo INTEGER,
+    p_unidades_pasillo INTEGER
+)
+RETURNS VOID AS $$
+BEGIN
+    -- Update the product's id_pasillo and unidades_pasillo
+    UPDATE inventario.productos
+    SET 
+        id_pasillo = p_id_pasillo,
+        unidades_pasillo = p_unidades_pasillo,
+        unidades_bodega = unidades_bodega - p_unidades_pasillo
+    WHERE 
+        id_producto = p_id_producto
+        AND id_sucursal = p_id_sucursal;
+END;
+$$ LANGUAGE plpgsql;
+
+
 --\q

@@ -25,8 +25,25 @@ const model_InventGetProducto = async (barcode) => {
     }
 }
 
-module.exports = {
-    model_InventGetProducto
+const model_InventAddPasillo = async (barcode,sucursal,pasillo,en_pasillo) => {
+    client = await CustomPool.connect();
+
+    try {
+        const text = 'SELECT inventario.add_pasillo($1, $2, $3, $4)';
+        const values = [barcode,sucursal,pasillo,en_pasillo];
+        await client.query(text, values);
+
+        return true;
+    } catch (err) {
+    } finally {
+        client.release();
+    }
+    return false;
 }
-/*
-*/
+
+
+module.exports = {
+    model_InventGetProducto,
+    model_InventAddPasillo
+}
+

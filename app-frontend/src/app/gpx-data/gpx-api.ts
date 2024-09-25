@@ -11,5 +11,5 @@ export let api_CajaGetCliente = 'http://localhost:3000/clientes/nit';
 export let api_InventGetProducto = 'http://localhost:3000/producto';
 export let api_InventGetProductos = 'http://localhost:3000/productos';
 export let api_InventAddProducto = 'http://localhost:3000/productos/add';
-export let api_InventAddPasillo = 'http://localhost:3000/estanteria/mod';
+export let api_InventAddPasillo = 'http://localhost:3000/estanteria/add';
 

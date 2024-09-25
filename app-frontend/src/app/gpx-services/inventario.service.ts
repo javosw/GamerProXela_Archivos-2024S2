@@ -43,9 +43,9 @@ export class InventarioService {
 
   // form.value: { barcode: string, pasillo: number, unidades: number }
   addPasillo(form: AddPasillo): Observable<any> {
-    return of({ http: 200 });
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     let url = api_InventAddPasillo;
-    return this.http.post<any>(url, form);
+    return this.http.post<any>(url, form, {headers:headers});
   }
 }
