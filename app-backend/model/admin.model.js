@@ -18,22 +18,28 @@ const model_AdminGetEmpleados = async () => {
             });
         });
 
-        /*const fila = tabla[0];
-        const json = {
-            username: fila.username,
-            rol: fila.rol,
-            nombre: fila.nombre,
-            sucursal: fila.id_sucursal
-        };*/
-
         return json;
     } catch (err) {
-        //console.error(err);
     } finally {
         client.release();
-        //await sql_admin.end();
     }
 }
 
+const model_AdminAddEmpleado = async (dpi, nombre, sucursal, rol, username, password) => {
+    client = await CustomPool.connect();
+
+    try {
+        const text = 'SELECT administracion.add_empleado($1, $2, $3, $4, $5, $6)';
+        const values = [dpi,nombre,sucursal,rol,username,password];
+        await client.query(text, values);
+
+        return true;
+    } catch (err) {
+    } finally {
+        client.release();
+    }
+    return false;
+}
+
 // -- exports -- exports -- exports -- exports -- exports --
-module.exports = { model_AdminGetEmpleados };
+module.exports = { model_AdminGetEmpleados, model_AdminAddEmpleado };

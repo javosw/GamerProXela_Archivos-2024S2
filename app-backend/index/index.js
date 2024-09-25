@@ -19,12 +19,22 @@ app.use(mw_session);
 const {mw_checkAnyRol} = require('../mw/auth.mw');
 app.use(mw_checkAnyRol);
 
+// ========================================================
+
 const {mw_auth} = require('../mw/auth.mw');
 app.post('/entrar', express.json(), mw_auth);
 
+// ========================================================
+
 const {mw_checkAdminRol} = require('../mw/auth.mw');
-const {mw_AdminGetEmpleados} = require('../mw/admin.mw');
+const {mw_AdminGetEmpleados, mw_AdminAddEmpleado} = require('../mw/admin.mw');
+
 app.get('/empleados', mw_checkAdminRol,mw_AdminGetEmpleados);
+app.post('/empleados/add', mw_checkAdminRol,express.json(),mw_AdminAddEmpleado);
+
+// ========================================================
+
+// ========================================================
 
 app.listen(port, () => {
   console.log(`[express] http://localhost:${port}`);

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AdminService } from '../../gpx-services/admin.service';
+import { AddEmpleado } from '../../gpx-data/admin.data';
 
 @Component({
   selector: 'gpx-admin-add-empleado',
@@ -32,7 +33,7 @@ export class AdminAddEmpleadoComponent {
   onSubmit() {
     this.fueEnviado = false;
 
-    this.adminServ.addEmpleado(this.empleadoForm.value).subscribe({
+    this.adminServ.addEmpleado(this.empleadoForm.value as AddEmpleado).subscribe({
       next: (response: any) => {
         this.fueEnviado = true;
         this.fueAgregado = true;
