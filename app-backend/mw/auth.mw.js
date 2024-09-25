@@ -122,7 +122,10 @@ module.exports = {
     mw_auth,
     mw_session,
     mw_checkAnyRol,
-    mw_checkAdminRol
+    mw_checkAdminRol,
+    mw_checkBodegaRol,
+    mw_checkCajaRol,
+    mw_checkInventRol
 };
 
 
