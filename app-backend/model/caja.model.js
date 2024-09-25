@@ -49,8 +49,9 @@ const model_CajaAddVenta = async (username,nit,total,fecha) => {
     try {
         const text = 'SELECT caja.add_factura($1,$2,$3,$4)';
         const values = [username,nit,total,fecha];
-        const v2 = await client.query(text, values);
-        console.log(v2);
+        const tabla = (await client.query(text, values)).rows;
+        console.log(tabla);
+        console.log(tabla[0].add_factura);
 
         return true;
     } catch (err) {

@@ -100,10 +100,15 @@ CREATE OR REPLACE FUNCTION caja.add_factura(
     p_total NUMERIC,
     p_fecha DATE
 )
-RETURNS VOID AS $$
+RETURNS INTEGER AS $$
+DECLARE
+    v_id_factura INTEGER;
 BEGIN
-    INSERT INTO caja.ventas (username,nit,total,total_descuento,fecha) 
-    VALUES (p_username,p_nit,p_total,0,p_fecha);
+    INSERT INTO caja.ventas (username, nit, total, total_descuento, fecha) 
+    VALUES (p_username, p_nit, p_total, 0, p_fecha)
+    RETURNING id_factura INTO v_id_factura;
+
+    RETURN v_id_factura;
 END;
 $$ LANGUAGE plpgsql;
 

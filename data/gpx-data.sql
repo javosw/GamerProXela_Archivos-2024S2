@@ -1,5 +1,16 @@
 INSERT INTO administracion.empleados VALUES
-(123456,'Javier Oswaldo SQ','parque','administracion','josq','123123'),
+(1,'Admin Parque','parque','administracion','admin','123'),
+(2,'Admin Centro 1','centro1','administracion','admin1','123'),
+(3,'Admin Centro 2','centro2','administracion','admin2','123'),
+(4,'Cajero Parque','parque','caja','caja','123'),
+(5,'Cajero Centro 1','centro1','caja','caja1','123'),
+(6,'Cajero Centro 2','centro2','caja','caja2','123'),
+(7,'Bodega Parque','parque','bodega','bodega','123'),
+(8,'Bodega Centro 1','centro1','bodega','bodega1','123'),
+(9,'Bodega Centro 2','centro2','bodega','bodega2','123'),
+(10,'Inventario Parque','parque','inventario','invent','123'),
+(11,'Inventario Centro 1','centro1','inventario','invent1','123'),
+(12,'Inventario Centro 2','centro2','inventario','invent2','123'),
 (546889,'Octavio Sánchez Barreto','parque','caja','indexLKMW','PrwwLmt'),
 (205703,'Benjamín Orozco Véliz','parque','caja','copyKNCI','DsvOntK'),
 (941283,'Nicolás Loera Carvajal','parque','caja','copyHNTL','BDfwjBL'),
@@ -294,6 +305,9 @@ INSERT INTO inventario.productos VALUES
 ;
 
 INSERT INTO caja.cajas(username) VALUES
+('caja'),
+('caja1'),
+('caja2'),
 ('indexLKMW'),
 ('copyKNCI'),
 ('copyHNTL'),
