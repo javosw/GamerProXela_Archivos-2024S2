@@ -13,7 +13,7 @@ app.use(cors({
   credentials: true 
 }));
 
-const {mw_session} = require('../mw/auth.mw');
+const {mw_session, mw_checkBodegaInventRol} = require('../mw/auth.mw');
 app.use(mw_session);
 
 const {mw_checkAnyRol} = require('../mw/auth.mw');
@@ -37,8 +37,12 @@ app.post('/empleados/add', mw_checkAdminRol,express.json(),mw_AdminAddEmpleado);
 const {mw_checkBodegaRol} = require('../mw/auth.mw');
 const {mw_BodegaGetProductos,mw_BodegaAddProducto} = require('../mw/bodega.mw');
 
-app.get('/productos',mw_checkBodegaRol,mw_BodegaGetProductos);
+app.get('/productos',mw_checkBodegaInventRol,mw_BodegaGetProductos);
 app.post('/productos/add',mw_checkBodegaRol,express.json(),mw_BodegaAddProducto);
+
+// ========================================================
+
+
 
 // ========================================================
 

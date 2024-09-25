@@ -1,1 +1,6 @@
-export type UsuarioAuth = { username: string, rol: string, sucursal:string, nombre: string };
+export type UsuarioAuth = { 
+    username: string, 
+    rol: string, 
+    sucursal:string, 
+    nombre: string 
+};

@@ -10,3 +10,9 @@ export type AddPasillo = {
     pasillo: number;
     en_pasillo: number
 };
+export type AddProducto = { 
+    barcode: string, 
+    nombre: string, 
+    en_bodega: number, 
+    precio: number 
+};

@@ -3,8 +3,8 @@ import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angul
 import { Router } from '@angular/router';
 import { InventarioService } from '../../gpx-services/inventario.service';
 import { ruta_BodegaBoard } from '../../gpx-rutas/bodega.rutas';
-import { AddProducto } from '../../gpx-data/bodega.data';
 import { GpxStatus } from '../../gpx-data/gpx-api';
+import { AddProducto } from '../../gpx-data/invent.data';
 
 @Component({
   selector: 'app-bodega-add-producto',

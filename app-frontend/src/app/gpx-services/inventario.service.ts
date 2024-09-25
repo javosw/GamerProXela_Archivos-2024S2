@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { api_InventAddPasillo, api_InventAddProducto, api_InventGetProducto, api_InventGetProductos, GpxStatus } from '../gpx-data/gpx-api';
-import { AddPasillo, Producto } from '../gpx-data/invent.data';
-import { AddProducto } from '../gpx-data/bodega.data';
+import { AddPasillo, Producto, AddProducto} from '../gpx-data/invent.data';
 
 @Injectable({
   providedIn: 'root'

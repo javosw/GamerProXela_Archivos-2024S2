@@ -86,6 +86,21 @@ const mw_checkBodegaRol = (req, res, next) => {
         return res.status(401).send(errorJson(401, at));
     }
 }
+const mw_checkBodegaInventRol = (req, res, next) => {
+    const at = 'mw_checkBodegaRol';
+    if (req.session.rol) {
+        const rol = req.session.rol;
+
+        if (rol == 'bodega' || rol == 'inventario') {
+            return next();
+        }
+        else {
+            return res.status(403).send(errorJson(403, at));
+        }
+    } else {
+        return res.status(401).send(errorJson(401, at));
+    }
+}
 const mw_checkCajaRol = (req, res, next) => {
     const at = 'mw_checkCajaRol';
     if (req.session.rol) {
@@ -125,7 +140,8 @@ module.exports = {
     mw_checkAdminRol,
     mw_checkBodegaRol,
     mw_checkCajaRol,
-    mw_checkInventRol
+    mw_checkInventRol,
+    mw_checkBodegaInventRol
 };
 
 
