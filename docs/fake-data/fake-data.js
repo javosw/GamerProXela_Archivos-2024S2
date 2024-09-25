@@ -117,10 +117,19 @@ function productos(){
 	genProducto(75,'centro2');
 }
 
-productos();
+//productos();
 
+function getNombre(){
+	return faker.person.fullName();
+}
 
+function genCliente(unidades){
+	for(let i = 0; i < unidades; i++){
+		console.log(`(${getNIT()},'${getNombre()}',0),`);
+	}
+}
 
+genCliente(8);
 
 
 

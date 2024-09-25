@@ -35,7 +35,7 @@ app.post('/empleados/add', mw_checkAdminRol,express.json(),mw_AdminAddEmpleado);
 // ========================================================
 
 const {mw_checkBodegaRol} = require('../mw/auth.mw');
-const {mw_BodegaGetProductos,mw_BodegaAddProducto} = require('../mw/bodega.mw');
+const {mw_BodegaGetProductos, mw_BodegaAddProducto} = require('../mw/bodega.mw');
 const {mw_InventGetProducto, mw_InventAddPasillo} = require('../mw/invent.mw');
 
 app.get('/producto',mw_checkInventRol,mw_InventGetProducto);
@@ -45,7 +45,11 @@ app.post('/estanteria/add',mw_checkInventRol,express.json(),mw_InventAddPasillo)
 
 // ========================================================
 
+const {mw_checkCajaRol} = require('../mw/auth.mw');
+const {mw_CajaGetCliente,mw_CajaGetPrecio} = require('../mw/caja.mw');
 
+app.get('/cliente',mw_checkCajaRol,mw_CajaGetCliente);
+app.get('/productos/precio',mw_checkCajaRol,mw_CajaGetPrecio);
 
 // ========================================================
 

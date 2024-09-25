@@ -5,8 +5,8 @@ export let api_HolaEntrar = 'http://localhost:3000/entrar';
 export let api_AdminAddEmpleado = 'http://localhost:3000/empleados/add';
 export let api_AdminGetEmpleados = 'http://localhost:3000/empleados';
 
+export let api_CajaGetCliente = 'http://localhost:3000/cliente';
 export let api_CajaGetPrecio = 'http://localhost:3000/productos/precio';
-export let api_CajaGetCliente = 'http://localhost:3000/clientes/nit';
 
 export let api_InventGetProducto = 'http://localhost:3000/producto';
 export let api_InventGetProductos = 'http://localhost:3000/productos';

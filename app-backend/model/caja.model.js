@@ -1,7 +1,6 @@
-const { json } = require('express');
 const { CustomPool } = require('./psql');
 
-const model_InventGetProducto = async (barcode) => {
+const model_CajaGetPrecio = async (barcode) => {
     client = await CustomPool.connect();
 
     try {
@@ -13,10 +12,8 @@ const model_InventGetProducto = async (barcode) => {
 
         const json = {
             barcode: fila.id_producto,
+            precio: fila.precio,
             nombre: fila.nombre,
-            pasillo: fila.id_pasillo,
-            en_bodega: fila.unidades_bodega,
-            en_pasillo: fila.unidades_pasillo,
         }
         return json;
     } catch (err) {
@@ -25,25 +22,28 @@ const model_InventGetProducto = async (barcode) => {
     }
 }
 
-const model_InventAddPasillo = async (barcode,sucursal,pasillo,en_pasillo) => {
+const model_CajaGetCliente = async (nit) => {
     client = await CustomPool.connect();
 
     try {
-        const text = 'SELECT inventario.add_pasillo($1, $2, $3, $4)';
-        const values = [barcode,sucursal,pasillo,en_pasillo];
-        await client.query(text, values);
+        const text = 'SELECT * FROM caja.clientes WHERE nit=$1;';
+        const values = [nit];
+        const tabla = (await client.query(text, values)).rows;
 
-        return true;
+        const fila = tabla[0];
+        console.log(fila);
+        const json = {
+            nit: fila.nit,
+            nombre: fila.nombre,
+        }
+        return json;
     } catch (err) {
     } finally {
         client.release();
     }
-    return false;
 }
-
 
 module.exports = {
-    model_InventGetProducto,
-    model_InventAddPasillo
+    model_CajaGetPrecio,
+    model_CajaGetCliente
 }
-

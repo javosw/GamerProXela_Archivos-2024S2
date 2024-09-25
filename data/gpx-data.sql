@@ -291,3 +291,14 @@ INSERT INTO inventario.productos VALUES
 ('MH26PZ','centro2','Shirt',272,0,19,0,-1),
 ('AH87CY','centro2','Chicken',43,0,6,0,-1)
 ;
+
+INSERT INTO caja.clientes VALUES
+(756853300,'Amelia Borer',0),
+(114882093,'Israel O''Keefe',0),
+(910527409,'Andres Kemmer',0),
+(751379405,'Alvin Koss',0),
+(151439858,'Madeline Kilback',0),
+(459992973,'Ana Sauer',0),
+(162388280,'Bridget Boyle',0),
+(899088271,'Jake Breitenberg',0)
+;
