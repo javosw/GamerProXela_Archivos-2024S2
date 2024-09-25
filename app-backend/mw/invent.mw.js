@@ -3,8 +3,9 @@ const {errorJson} = require('./utils');
 const mw_InventGetProducto = async (req, res, next) => {
     const { model_InventGetProducto } = require('../model/invent.model');
     
+    const sucursal = req.session.sucursal;
     const barcode = req.query.barcode;
-    const json = await model_InventGetProducto(barcode);
+    const json = await model_InventGetProducto(sucursal,barcode);
 
     res.setHeader('Content-Type', 'application/json');
     if (json) {

@@ -1,11 +1,12 @@
 const { CustomPool } = require('./psql');
 
-const model_BodegaGetProductos = async () => {
+const model_BodegaGetProductos = async (sucursal) => {
     client = await CustomPool.connect();
 
     try {
-        const text = 'SELECT * FROM inventario.productos';
-        const tabla = (await client.query(text)).rows;
+        const text = 'SELECT * FROM inventario.productos WHERE id_sucursal=$1';
+        const values = [sucursal];
+        const tabla = (await client.query(text, values)).rows;
 
         json = [];
         tabla.forEach(fila => {

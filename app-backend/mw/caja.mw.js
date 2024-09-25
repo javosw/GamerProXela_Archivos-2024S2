@@ -3,8 +3,9 @@ const {errorJson} = require('./utils');
 const mw_CajaGetPrecio = async (req, res, next) => {
     const { model_CajaGetPrecio } = require('../model/caja.model');
     
+    const sucursal = req.session.sucursal;
     const barcode = req.query.barcode;
-    const json = await model_CajaGetPrecio(barcode);
+    const json = await model_CajaGetPrecio(sucursal,barcode);
 
     res.setHeader('Content-Type', 'application/json');
     if (json) {

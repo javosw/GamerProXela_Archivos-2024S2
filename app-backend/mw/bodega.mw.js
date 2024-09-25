@@ -1,8 +1,10 @@
 const {errorJson} = require('./utils');
 
 const mw_BodegaGetProductos = async (req, res, next) => {
+    const sucursal = req.session.sucursal;
+
     const { model_BodegaGetProductos } = require('../model/bodega.model');
-    const json = await model_BodegaGetProductos();
+    const json = await model_BodegaGetProductos(sucursal);
 
     res.setHeader('Content-Type', 'application/json');
     if (json) {
