@@ -12,9 +12,8 @@ export class InventarioService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-
   getProducto(barcode: string): Observable<Producto> {
-    let url = api_InventGetProducto + '?barcode=${barcode}';
+    let url = api_InventGetProducto;
     let httpParams = new HttpParams().set('barcode', barcode);
 
     return this.http.get<Producto>(url,{params: httpParams});

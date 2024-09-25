@@ -33,7 +33,7 @@ export class InventAddPasilloComponent {
   ngOnInit() {
     this.route.queryParamMap.subscribe(params => {
       let barcodeQuery = params.get('barcode');
-      if(barcodeQuery != null){
+      if(barcodeQuery){
         this.barcode = barcodeQuery;
       }
     });
