@@ -33,10 +33,12 @@ app.get('/empleados', mw_checkAdminRol,mw_AdminGetEmpleados);
 app.post('/empleados/add', mw_checkAdminRol,express.json(),mw_AdminAddEmpleado);
 
 // ========================================================
-const {mw_checkBodegaRol} = require('../mw/auth.mw');
-const {mw_BodegaGetProductos} = require('../mw/bodega.mw');
-app.get('/productos',mw_checkBodegaRol,mw_BodegaGetProductos);
 
+const {mw_checkBodegaRol} = require('../mw/auth.mw');
+const {mw_BodegaGetProductos,mw_BodegaAddProducto} = require('../mw/bodega.mw');
+
+app.get('/productos',mw_checkBodegaRol,mw_BodegaGetProductos);
+app.post('/productos/add',mw_checkBodegaRol,express.json(),mw_BodegaAddProducto);
 
 // ========================================================
 

@@ -26,4 +26,24 @@ SELECT
 FROM
     administracion.empleados empl;
 
+CREATE OR REPLACE FUNCTION inventario.add_producto(
+    p_id_producto VARCHAR,
+    p_id_sucursal VARCHAR,
+    p_nombre VARCHAR,
+    p_precio NUMERIC,
+    p_unidades_bodega INTEGER
+)
+RETURNS VOID AS $$
+BEGIN
+    INSERT INTO inventario.productos (
+        id_producto, id_sucursal, nombre, precio, 
+        unidades_vendidas, unidades_bodega, unidades_pasillo, id_pasillo
+    ) 
+    VALUES (
+        p_id_producto, p_id_sucursal, p_nombre, p_precio, 
+        0, p_unidades_bodega, 0, -1
+    );
+END;
+$$ LANGUAGE plpgsql;
+
 --\q

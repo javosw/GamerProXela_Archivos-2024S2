@@ -26,7 +26,7 @@ const mw_AdminAddEmpleado = async (req, res, next)=>{
 
     res.setHeader('Content-Type', 'application/json');
     if (fueAgregado) {
-        res.status(200).send({add:true});
+        res.status(200).send({added:true});
     }
     else {
         res.status(400).send(errorJson(500,'mw_AdminAddEmpleado'));

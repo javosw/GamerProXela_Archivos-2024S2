@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
@@ -22,9 +22,11 @@ export class InventarioService {
     return this.http.get<Producto>(url,{params: httpParams});
   }
 
-  addProducto(form: AddProducto): Observable<GpxStatus> {
+  addProducto(form: AddProducto): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
     let url = api_InventAddProducto;
-    return this.http.post<GpxStatus>(url, form);
+    return this.http.post<any>(url, form,{headers:headers});
   }
 
   productos: Producto[] = [
