@@ -28,7 +28,6 @@ const mw_auth = async (req, res, next) => {
         res.status(200).send(json);
     }
     else {
-        //res.status(401).send({ http: 404, at: 'mw_auth', dev: 'josq' });
         res.status(401).send(errorJson(401, 'mw_auth'));
     }
 }
@@ -40,16 +39,6 @@ const mw_checkAnyRol = (req, res, next) => {
 
     if (req.session.rol) {
         return next();
-        /*
-        const rol = req.session.rol;
-
-        if (rol == 'administracion' || rol == 'inventario' || rol == 'caja' || rol == 'bodega') {
-            return next();
-        } else {
-            return res.status(403).send({ http: 403, at: 'mw_checkSession', dev: 'josq' });
-        }
-        
-        */
     } else {
         return res.status(401).send(errorJson(401, 'mw_checkAnyRol'));
     }

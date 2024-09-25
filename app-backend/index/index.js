@@ -46,10 +46,11 @@ app.post('/estanteria/add',mw_checkInventRol,express.json(),mw_InventAddPasillo)
 // ========================================================
 
 const {mw_checkCajaRol} = require('../mw/auth.mw');
-const {mw_CajaGetCliente,mw_CajaGetPrecio} = require('../mw/caja.mw');
+const {mw_CajaGetCliente,mw_CajaGetPrecio,mw_CajaAddVenta} = require('../mw/caja.mw');
 
 app.get('/cliente',mw_checkCajaRol,mw_CajaGetCliente);
 app.get('/productos/precio',mw_checkCajaRol,mw_CajaGetPrecio);
+app.post('/ventas/add',mw_checkCajaRol,express.json(),mw_CajaAddVenta);
 
 // ========================================================
 

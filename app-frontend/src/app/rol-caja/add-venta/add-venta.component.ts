@@ -1,11 +1,12 @@
-import { Component, QueryList, ViewChildren } from '@angular/core';
+import { Component, input, QueryList, ViewChildren } from '@angular/core';
 import { CajaAddProductoComponent } from '../add-producto/add-producto.component';
 import { JsonPipe, ViewportScroller } from '@angular/common';
 import { Router } from '@angular/router';
 import { ruta_CajaBoard } from '../../gpx-rutas/caja.rutas';
 import { FormsModule } from '@angular/forms';
 import { CajaService } from '../../gpx-services/caja.service';
-import { GetCliente } from '../../gpx-data/caja.data';
+import { AddSubVenta, AddVenta, GetCliente } from '../../gpx-data/caja.data';
+
 @Component({
   selector: 'app-add-venta',
   standalone: true,
@@ -14,47 +15,103 @@ import { GetCliente } from '../../gpx-data/caja.data';
 })
 export class CajaAddVentaComponent {
 
-  rutas:any = {
-    ruta_CajaBoard
-  };
-
-  input_nit: number = 0;
-  http_cliente: GetCliente = {nit:0,nombre:''};
-
-  flag_existeCliente = false;
-  flag_fueEnviado = false;
-
   constructor(private router: Router, private cajaServ:CajaService) { }
+
+  // =-=-=-=-=-=-=-=-=-=-=-=-=-=-= VENTA
+
+  flag_fueVentaSolicitada: boolean = false;
+  flag_fueVentaExitosa: boolean = false;
+
+  addVenta() {
+    this.flag_fueVentaSolicitada = false;
+
+    let form:AddVenta = this.buildVenta();
+    this.cajaServ.addVenta(form).subscribe({
+      next: (value: any) => {
+        this.flag_fueVentaSolicitada = true;
+        this.flag_fueVentaExitosa = true;
+      },
+      complete: ()=>{
+        //this.flag_fueVentaSolicitada = true;
+        //this.flag_fueVentaExitosa = true;
+      },
+      error: (error) => {
+        this.flag_fueVentaSolicitada = true;
+        this.flag_fueVentaExitosa = false;
+      }
+    });
+  }
+
+  // =-=-=-=-=-=-=-=-=-=-=-=-=-=-= CARRITO DATA
+
+  buildVenta():AddVenta {
+    let productos: Array<AddSubVenta> = this.query_AddProducto.map((component) => { 
+      return component.buildSubVenta();
+    });
+    let total = this.getTotal(productos);
+    let nit = this.data_cliente.nit;
+    let fecha = this.input_fecha;
+
+    console.log(JSON.stringify(productos));
+
+    return {
+      nit: nit,
+      total: total,
+      fecha: fecha,
+      productos: productos,
+    }
+  }
+
+  getTotal(productos:Array<AddSubVenta>):number{
+    let total:number = 0;
+    for (let index = 0; index < productos.length; index++) {
+      if(productos[index]){
+        total = total + productos[index].subtotal;
+      }
+    }
+    return total;
+  }
+
+  // =-=-=-=-=-=-=-=-=-=-=-=-=-=-= CARRITO UI
 
   loop_AddProducto: Array<number> = new Array();
   @ViewChildren('addProduct') query_AddProducto!: QueryList<CajaAddProductoComponent>;
-  productos: Array<{ barcode: string; unidades: number; }> = new Array();
 
   addComponent() {
     this.loop_AddProducto.push(this.loop_AddProducto.length);
   }
 
-  collectValues() {
-    this.productos = this.query_AddProducto.map((component) => { return { barcode: component.input_barcode, unidades: component.input_unidades } });
-    alert(JSON.stringify(this.productos));
-  }
+  // =-=-=-=-=-=-=-=-=-=-=-=-=-=-= CLIENTE
+
+  input_fecha: string = '';
+  input_nit: number = 0;
+  data_cliente: GetCliente = {nit:0,nombre:''};
+
+  flag_existeCliente = false;
+  flag_fueClienteSolicitado = false;
 
   getCliente(nit:number){
     this.cajaServ.getCliente(nit).subscribe({
       next: (value: GetCliente) => {
-        this.http_cliente = value;
-        this.flag_fueEnviado = true;
+        this.data_cliente = value;
+        this.flag_fueClienteSolicitado = true;
         this.flag_existeCliente = true;
       },
       complete: ()=>{
-        this.flag_fueEnviado = true;
+        //this.flag_fueClienteSolicitado = true;
       },
       error: (error) => {
-        this.flag_fueEnviado = true;
+        this.flag_fueClienteSolicitado = true;
         this.flag_existeCliente = false;
       }
     });
   }
+
+  // =-=-=-=-=-=-=-=-=-=-=-=-=-=-= RUTAS
+  
+  rutas:any = {
+    ruta_CajaBoard
+  };
 
   navegar(url: string) {
     this.router.navigate([url]);
@@ -86,12 +143,6 @@ export class CajaAddVentaComponent {
   if(quiereDescuento) checkDescuento(id-factura):{factura:number; total_descuento:number}
     server.calc
       total-descuento
-  
-  
-  
-  
-  
   */
-
 
 }

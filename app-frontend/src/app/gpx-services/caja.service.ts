@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
-import { GetCliente, GetProducto } from '../gpx-data/caja.data';
-import { api_CajaGetCliente, api_CajaGetPrecio } from '../gpx-data/gpx-api';
+import { AddVenta, GetCliente, GetProducto } from '../gpx-data/caja.data';
+import { api_CajaAddVenta, api_CajaGetCliente, api_CajaGetPrecio } from '../gpx-data/gpx-api';
 
 @Injectable({
   providedIn: 'root'
@@ -12,18 +12,6 @@ import { api_CajaGetCliente, api_CajaGetPrecio } from '../gpx-data/gpx-api';
 export class CajaService {
 
   constructor(private http: HttpClient, private router: Router) { }
-
-
-  precios:Array<GetProducto> = [
-    {barcode:'AAA',precio:5,nombre:'fruto5'},
-    {barcode:'QQQ',precio:6,nombre:'libro4'},
-    {barcode:'WWW',precio:8,nombre:'bebida7'},
-    {barcode:'SSS',precio:9,nombre:'fruto1'},
-    {barcode:'DDD',precio:1,nombre:'bebida6'},
-    {barcode:'ZZZ',precio:4,nombre:'comida3'},
-    {barcode:'XXX',precio:9,nombre:'libro7'},
-  ];
-
 
   getPrecio(barcode:string): Observable<GetProducto> {
     let url = api_CajaGetPrecio;
@@ -40,8 +28,12 @@ export class CajaService {
     return this.http.get<GetCliente>(url, {params: httpParams});
   }
 
+  addVenta(form: AddVenta): Observable<any> {
+    let url: string = api_CajaAddVenta;
 
-
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<any>(url, form,{headers:headers});
+  }
 
   /*
   ejemploGet(user: string, pass: string) {

@@ -15,19 +15,19 @@
     <div class="container row">
         <label class="col-2 col-form-label">Nombre</label>
         <div class="col-10">
-            <input [ngModel]="http_producto.nombre" disabled class="form-control" />
+            <input [ngModel]="data_producto.nombre" disabled class="form-control" />
         </div>
     </div>
     <div class="container row">
         <label class="col-2 col-form-label">Precio</label>
         <div class="col-10">
-            <input [ngModel]="http_producto.precio" disabled class="form-control" />
+            <input [ngModel]="data_producto.precio" disabled class="form-control" />
         </div>
     </div>
     <div class="container row">
         <label class="col-2 col-form-label">Subtotal</label>
         <div class="col-10">
-            <input [ngModel]="http_producto.precio*input_unidades" disabled class="form-control" />
+            <input [ngModel]="data_producto.precio*input_unidades" disabled class="form-control" />
         </div>
     </div>
     @if (flag_fueEnviado && !flag_existeProducto) {

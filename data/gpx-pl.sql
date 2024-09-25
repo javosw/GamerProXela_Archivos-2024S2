@@ -94,4 +94,18 @@ END;
 $$ LANGUAGE plpgsql;
 
 
+CREATE OR REPLACE FUNCTION caja.add_factura(
+    p_username VARCHAR,
+    p_nit BIGINT,
+    p_total NUMERIC,
+    p_fecha DATE
+)
+RETURNS VOID AS $$
+BEGIN
+    INSERT INTO caja.ventas (username,nit,total,total_descuento,fecha) 
+    VALUES (p_username,p_nit,p_total,0,p_fecha);
+END;
+$$ LANGUAGE plpgsql;
+
+
 --\q

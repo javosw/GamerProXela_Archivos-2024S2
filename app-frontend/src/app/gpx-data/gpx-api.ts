@@ -13,3 +13,4 @@ export let api_InventGetProductos = 'http://localhost:3000/productos';
 export let api_InventAddProducto = 'http://localhost:3000/productos/add';
 export let api_InventAddPasillo = 'http://localhost:3000/estanteria/add';
 
+export let api_CajaAddVenta = 'http://localhost:3000/ventas/add';

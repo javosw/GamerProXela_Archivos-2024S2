@@ -1,10 +1,9 @@
 import { ViewportScroller } from '@angular/common';
-import { Component, SimpleChanges } from '@angular/core';
+import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
 import { CajaService } from '../../gpx-services/caja.service';
-import { GetProducto } from '../../gpx-data/caja.data';
+import { AddSubVenta, GetProducto } from '../../gpx-data/caja.data';
 
 @Component({
   selector: 'gpx-add-producto',
@@ -13,23 +12,35 @@ import { GetProducto } from '../../gpx-data/caja.data';
   templateUrl: './add-producto.component.html',
 })
 export class CajaAddProductoComponent {
-  input_barcode = '';
-  input_unidades = 0;
+  protected input_barcode = '';
+  protected input_unidades = 0;
 
-  http_producto:GetProducto = { barcode:'',precio:0,nombre:'' };
+  data_producto:GetProducto = { barcode:'',precio:0,nombre:'' };
   flag_existeProducto = false;
   flag_fueEnviado = false;
 
   constructor(private cajaServ: CajaService, private viewportScroller: ViewportScroller) { }
 
+  buildSubVenta():AddSubVenta{
+    let barcode = this.data_producto.barcode;
+    let unidades = this.input_unidades;
+    let subtotal = this.data_producto.precio * unidades;
+
+    return {
+      barcode: barcode,
+      unidades: unidades,
+      subtotal: subtotal
+    }
+  }
+
   getPrecio(barcode: string) {
-    this.http_producto = { barcode:'',precio:0,nombre:'' };
+    this.data_producto = { barcode:'',precio:0,nombre:'' };
     this.flag_existeProducto = false;
     this.flag_fueEnviado = false;
 
     this.cajaServ.getPrecio(barcode).subscribe({
       next: (value: GetProducto) => {
-        this.http_producto = value;
+        this.data_producto = value;
         this.flag_fueEnviado = true;
         this.flag_existeProducto = true;
       },

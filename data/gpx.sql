@@ -30,7 +30,7 @@ CREATE TYPE administracion.rol_type AS ENUM ('caja', 'bodega', 'inventario', 'ad
 CREATE TABLE administracion.empleados (
     dpi BIGINT NOT NULL PRIMARY KEY,
     nombre VARCHAR NOT NULL,
-    id_sucursal VARCHAR REFERENCES administracion.sucursales(id_sucursal),
+    id_sucursal VARCHAR NOT NULL REFERENCES administracion.sucursales(id_sucursal),
     rol administracion.rol_type NOT NULL,
     username VARCHAR UNIQUE NOT NULL,
     password VARCHAR NOT NULL
@@ -54,31 +54,28 @@ CREATE TABLE inventario.productos (
 \dt inventario.*
 \d inventario.productos
 
-CREATE TABLE caja.cajas (
-    id_caja SMALLINT PRIMARY KEY,
-    id_sucursal VARCHAR REFERENCES administracion.sucursales(id_sucursal), --ON DELETE CASCADE,
-    dpi BIGINT UNIQUE REFERENCES administracion.empleados(dpi) --ON DELETE SET NULL,
-);
-
 CREATE TABLE caja.clientes (
     nit BIGINT PRIMARY KEY,
     nombre VARCHAR NOT NULL,
     total_historico NUMERIC CHECK (total_historico >= 0)
 );
 
+CREATE TABLE caja.cajas (
+    id_caja SERIAL PRIMARY KEY,
+    username VARCHAR UNIQUE REFERENCES administracion.empleados(username)
+);
+
 CREATE TABLE caja.ventas (
-    id_factura BIGINT PRIMARY KEY,
-    id_caja SMALLINT,
-    id_sucursal VARCHAR,
+	id_factura SERIAL PRIMARY KEY,
+	username VARCHAR NOT NULL REFERENCES caja.cajas(username),
     nit BIGINT REFERENCES caja.clientes(nit),
     total NUMERIC CHECK (total >= 0),
     total_descuento NUMERIC CHECK (total_descuento >= 0),
-    fecha DATE NOT NULL,
-	FOREIGN KEY (id_caja, id_sucursal) REFERENCES caja.cajas(id_caja, id_sucursal)
+    fecha DATE NOT NULL
 );
 
 CREATE TABLE caja.productos_facturados (
-    id_factura BIGINT REFERENCES caja.ventas(id_factura),
+    id_factura INTEGER REFERENCES caja.ventas(id_factura),
     id_producto VARCHAR REFERENCES inventario.productos(id_producto),
     unidades INT CHECK (unidades > 0),
     subtotal NUMERIC CHECK (subtotal >= 0),

@@ -43,7 +43,44 @@ const model_CajaGetCliente = async (nit) => {
     }
 }
 
+const model_CajaAddVenta = async (username,nit,total,fecha) => {
+    client = await CustomPool.connect();
+
+    try {
+        const text = 'SELECT caja.add_factura($1,$2,$3,$4)';
+        const values = [username,nit,total,fecha];
+        const v2 = await client.query(text, values);
+        console.log(v2);
+
+        return true;
+    } catch (err) {
+    } finally {
+        client.release();
+    }
+    return false;
+}
+
+//SELECT caja.add_factura('programARRS',151439858,55553,'2024-05-05');
+
+/* 
+
+export type AddProductoVenta = {
+    barcode:string;
+    unidades:number;
+    subtotal:number;
+}
+
+export type AddVenta = {
+    username:string;
+    nit:number;
+    total:number;
+    fecha:string;
+    productos:AddProductoVenta[]
+}
+*/
+
 module.exports = {
     model_CajaGetPrecio,
-    model_CajaGetCliente
+    model_CajaGetCliente,
+    model_CajaAddVenta
 }

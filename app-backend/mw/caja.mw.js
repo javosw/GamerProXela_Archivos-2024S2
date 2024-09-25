@@ -33,8 +33,27 @@ const mw_CajaGetCliente = async (req, res, next) => {
     }
 }
 
+const mw_CajaAddVenta = async (req, res, next)=>{
+    const username = req.session.username;
+    const nit = req.body.nit;
+    const total = req.body.total;
+    const fecha = req.body.fecha;
+
+    const { model_CajaAddVenta } = require('../model/caja.model');
+    const fueAgregado = await model_CajaAddVenta(username,nit,total,fecha);
+
+    res.setHeader('Content-Type', 'application/json');
+    if (fueAgregado) {
+        res.status(200).send({added:true});
+    }
+    else {
+        res.status(400).send(errorJson(500,'mw_AdminAddEmpleado'));
+    }
+}
+
 
 module.exports = {
     mw_CajaGetCliente,
-    mw_CajaGetPrecio
+    mw_CajaGetPrecio,
+    mw_CajaAddVenta
 }

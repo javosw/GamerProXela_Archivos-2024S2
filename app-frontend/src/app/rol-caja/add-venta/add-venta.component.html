@@ -18,26 +18,41 @@
         <hr />
 
         <div class="container row">
-            <label class="col-3 col-form-label">NIT</label>
-            <div class="col-9">
+            <label class="col-1 col-form-label">NIT</label>
+            <div class="col">
                 <input [(ngModel)]="input_nit" (blur)="getCliente(input_nit)"
                     class="form-control btn-outline-primary bg-secondary-subtle" />
             </div>
+            
+            <label class="col-1 col-form-label">Fecha</label>
+            <div class="col">
+                <input [(ngModel)]="input_fecha" class="form-control btn-outline-primary bg-secondary-subtle" />
+            </div>
         </div>
-        @if (flag_fueEnviado && !flag_existeCliente) {
+        
+        @if (flag_fueClienteSolicitado && !flag_existeCliente) {
         <div class="bg-warning-subtle p-3 border mt-3">
             NIT incorrecto?!
         </div>
         }
-        @else if(flag_fueEnviado && flag_existeCliente){
-        <h4 class="text-center text-primary mt-3">{{http_cliente.nombre}}</h4>
+        @else if(flag_fueClienteSolicitado && flag_existeCliente){
+        <h4 class="text-center text-primary mt-3">{{data_cliente.nombre}}</h4>
         }
 
         <hr />
 
         <div class="d-flex justify-content-center">
-            <button (click)="collectValues()" class="btn btn-outline-light">FACTURAR</button>
+            <button (click)="addVenta()" class="btn btn-outline-light">FACTURAR</button>
         </div>
-
+        @if (flag_fueVentaSolicitada && !flag_fueVentaExitosa) {
+        <div class="alert alert-warning mt-3" role="alert">
+            Operacion fallida?!
+        </div>
+        }
+        @else if(flag_fueVentaSolicitada && flag_fueVentaExitosa) {
+        <div class="alert alert-info mt-3" role="alert">
+            Operacion exitosa!
+        </div>
+        }
     </div>
 </div>
