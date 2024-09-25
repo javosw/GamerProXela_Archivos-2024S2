@@ -41,26 +41,23 @@ CREATE TABLE administracion.empleados (
 \d administracion.empleados
 
 CREATE TABLE inventario.productos (
-    id_producto VARCHAR UNIQUE NOT NULL,
-	id_sucursal VARCHAR NOT NULL,
+    id_producto VARCHAR NOT NULL PRIMARY KEY,
+	id_sucursal VARCHAR NOT NULL REFERENCES administracion.sucursales(id_sucursal),
     nombre VARCHAR NOT NULL,
 	precio NUMERIC CHECK (precio > 0),
     unidades_vendidas INTEGER CHECK (unidades_vendidas >= 0),
     unidades_bodega INTEGER CHECK (unidades_bodega >= 0),
     unidades_pasillo INTEGER CHECK (unidades_pasillo >= 0),
-    id_pasillo INTEGER CHECK (id_pasillo >= -1),
-    PRIMARY KEY (id_producto,id_sucursal),
-	FOREIGN KEY (id_sucursal) REFERENCES administracion.sucursales(id_sucursal)
+    id_pasillo INTEGER CHECK (id_pasillo >= -1)
 );
 
 \dt inventario.*
 \d inventario.productos
 
 CREATE TABLE caja.cajas (
-    id_caja INT,
+    id_caja SMALLINT PRIMARY KEY,
     id_sucursal VARCHAR REFERENCES administracion.sucursales(id_sucursal), --ON DELETE CASCADE,
-    dpi BIGINT REFERENCES administracion.empleados(dpi),--ON DELETE SET NULL,
-    PRIMARY KEY (id_caja, id_sucursal)
+    dpi BIGINT UNIQUE REFERENCES administracion.empleados(dpi) --ON DELETE SET NULL,
 );
 
 CREATE TABLE caja.clientes (

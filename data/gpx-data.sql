@@ -1,5 +1,6 @@
 INSERT INTO administracion.empleados VALUES
 (123456,'Javier Oswaldo SQ','parque','administracion','josq','123123'),
+(546889,'Octavio Sánchez Barreto','parque','caja','indexLKMW','PrwwLmt'),
 (205703,'Benjamín Orozco Véliz','parque','caja','copyKNCI','DsvOntK'),
 (941283,'Nicolás Loera Carvajal','parque','caja','copyHNTL','BDfwjBL'),
 (761435,'Homero Valentín Santacruz','parque','caja','connectERKW','CzoIFH3'),
@@ -290,6 +291,27 @@ INSERT INTO inventario.productos VALUES
 ('YX79RA','centro2','Chicken',217,0,16,0,-1),
 ('MH26PZ','centro2','Shirt',272,0,19,0,-1),
 ('AH87CY','centro2','Chicken',43,0,6,0,-1)
+;
+
+INSERT INTO caja.cajas VALUES
+(1,'parque',546889),
+(2,'parque',941283),
+(3,'parque',761435),
+(4,'parque',460733),
+(5,'parque',597498),
+(18,'parque',205703),
+(6,'centro1',107746),
+(7,'centro1',461496),
+(8,'centro1',995740),
+(9,'centro1',298172),
+(10,'centro1',897210),
+(11,'centro1',296355),
+(12,'centro2',478294),
+(13,'centro2',790809),
+(14,'centro2',985481),
+(15,'centro2',361138),
+(16,'centro2',317143),
+(17,'centro2',720072)
 ;
 
 INSERT INTO caja.clientes VALUES
