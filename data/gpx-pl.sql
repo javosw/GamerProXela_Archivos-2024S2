@@ -144,4 +144,17 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+CREATE OR REPLACE VIEW administracion.mejores_clientes AS
+SELECT 
+    c.nit, 
+    c.nombre, 
+    c.total_historico
+FROM 
+    caja.clientes c
+ORDER BY 
+    c.total_historico DESC
+LIMIT 10;
+
 --\q

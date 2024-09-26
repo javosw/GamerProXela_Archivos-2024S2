@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="container mt-3 mb-3">
+
+        <h2 (click)="navegar(ruta_AdminBoard)">Mejores clientes</h2>
+        <hr />
+
+        @if (flag_fueSolicitado && flag_fueExitosa && data_mejoresClientes.length > 0) {
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>nit</th>
+                    <th>fecha</th>
+                    <th>total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(venta of data_mejoresClientes; track venta.nit) {
+                <tr>
+                    <td>{{venta.nit}}</td>
+                    <td>{{venta.nombre}}</td>
+                    <td>{{venta.total}}</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        }
+        @else if(flag_fueSolicitado && flag_fueExitosa && data_mejoresClientes.length == 0) {
+        <div class="alert alert-info" role="alert">
+            No hay ventas?
+        </div>
+        }
+        @else if(flag_fueSolicitado && !flag_fueExitosa) {
+        <div class="alert alert-warning" role="alert">
+            Operacion fallida?!
+        </div>
+        }
+    </div>
+</div>

@@ -3,8 +3,8 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { api_AdminAddEmpleado, api_AdminGetEmpleados, api_AdminMejoresVentas } from '../gpx-data/gpx-api';
-import { AddEmpleado, Empleado, MejoresVentas } from '../gpx-data/admin.data';
+import { api_AdminAddEmpleado, api_AdminGetEmpleados, api_AdminMejoresClientes, api_AdminMejoresVentas } from '../gpx-data/gpx-api';
+import { AddEmpleado, Empleado, MejoresClientes, MejoresVentas } from '../gpx-data/admin.data';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +31,11 @@ export class AdminService {
     let httpParams = new HttpParams().set('fecha1', fecha1).set('fecha2',fecha2);
 
     return this.http.get<MejoresVentas[]>(url,{params: httpParams});
+  }
+  getMejoresClientes():Observable<MejoresClientes[]>{
+    let url = api_AdminMejoresClientes;
+
+    return this.http.get<MejoresClientes[]>(url);
   }
 
 }

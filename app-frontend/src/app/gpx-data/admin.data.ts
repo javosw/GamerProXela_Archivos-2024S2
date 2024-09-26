@@ -19,3 +19,9 @@ export type MejoresVentas = {
     total: string;
     fecha: string;
 }
+
+export type MejoresClientes = {
+    nit: number;
+    nombre: string;
+    total: number;
+}

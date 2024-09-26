@@ -65,9 +65,35 @@ const model_AdminMejoresVentas = async (fecha1,fecha2) => {
     }
 }
 
+//SELECT * FROM administracion.mejores_clientes;
+const model_AdminMejoresClientes = async () => {
+    client = await CustomPool.connect();
+
+    try {
+        const text = 'SELECT * FROM administracion.mejores_clientes';
+        const tabla = (await client.query(text)).rows;
+
+        json = [];
+        tabla.forEach(fila => {
+            json.push({
+                nit: fila.nit,
+                nombre: fila.nombre,
+                total: fila.total_historico,
+            });
+        });
+
+        return json;
+    } catch (err) {
+    } finally {
+        client.release();
+    }
+}
+
+
 // -- exports -- exports -- exports -- exports -- exports --
 module.exports = { 
     model_AdminGetEmpleados, 
     model_AdminAddEmpleado,
-    model_AdminMejoresVentas
+    model_AdminMejoresVentas,
+    model_AdminMejoresClientes
 };

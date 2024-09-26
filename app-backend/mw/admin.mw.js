@@ -48,10 +48,24 @@ const mw_AdminMejoresVentas= async (req, res, next) => {
         res.status(500).send(errorJson(500,'mw_AdminMejoresVentas'));
     }
 }
+const mw_AdminMejoresClientes = async (req, res, next) => {
+
+    const { model_AdminMejoresClientes } = require('../model/admin.model');
+    const json = await model_AdminMejoresClientes();
+
+    res.setHeader('Content-Type', 'application/json');
+    if (json) {
+        res.status(200).send(json);
+    }
+    else {
+        res.status(500).send(errorJson(500,'mw_AdminMejoresVentas'));
+    }
+}
 
 
 module.exports = {
     mw_AdminGetEmpleados,
     mw_AdminAddEmpleado,
-    mw_AdminMejoresVentas
+    mw_AdminMejoresVentas,
+    mw_AdminMejoresClientes
 };

@@ -18,6 +18,7 @@ import * as invent from '../gpx-rutas/invent.rutas';
 import { CajaAddClienteComponent } from '../rol-caja/add-cliente/add-cliente.component';
 import { CajaModClienteComponent } from '../rol-caja/mod-cliente/mod-cliente.component';
 import { MejoresVentasComponent } from '../rol-admin/mejores-ventas/mejores-ventas.component';
+import { MejoresClientesComponent } from '../rol-admin/mejores-clientes/mejores-clientes.component';
 
 export const gpxRoutes: Routes = [
     { path: "test", component: CajaAddVentaComponent },
@@ -34,6 +35,7 @@ export const gpxRoutes: Routes = [
     { path: admin.ruta_AdminGetEmpleados, component: AdminGetEmpleadosComponent },
     { path: admin.ruta_AdminAddEmpleado, component: AdminAddEmpleadoComponent },
     { path: admin.ruta_AdminGetMejoresVentas, component: MejoresVentasComponent },
+    { path: admin.ruta_AdminGetMejoresClientes, component: MejoresClientesComponent },
     { path: admin.ruta_AdminBoard, component: AdminBoardComponent },
     //{ path:"sin-auth", component: SinAuthComponent },
     //{ path:"entrar", component: HolaEntrarComponent },
