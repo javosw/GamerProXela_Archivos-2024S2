@@ -16,6 +16,8 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 CREATE OR REPLACE VIEW administracion.get_empleados AS
 SELECT
     empl.dpi,
@@ -25,6 +27,8 @@ SELECT
     empl.username
 FROM
     administracion.empleados empl;
+
+-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 CREATE OR REPLACE FUNCTION inventario.add_producto(
     p_id_producto VARCHAR,
@@ -46,6 +50,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 CREATE OR REPLACE FUNCTION inventario.add_pasillo(
     p_id_producto VARCHAR,
@@ -55,7 +60,6 @@ CREATE OR REPLACE FUNCTION inventario.add_pasillo(
 )
 RETURNS VOID AS $$
 BEGIN
-    -- Update the product's id_pasillo and unidades_pasillo
     UPDATE inventario.productos
     SET 
         id_pasillo = p_id_pasillo,
@@ -65,7 +69,6 @@ BEGIN
         id_producto = p_id_producto
         AND id_sucursal = p_id_sucursal;
 
-    -- Ensure that unidades_bodega does not go negative
     IF (SELECT unidades_bodega FROM inventario.productos 
         WHERE id_producto = p_id_producto AND id_sucursal = p_id_sucursal) < 0 THEN
         RAISE EXCEPTION 'unidades_bodega cannot be negative';
@@ -73,6 +76,8 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 CREATE OR REPLACE FUNCTION inventario.add_pasillo(
     p_id_producto VARCHAR,
     p_id_sucursal VARCHAR,
@@ -93,6 +98,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 CREATE OR REPLACE FUNCTION caja.add_factura(
     p_username VARCHAR,
@@ -112,5 +118,30 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+CREATE OR REPLACE FUNCTION administracion.mejores_ventas(
+    p_fecha_inicio DATE, 
+    p_fecha_fin DATE
+) RETURNS TABLE (
+    nit BIGINT, 
+    total NUMERIC, 
+    fecha DATE
+) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT 
+        v.nit,        
+        v.total,      
+        v.fecha       
+    FROM 
+        caja.ventas v
+    WHERE 
+        v.fecha BETWEEN p_fecha_inicio AND p_fecha_fin
+    ORDER BY 
+        v.total DESC
+    LIMIT 10;
+END;
+$$ LANGUAGE plpgsql;
 
 --\q

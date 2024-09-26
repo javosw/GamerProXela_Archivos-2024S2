@@ -27,10 +27,11 @@ app.post('/entrar', express.json(), mw_auth);
 // ========================================================
 
 const {mw_checkAdminRol} = require('../mw/auth.mw');
-const {mw_AdminGetEmpleados, mw_AdminAddEmpleado} = require('../mw/admin.mw');
+const {mw_AdminGetEmpleados, mw_AdminAddEmpleado, mw_AdminMejoresVentas} = require('../mw/admin.mw');
 
 app.get('/empleados', mw_checkAdminRol,mw_AdminGetEmpleados);
 app.post('/empleados/add', mw_checkAdminRol,express.json(),mw_AdminAddEmpleado);
+app.get('/ventas/mejores', mw_checkAdminRol,express.json(),mw_AdminMejoresVentas);
 
 // ========================================================
 

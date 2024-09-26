@@ -9,7 +9,7 @@ const mw_AdminGetEmpleados = async (req, res, next) => {
         res.status(200).send(json);
     }
     else {
-        res.status(400).send(errorJson(500,'mw_AdminGetEmpleados'));
+        res.status(500).send(errorJson(500,'mw_AdminGetEmpleados'));
     }
 }
 
@@ -29,11 +29,29 @@ const mw_AdminAddEmpleado = async (req, res, next)=>{
         res.status(200).send({added:true});
     }
     else {
-        res.status(400).send(errorJson(500,'mw_AdminAddEmpleado'));
+        res.status(500).send(errorJson(500,'mw_AdminAddEmpleado'));
+    }
+}
+
+const mw_AdminMejoresVentas= async (req, res, next) => {
+    const fecha1 = req.query.fecha1;
+    const fecha2 = req.query.fecha2;
+
+    const { model_AdminMejoresVentas } = require('../model/admin.model');
+    const json = await model_AdminMejoresVentas(fecha1,fecha2);
+
+    res.setHeader('Content-Type', 'application/json');
+    if (json) {
+        res.status(200).send(json);
+    }
+    else {
+        res.status(500).send(errorJson(500,'mw_AdminMejoresVentas'));
     }
 }
 
 
-
-
-module.exports = {mw_AdminGetEmpleados,mw_AdminAddEmpleado};
+module.exports = {
+    mw_AdminGetEmpleados,
+    mw_AdminAddEmpleado,
+    mw_AdminMejoresVentas
+};

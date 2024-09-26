@@ -4,6 +4,7 @@ export let api_HolaEntrar = 'http://localhost:3000/entrar';
 
 export let api_AdminAddEmpleado = 'http://localhost:3000/empleados/add';
 export let api_AdminGetEmpleados = 'http://localhost:3000/empleados';
+export let api_AdminMejoresVentas = 'http://localhost:3000/ventas/mejores';
 
 export let api_CajaGetCliente = 'http://localhost:3000/cliente';
 export let api_CajaAddCliente = 'http://localhost:3000/cliente/add';

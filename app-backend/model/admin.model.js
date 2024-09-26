@@ -41,5 +41,33 @@ const model_AdminAddEmpleado = async (dpi, nombre, sucursal, rol, username, pass
     return false;
 }
 
+
+const model_AdminMejoresVentas = async (fecha1,fecha2) => {
+    client = await CustomPool.connect();
+
+    try {
+        const text = 'SELECT * FROM administracion.mejores_ventas($1,$2)';
+        const tabla = (await client.query(text,[fecha1,fecha2])).rows;
+
+        json = [];
+        tabla.forEach(fila => {
+            json.push({
+                nit: fila.nit,
+                total: fila.total,
+                fecha: fila.fecha,
+            });
+        });
+
+        return json;
+    } catch (err) {
+    } finally {
+        client.release();
+    }
+}
+
 // -- exports -- exports -- exports -- exports -- exports --
-module.exports = { model_AdminGetEmpleados, model_AdminAddEmpleado };
+module.exports = { 
+    model_AdminGetEmpleados, 
+    model_AdminAddEmpleado,
+    model_AdminMejoresVentas
+};

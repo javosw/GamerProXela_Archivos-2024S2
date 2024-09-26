@@ -14,3 +14,8 @@ export type AddEmpleado = {
     username: string,
     password: string,
 }
+export type MejoresVentas = {
+    nit: string;
+    total: string;
+    fecha: string;
+}

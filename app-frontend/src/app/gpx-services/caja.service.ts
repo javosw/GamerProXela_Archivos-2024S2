@@ -49,22 +49,4 @@ export class CajaService {
     return this.http.post<any>(url, form,{headers:headers});
   }
 
-
-
-  /*
-  ejemploGet(user: string, pass: string) {
-    const params = new HttpParams()
-      .set('user', user)
-      .set('pass', pass);
-    this.http.get(this.url, { params }).subscribe(
-      {
-        next: (response: any) => {
-        },
-        error: (error) => {
-        }
-      }
-    );
-  }
-*/
-
 }
