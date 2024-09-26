@@ -1,11 +1,11 @@
 const { CustomPool } = require('./psql');
 
-const model_CajaGetPrecio = async (sucursal,barcode) => {
+const model_CajaGetPrecio = async (sucursal, barcode) => {
     client = await CustomPool.connect();
 
     try {
         const text = 'SELECT * FROM inventario.productos WHERE id_sucursal=$1 AND id_producto=$2';
-        const values = [sucursal,barcode];
+        const values = [sucursal, barcode];
         const tabla = (await client.query(text, values)).rows;
 
         const fila = tabla[0];
@@ -43,42 +43,40 @@ const model_CajaGetCliente = async (nit) => {
     }
 }
 
-const model_CajaAddVenta = async (username,nit,total,fecha,productos) => {
+const model_CajaAddVenta = async (username, nit, total, fecha, productos) => {
     client = await CustomPool.connect();
 
+    fueExitoso = false;
     try {
-        const text = 'SELECT caja.exe_venta($1::VARCHAR,$2::BIGINT,$3::NUMERIC,$4::DATE,$5::JSONB)';
-        
-        const values = [username,nit,total,fecha,productos];
-        await client.query(text, values);
+        await client.query('BEGIN');
+    
+        const add_venta = 'INSERT INTO caja.ventas (username, nit, total, total_descuento, fecha) VALUES ($1, $2, $3, 0, $4) RETURNING id_factura';
+        const id_factura = (await client.query(add_venta, [username, nit, total, fecha])).rows[0].id_factura;
 
-        return true;
+        for (const producto of productos) {
+            const add_producto_vendido = 'INSERT INTO caja.productos_facturados (id_factura, id_producto, unidades, subtotal) VALUES ($1, $2, $3, $4)';
+            await client.query(add_producto_vendido, [id_factura, producto.barcode, producto.unidades, producto.subtotal]);
+
+            const mod_inventario = 'UPDATE inventario.productos SET unidades_pasillo = unidades_pasillo - $1, unidades_vendidas = unidades_vendidas + $1 WHERE id_producto = $2';
+            await client.query(mod_inventario, [producto.unidades, producto.barcode]);
+        }
+
+        const mod_cliente = 'UPDATE caja.clientes SET total_historico = total_historico + $1 WHERE nit = $2';
+        await client.query(mod_cliente, [total, nit]);
+
+        await client.query('COMMIT');
+
+        fueExitoso = true;
     } catch (err) {
-        console.error(err);
+        await client.query('ROLLBACK');
+        fueExitoso = false;
     } finally {
         client.release();
     }
-    return false;
+    return fueExitoso;
 }
 
 //SELECT caja.add_factura('programARRS',151439858,55553,'2024-05-05');
-
-/* 
-
-export type AddProductoVenta = {
-    barcode:string;
-    unidades:number;
-    subtotal:number;
-}
-
-export type AddVenta = {
-    username:string;
-    nit:number;
-    total:number;
-    fecha:string;
-    productos:AddProductoVenta[]
-}
-*/
 
 module.exports = {
     model_CajaGetPrecio,
