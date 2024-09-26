@@ -13,7 +13,7 @@ import { AddSubVenta, GetProducto } from '../../gpx-data/caja.data';
 })
 export class CajaAddProductoComponent {
   protected input_barcode = '';
-  protected input_unidades = 0;
+  protected input_unidades = 1;
 
   data_producto:GetProducto = { barcode:'',precio:0,nombre:'' };
   flag_existeProducto = false;
@@ -22,9 +22,9 @@ export class CajaAddProductoComponent {
   constructor(private cajaServ: CajaService, private viewportScroller: ViewportScroller) { }
 
   buildSubVenta():AddSubVenta{
-    let barcode = this.data_producto.barcode;
-    let unidades = this.input_unidades;
-    let subtotal = this.data_producto.precio * unidades;
+    let barcode:string = this.data_producto.barcode;
+    let unidades:number = this.input_unidades;
+    let subtotal:number = this.data_producto.precio * unidades;
 
     return {
       barcode: barcode,

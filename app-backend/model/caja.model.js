@@ -47,20 +47,14 @@ const model_CajaAddVenta = async (username,nit,total,fecha,productos) => {
     client = await CustomPool.connect();
 
     try {
-        const text = 'SELECT caja.add_factura($1,$2,$3,$4)';
-        const values = [username,nit,total,fecha];
-        const tabla = (await client.query(text, values)).rows;
-        const idFactura = tabla[0].add_factura;
-
-        /*
-        for (let index = 0; index < productos.length; index++) {
-            const producto = productos[index];
-            const {barcode,unidades,subtotal} = producto;
-        }
-        */
+        const text = 'SELECT caja.exe_venta($1::VARCHAR,$2::BIGINT,$3::NUMERIC,$4::DATE,$5::JSONB)';
         
+        const values = [username,nit,total,fecha,productos];
+        await client.query(text, values);
+
         return true;
     } catch (err) {
+        console.error(err);
     } finally {
         client.release();
     }

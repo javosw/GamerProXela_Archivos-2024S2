@@ -45,12 +45,12 @@ export class CajaAddVentaComponent {
   // =-=-=-=-=-=-=-=-=-=-=-=-=-=-= CARRITO DATA
 
   buildVenta():AddVenta {
+    let nit:number = this.data_cliente.nit;
+    let fecha:string = this.input_fecha;
     let productos: Array<AddSubVenta> = this.query_AddProducto.map((component) => { 
       return component.buildSubVenta();
     });
-    let total = this.getTotal(productos);
-    let nit = this.data_cliente.nit;
-    let fecha = this.input_fecha;
+    let total:number = this.getTotal(productos);
 
     console.log(JSON.stringify(productos));
 
@@ -58,7 +58,7 @@ export class CajaAddVentaComponent {
       nit: nit,
       total: total,
       fecha: fecha,
-      productos: productos,
+      productos: productos
     }
   }
 

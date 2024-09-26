@@ -39,7 +39,9 @@ const mw_CajaAddVenta = async (req, res, next)=>{
     const total = req.body.total;
     const fecha = req.body.fecha;
     const productos = req.body.productos;
-    console.log(productos);
+
+    console.log("--------- VENTA SOLICITADA ---------");
+    console.log(req.body);
 
     const { model_CajaAddVenta } = require('../model/caja.model');
     const fueAgregado = await model_CajaAddVenta(username,nit,total,fecha,productos);
