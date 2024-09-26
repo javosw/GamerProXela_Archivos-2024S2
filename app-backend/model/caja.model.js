@@ -76,10 +76,63 @@ const model_CajaAddVenta = async (username, nit, total, fecha, productos) => {
     return fueExitoso;
 }
 
+const model_CajaAddCliente = async (nit, nombre) => {
+
+    client = await CustomPool.connect();
+
+    fueExitoso = false;
+    try {
+        await client.query('BEGIN');
+    
+        const add_venta = 'INSERT INTO caja.clientes VALUES ($1, $2, 0)';
+        await client.query(add_venta, [nit, nombre]);
+
+        await client.query('COMMIT');
+
+        fueExitoso = true;
+    } catch (err) {
+        await client.query('ROLLBACK');
+        fueExitoso = false;
+    } finally {
+        client.release();
+    }
+    return fueExitoso;
+}
+const model_CajaModCliente = async (nit, nombre, username, password) => {
+
+    client = await CustomPool.connect();
+
+    fueExitoso = false;
+    try {
+        await client.query('BEGIN');
+    
+        const get_admin = `SELECT * FROM administracion.empleados WHERE rol='administracion' AND username=$1 AND password=$2`;
+        const tabla = (await client.query(get_admin, [username, password])).rows;
+
+        if(username == tabla[0].username){
+            const add_cliente = 'UPDATE caja.clientes SET nombre=$1 WHERE nit=$2';
+            await client.query(add_cliente, [nombre, nit]);
+        }
+
+        await client.query('COMMIT');
+
+        fueExitoso = true;
+    } catch (err) {
+        await client.query('ROLLBACK');
+        fueExitoso = false;
+    } finally {
+        client.release();
+    }
+    return fueExitoso;
+}
+
+
 //SELECT caja.add_factura('programARRS',151439858,55553,'2024-05-05');
 
 module.exports = {
     model_CajaGetPrecio,
     model_CajaGetCliente,
-    model_CajaAddVenta
+    model_CajaAddVenta,
+    model_CajaAddCliente,
+    model_CajaModCliente
 }

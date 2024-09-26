@@ -1,7 +1,7 @@
 const {errorJson} = require('./utils');
 
 const mw_CajaGetPrecio = async (req, res, next) => {
-    const { model_CajaGetPrecio } = require('../model/caja.model');
+    const { model_CajaGetPrecio, model_CajaAddCliente } = require('../model/caja.model');
     
     const sucursal = req.session.sucursal;
     const barcode = req.query.barcode;
@@ -56,8 +56,44 @@ const mw_CajaAddVenta = async (req, res, next)=>{
 }
 
 
+const mw_CajaAddCliente = async (req, res, next)=>{
+    const nit = req.body.nit;
+    const nombre = req.body.nombre;
+
+    const { model_CajaAddCliente } = require('../model/caja.model');
+    const fueAgregado = await model_CajaAddCliente(nit, nombre);
+
+    res.setHeader('Content-Type', 'application/json');
+    if (fueAgregado) {
+        res.status(200).send({added:true});
+    }
+    else {
+        res.status(400).send(errorJson(500,'mw_AdminAddEmpleado'));
+    }
+}
+
+const mw_CajaModCliente = async (req, res, next)=>{
+    const nit = req.body.nit;
+    const nombre = req.body.nombre;
+    const username = req.body.username;
+    const password = req.body.password;
+
+    const { model_CajaModCliente } = require('../model/caja.model');
+    const fueAgregado = await model_CajaModCliente(nit, nombre, username, password);
+
+    res.setHeader('Content-Type', 'application/json');
+    if (fueAgregado) {
+        res.status(200).send({added:true});
+    }
+    else {
+        res.status(400).send(errorJson(500,'mw_AdminAddEmpleado'));
+    }
+}
+
 module.exports = {
     mw_CajaGetCliente,
     mw_CajaGetPrecio,
-    mw_CajaAddVenta
+    mw_CajaAddVenta,
+    mw_CajaAddCliente,
+    mw_CajaModCliente
 }
