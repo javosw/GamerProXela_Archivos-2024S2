@@ -15,11 +15,15 @@ import * as bodega from '../gpx-rutas/bodega.rutas'
 import * as admin from '../gpx-rutas/admin.rutas';
 import * as caja from '../gpx-rutas/caja.rutas';
 import * as invent from '../gpx-rutas/invent.rutas';
+import { CajaAddClienteComponent } from '../rol-caja/add-cliente/add-cliente.component';
+import { CajaModClienteComponent } from '../rol-caja/mod-cliente/mod-cliente.component';
 
 export const gpxRoutes: Routes = [
     { path: "test", component: CajaAddVentaComponent },
     { path: caja.ruta_CajaBoard, component: CajaBoardComponent },
     { path: caja.ruta_CajaAddVenta, component: CajaAddVentaComponent },
+    { path: caja.ruta_CajaAddCliete, component: CajaAddClienteComponent },
+    { path: caja.ruta_CajaModCliente, component: CajaModClienteComponent },
     { path: bodega.ruta_BodegaBoard, component: BodegaBoardComponent },
     { path: bodega.ruta_BodegaGetProductos, component: BodegaGetProductosComponent },
     { path: bodega.ruta_BodegaAddProducto, component: BodegaAddProductoComponent },

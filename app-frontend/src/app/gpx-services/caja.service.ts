@@ -3,8 +3,8 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
-import { AddVenta, GetCliente, GetProducto } from '../gpx-data/caja.data';
-import { api_CajaAddVenta, api_CajaGetCliente, api_CajaGetPrecio } from '../gpx-data/gpx-api';
+import { AddCliente, AddVenta, GetCliente, GetProducto, ModCliente } from '../gpx-data/caja.data';
+import { api_CajaAddCliente, api_CajaAddVenta, api_CajaGetCliente, api_CajaGetPrecio, api_CajaModCliente } from '../gpx-data/gpx-api';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +34,22 @@ export class CajaService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<any>(url, form,{headers:headers});
   }
+
+  addCliente(form: AddCliente): Observable<any> {
+    let url: string = api_CajaAddCliente;
+
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<any>(url, form,{headers:headers});
+  }
+
+  modCliente(form: ModCliente): Observable<any> {
+    let url: string = api_CajaModCliente;
+
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<any>(url, form,{headers:headers});
+  }
+
+
 
   /*
   ejemploGet(user: string, pass: string) {

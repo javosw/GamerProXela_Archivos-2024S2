@@ -20,3 +20,13 @@ export type AddVenta = {
     fecha:string;
     productos:AddSubVenta[]
 }
+export type AddCliente = {
+    nit:number;
+    nombre:string;
+}
+export type ModCliente = {
+    nit:number;
+    nombre:string;
+    username:string;
+    password:string;
+}
